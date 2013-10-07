@@ -11,7 +11,7 @@
 
 import java.util.*;
 
-public class bingImageGrabber {
+public class Main {
 
 	public static Scanner in = new Scanner(System.in);
 
@@ -20,8 +20,10 @@ public class bingImageGrabber {
 			System.out.println("\nBing Image Grabber 0.1.0\n");
 			System.out.print("Enter Bing AppID: ");
 			String userAccountKey = in.next();
+			System.out.print("\nDesired Number of Images: ");
+			int numImages = in.nextInt();
 
-			serialGrabber mySerialGrabber = new serialGrabber(userAccountKey, 30);
+			urlGrabber mySerialGrabber = new urlGrabber(userAccountKey, numImages);
 			mySerialGrabber.run();	
 	}
 }

@@ -45,11 +45,11 @@ public class imageDownloader {
 	
 	// Constructor copies the imageURL array into this object.
 	// It also copies in the raw query for directory structure
-	public imageDownloader(serialGrabber mySerialGrabber) {
-		this.imageURLs = new String[mySerialGrabber.storedAddresses.length];
+	public imageDownloader(urlGrabber myUrlGrabber) {
+		this.imageURLs = new String[myUrlGrabber.storedAddresses.length];
 		for(int i = 0; i < imageURLs.length; i++)
-			imageURLs[i] = mySerialGrabber.storedAddresses[i];
-		this.rawQueryTerm = mySerialGrabber.rawQueryTerm;
+			imageURLs[i] = myUrlGrabber.storedAddresses[i];
+		this.rawQueryTerm = myUrlGrabber.rawQueryTerm;
 	}
 	
 	public void run() throws IOException {
@@ -67,7 +67,7 @@ public class imageDownloader {
 	public String makeDirectories() {
 		
 		Scanner in = new Scanner(System.in);
-		System.out.print("Enter Storage Directory: ");
+		System.out.print("\nEnter Storage Directory: ");
 		String strDirectory = in.next();
 		in.close();
 		File bingDir = new File(strDirectory);
@@ -94,8 +94,10 @@ public class imageDownloader {
 		// Counts downloaded images
 		int imageCount = 0; 											
 		
-		// Lets user know downloading started
+		// Lets user know downloading started, starts timer
 		System.out.print("\nDownloading Images");	
+		long startTime = System.nanoTime();
+		
 		// Loops over all URLs in array
 		for(int i = 0; i < imageURLs.length; i++) {						
 			
@@ -127,7 +129,10 @@ public class imageDownloader {
 			
 			imageCount++;				// Increments for final download count.
 		}
+		long endTime = System.nanoTime();
+		long duration = endTime - startTime;
+		double seconds = duration / 1000000000.0; // Converts time to download all images to seconds
 		
-		System.out.println("\n\nSaved " + imageCount + " images.");
+		System.out.printf("\n\nSaved %d images in %.2f seconds.", imageCount, seconds);
 	}
 }
