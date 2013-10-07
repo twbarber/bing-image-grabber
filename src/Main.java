@@ -15,15 +15,22 @@ public class Main {
 
 	public static Scanner in = new Scanner(System.in);
 
+	// Sets default values of content filter to Moderate, and images to 30
+	// If custom search is chosen, user enters search term, and chooses other parameters
 	public static void main(String[] args) throws Exception {
-	
+			
+			String adult = "Moderate";
+			int numImages = 30;
+			
 			System.out.println("\nBing Image Grabber 0.1.0\n");
 			System.out.print("Enter Bing AppID: ");
 			String userAccountKey = in.next();
 			String queryChoice = queryMenu();
-			String adult = filterMenu();
-			System.out.print("\nDesired Number of Images (Max 50): ");
-			int numImages = in.nextInt();
+			if(!queryChoice.equals("random")) {
+				adult = filterMenu();
+				System.out.print("\nDesired Number of Images (Max 50): ");
+				numImages = in.nextInt();
+			}
 			urlGrabber mySerialGrabber = new urlGrabber(userAccountKey, queryChoice, numImages, adult);
 			mySerialGrabber.run();	
 	}
