@@ -124,10 +124,11 @@ public class imageDownloader {
 
 			is.close();					// Close inputStream
 			os.close();					// Close outputStream
+			
+			imageCount++;				// Increments for final download count.
 			} catch (IOException e) {
 			}
 			
-			imageCount++;				// Increments for final download count.
 		}
 		long endTime = System.nanoTime();
 		long duration = endTime - startTime;
