@@ -1,3 +1,4 @@
+
 /* 
 	Bing Image Grabber - Version 0.1.1
 
@@ -30,10 +31,18 @@
 	number of images requested per search term (imageCount parameter in the constructor).
 */
 	
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.URL;
+import java.net.URLConnection;
+import java.util.Scanner;
+
 import org.apache.commons.codec.binary.Base64;
-import com.google.gson.*;
-import java.io.*;
-import java.net.*;
+
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 
 public class urlGrabber {
 
@@ -46,17 +55,14 @@ public class urlGrabber {
 	public String queryURL; 				// Final URL sent to Bing, created by makeQuery method
 	public String[] storedAddresses; 		// Array of parsed URLs from JSON object
 	public String rawQueryTerm;
+	Scanner sc = new Scanner(System.in);
 	
-	public urlGrabber(String userAccountKey, String queryChoice, int imageCount, String queryFilter) {
+	public urlGrabber(String queryChoice, int imageCount, String queryFilter) {
 		
-		// Found this encryption on GitHub and StackOverflow... Required by MSoft
-		byte[] byteKey = Base64.encodeBase64((userAccountKey + ":" + userAccountKey).getBytes());
-		this.encryptedKey = new String(byteKey);				// Encrypted Key
-		
+		getUserKey();
 		if(queryChoice.equals("random"))
 			this.queryTerm = generateTerm();					// Search term, 6 digit int
 		else this.queryTerm = queryChoice;						// Search term, user input
-		
 		this.queryFilter = queryFilter;
 		this.rawQueryTerm = queryTerm; 							// Used later for directories
 		this.queryResultAmount = String.valueOf(imageCount);	// Image download count
@@ -74,7 +80,49 @@ public class urlGrabber {
 		imageDownloader myImageDownloader = new imageDownloader(this);
 		myImageDownloader.run();			// Runs through array, downloads images
 	}
-
+	
+	public void getUserKey() {
+		
+		boolean goodKey = false;
+		
+		while(!goodKey) {
+			System.out.print("\nEnter Bing AppID: ");
+			String userAccountKey = sc.next();
+			// Found this encryption on GitHub and StackOverflow... Required by MSoft
+			byte[] byteKey = Base64.encodeBase64((userAccountKey + ":" + userAccountKey).getBytes());
+			String testKey = new String(byteKey);
+			if(verifyKey(testKey)) {
+				goodKey = true;
+				sc.nextLine();
+				System.out.println("\nKey Accepted");
+				this.encryptedKey = testKey;
+			}
+			else System.out.println("\nInvalid Key");
+		}
+	}
+	
+	public boolean verifyKey(String testKey) {
+		
+		try{
+			URL url = new URL("https://api.datamarket.azure.com/Data.ashx/Bing/Search/Web?Query=%27test%27&$top=50&$format=json");
+		
+			URLConnection urlConnection = url.openConnection();
+			String s1 = "Basic " + testKey;
+			urlConnection.setRequestProperty("Authorization", s1);
+			BufferedReader in = new BufferedReader(new InputStreamReader(
+					urlConnection.getInputStream()));
+			String inputLine;
+			StringBuffer sb = new StringBuffer();
+			while ((inputLine = in.readLine()) != null)
+				sb.append(inputLine);
+			in.close();
+		}catch (Exception e) {
+			return false;
+		}
+		
+		return true;
+	}
+	
 	// Formats parameters to comply with URL needs
 	// Example: 
 	public void encodeParameters() {
@@ -90,8 +138,6 @@ public class urlGrabber {
 	// the search term, the search region, and the content filter. 
 	public void makeQuery() {
 		
-		// StringBuilder sb = new StringBuilder();
-
 		String rootURL = "https://api.datamarket.azure.com/Bing/Search/Image";
 
 		this.queryURL = rootURL + 
@@ -118,7 +164,7 @@ public class urlGrabber {
 		
 		URL url = new URL(queryURL);
 	    URLConnection urlConnection = url.openConnection();
-	    String s1 = "Basic " + encryptedKey;
+	    String s1 = "Basic " + this.encryptedKey;
 	    urlConnection.setRequestProperty("Authorization", s1);
 	    BufferedReader in = new BufferedReader(new InputStreamReader(
 	        urlConnection.getInputStream()));

@@ -33,9 +33,16 @@
  	Download time varied depending on the size of the image.
  */
 
-import java.io.*;
-import java.util.*;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.Writer;
 import java.net.URL;
+import java.util.Scanner;
 
 public class imageDownloader {
 	
@@ -66,10 +73,11 @@ public class imageDownloader {
 	// Returns directory to be used with download() method
 	public String makeDirectories() {
 		
-		Scanner in = new Scanner(System.in);
+		Scanner sc = new Scanner(System.in);
+		
 		System.out.print("\nEnter Storage Directory: ");
-		String strDirectory = in.next();
-		in.close();
+		String strDirectory = sc.nextLine();
+		
 		File bingDir = new File(strDirectory);
 		File queryDir = new File(strDirectory + "/" + this.rawQueryTerm);
 		
@@ -84,7 +92,7 @@ public class imageDownloader {
 			if (success)
 				System.out.println("Query Directory: " + queryDir.toString() + " created");
 		}
-		
+		sc.close();
 		return queryDir.toString();
 	}
 	
@@ -133,7 +141,26 @@ public class imageDownloader {
 		long endTime = System.nanoTime();
 		long duration = endTime - startTime;
 		double seconds = duration / 1000000000.0; // Converts time to download all images to seconds
-		
+		makeLog(seconds);
 		System.out.printf("\n\nSaved %d images in %.2f seconds.", imageCount, seconds);
 	}
+	
+	
+	// Writes a log file to the download directory.
+	// Contains all URLs and time to download full directory
+	public void makeLog(Double seconds) throws IOException {
+		
+		File logFile = new File(queryDir + "/" + rawQueryTerm + ".txt");
+		Writer output = new BufferedWriter(new FileWriter(logFile));
+			
+			try {
+				for(String i : this.imageURLs)
+					output.write(i + "\n");
+				output.write("\nProcess Completed in " + seconds + " seconds.");
+		    }
+			finally {
+		      output.close();
+		    }
+	}
+	
 }

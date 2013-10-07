@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 /* 
 	Bing Image Grabber - Version 0.1.1
 
@@ -8,8 +10,6 @@
 		- Make iterations to run multiple querys
 		- Make search options available to be entered manually
 */
-
-import java.util.*;
 
 public class Main {
 
@@ -23,32 +23,33 @@ public class Main {
 			int numImages = 30;
 			
 			System.out.println("\nBing Image Grabber 0.1.0\n");
-			System.out.print("Enter Bing AppID: ");
-			String userAccountKey = in.next();
 			String queryChoice = queryMenu();
 			if(!queryChoice.equals("random")) {
 				adult = filterMenu();
 				System.out.print("\nDesired Number of Images (Max 50): ");
 				numImages = in.nextInt();
 			}
-			urlGrabber mySerialGrabber = new urlGrabber(userAccountKey, queryChoice, numImages, adult);
+			urlGrabber mySerialGrabber = new urlGrabber(queryChoice, numImages, adult);
 			mySerialGrabber.run();	
 	}
 	
 	public static String queryMenu() {
-		
+
 		System.out.println("\nChoose Search Term: \n" +
 				"\n1) Random \n2) Custom");  
 		System.out.print("\nChoice: ");
 
-		int choice = in.nextInt();
-
-		switch(choice) {
-			case 1: return "random";
-			case 2: System.out.print("\nEnter Search Term: ");
-					return in.next();
-			default: System.out.println("\nInvalid Option\n");
-					 queryMenu();
+		String choice = in.nextLine();
+		
+		if(choice.equals("1") || choice.equalsIgnoreCase("random"))
+			return "random";
+		else if(choice.equals("2") || choice.equalsIgnoreCase("custom")) {
+			System.out.print("\nEnter Search Term: ");
+			return in.next();
+		}	
+		else {
+			System.out.println("\nInvalid Option");
+			queryMenu();
 		}
 		// Returns random as default if somehow it gets here
 		return "random";
@@ -62,15 +63,20 @@ public class Main {
 							"\n1) Strict \n2) Moderate \n3) Off");  
 		System.out.print("\nChoice: ");
 		
-		int choice = in.nextInt();
+		String choice = in.nextLine();
 		
-			switch(choice) {
-				case 1: return "Strict";
-				case 2: return "Moderate";
-				case 3: return "Off";
-				default: System.out.println("\nInvalid Option\n");
-						 filterMenu();
-			}
+		if(choice.equals("1") || choice.equalsIgnoreCase("strict"))
+			return "Strict";
+		else if(choice.equals("2") || choice.equalsIgnoreCase("moderate")) {
+			return "Moderate";
+		}	
+		else if(choice.equals("3") || choice.equalsIgnoreCase("off")) {
+			return "Off";
+		}	
+		else {
+			System.out.println("\nInvalid Option");
+			filterMenu();
+		}
 		return "Moderate";				// Returns Moderate as default if somehow it gets here
 	}
 }

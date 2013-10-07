@@ -31,10 +31,15 @@ Bing Image Grabber - Version 0.1.1
 	accessed by the saveImages() method. The size of the array is equal to the
 	number of images requested per search term (imageCount parameter in the constructor).
 	
-	TODO: 
+	TODO 0.2.0: 
 	
+		- Implement Tab completion when choosing directory in imageDownload
+		- Reimplement key verification
+		
+	DONE: 
+	
+		- Make "Random" query auto set parameters in Main
+		- User key gets verified before running query
 		- Make log file for each query in imageDownloader
 			- Contains search term, results grabbed, list of URLs, time to download
-		- Implement Tab completion when choosing directory in imageDownloader
-		- Make "Random" query auto set parameters in Main
 		- Fix input issues in Main
