@@ -34,11 +34,11 @@ public class Main {
 				"\n1) Random \n2) Custom");  
 		System.out.print("\nChoice: ");
 
-		String choice = in.next();
+		int choice = in.nextInt();
 
 		switch(choice) {
-			case "1": return "random";
-			case "2": System.out.print("\nEnter Search Term: ");
+			case 1: return "random";
+			case 2: System.out.print("\nEnter Search Term: ");
 					return in.next();
 			default: System.out.println("\nInvalid Option\n");
 					 queryMenu();
@@ -55,12 +55,12 @@ public class Main {
 							"\n1) Strict \n2) Moderate \n3) Off");  
 		System.out.print("\nChoice: ");
 		
-		String choice = in.next();
+		int choice = in.nextInt();
 		
 			switch(choice) {
-				case "1": return "Strict";
-				case "2": return "Moderate";
-				case "3": return "Off";
+				case 1: return "Strict";
+				case 2: return "Moderate";
+				case 3: return "Off";
 				default: System.out.println("\nInvalid Option\n");
 						 filterMenu();
 			}
