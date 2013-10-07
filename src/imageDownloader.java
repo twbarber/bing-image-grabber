@@ -1,5 +1,5 @@
 /*
- 	Bing Image Grabber - Version 0.1.0
+ 	Bing Image Grabber - Version 0.1.1
  	
  	Image downloader class that handles the actual retrieval of images.
  	

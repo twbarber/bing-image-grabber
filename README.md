@@ -1,7 +1,7 @@
 bing-image-grabber
 ==================
 
-Bing Image Grabber - Version 0.1.0
+Bing Image Grabber - Version 0.1.1
 
 	It generates a JSON object with results from the Bing search, which
 	we parse to extract the URLs of images. After that, they are downloaded
