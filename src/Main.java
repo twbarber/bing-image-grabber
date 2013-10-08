@@ -20,7 +20,7 @@ public class Main {
 			String adult = "Moderate";
 			int numImages = 30;
 			
-			System.out.println("\nBing Image Grabber 0.1.0\n");
+			System.out.println("\nBing Image Grabber 0.1.1\n");
 			String queryChoice = queryMenu();
 			if(!queryChoice.equals("random")) {
 				adult = filterMenu();
