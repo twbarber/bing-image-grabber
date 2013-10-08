@@ -1,4 +1,3 @@
-
 /* 
 	Bing Image Grabber - Version 0.1.1
 
@@ -59,7 +58,9 @@ public class urlGrabber {
 	
 	public urlGrabber(String queryChoice, int imageCount, String queryFilter) {
 		
-		getUserKey();
+		keyHandler myKeyHandler = new keyHandler();				// Used to get users App Key
+		myKeyHandler.getUserKey();								// Actually gets users App Key
+		this.encryptedKey = myKeyHandler.encryptedKey;			// Passes encrypted key to this
 		if(queryChoice.equals("random"))
 			this.queryTerm = generateTerm();					// Search term, 6 digit int
 		else this.queryTerm = queryChoice;						// Search term, user input
@@ -79,48 +80,6 @@ public class urlGrabber {
 		parseURLs(jsonLine);				// Parses URL from JSON string
 		imageDownloader myImageDownloader = new imageDownloader(this);
 		myImageDownloader.run();			// Runs through array, downloads images
-	}
-	
-	public void getUserKey() {
-		
-		boolean goodKey = false;
-		
-		while(!goodKey) {
-			System.out.print("\nEnter Bing AppID: ");
-			String userAccountKey = sc.next();
-			// Found this encryption on GitHub and StackOverflow... Required by MSoft
-			byte[] byteKey = Base64.encodeBase64((userAccountKey + ":" + userAccountKey).getBytes());
-			String testKey = new String(byteKey);
-			if(verifyKey(testKey)) {
-				goodKey = true;
-				sc.nextLine();
-				System.out.println("\nKey Accepted");
-				this.encryptedKey = testKey;
-			}
-			else System.out.println("\nInvalid Key");
-		}
-	}
-	
-	public boolean verifyKey(String testKey) {
-		
-		try{
-			URL url = new URL("https://api.datamarket.azure.com/Data.ashx/Bing/Search/Web?Query=%27test%27&$top=50&$format=json");
-		
-			URLConnection urlConnection = url.openConnection();
-			String s1 = "Basic " + testKey;
-			urlConnection.setRequestProperty("Authorization", s1);
-			BufferedReader in = new BufferedReader(new InputStreamReader(
-					urlConnection.getInputStream()));
-			String inputLine;
-			StringBuffer sb = new StringBuffer();
-			while ((inputLine = in.readLine()) != null)
-				sb.append(inputLine);
-			in.close();
-		}catch (Exception e) {
-			return false;
-		}
-		
-		return true;
 	}
 	
 	// Formats parameters to comply with URL needs

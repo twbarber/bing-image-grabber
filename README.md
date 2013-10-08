@@ -34,12 +34,13 @@ Bing Image Grabber - Version 0.1.1
 	TODO 0.2.0: 
 	
 		- Implement Tab completion when choosing directory in imageDownload
-		- Reimplement key verification
+		- Log file for previously used keys
 		
 	DONE: 
 	
 		- Make "Random" query auto set parameters in Main
 		- User key gets verified before running query
+			-- Reimplemented key verification
 		- Make log file for each query in imageDownloader
-			- Contains search term, results grabbed, list of URLs, time to download
+			-- Contains search term, results grabbed, list of URLs, time to download
 		- Fix input issues in Main

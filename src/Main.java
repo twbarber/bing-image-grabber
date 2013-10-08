@@ -1,15 +1,13 @@
-import java.util.Scanner;
-
 /* 
 	Bing Image Grabber - Version 0.1.1
 
 	Main class. Gets BingID from user and makes objects.
 	
 	TODO: 
-		- Make downloads / seed variable
 		- Make iterations to run multiple querys
-		- Make search options available to be entered manually
 */
+
+import java.util.Scanner;
 
 public class Main {
 
@@ -77,6 +75,6 @@ public class Main {
 			System.out.println("\nInvalid Option");
 			filterMenu();
 		}
-		return "Moderate";				// Returns Moderate as default if somehow it gets here
+		return "Moderate";	// Returns Moderate as default if somehow it gets here
 	}
 }
