@@ -1,5 +1,5 @@
 /* 
-	Bing Image Grabber - Version 0.1.1
+	Bing Image Grabber - Version 0.2.0
 
 	It generates a JSON object with results from the Bing search, which
 	we parse to extract the URLs of images. After that, they are downloaded
@@ -31,12 +31,11 @@
 */
 	
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.Scanner;
-
-import org.apache.commons.codec.binary.Base64;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -56,7 +55,7 @@ public class urlGrabber {
 	public String rawQueryTerm;
 	Scanner sc = new Scanner(System.in);
 	
-	public urlGrabber(String queryChoice, int imageCount, String queryFilter) {
+	public urlGrabber(String queryChoice, int imageCount, String queryFilter) throws IOException {
 		
 		keyHandler myKeyHandler = new keyHandler();				// Used to get users App Key
 		myKeyHandler.getUserKey();								// Actually gets users App Key

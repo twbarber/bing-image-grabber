@@ -1,5 +1,5 @@
 /*
- 	Bing Image Grabber - Version 0.1.1
+ 	Bing Image Grabber - Version 0.2.0
  	
  	Image downloader class that handles the actual retrieval of images.
  	
@@ -116,24 +116,25 @@ public class imageDownloader {
 				// Builds string for img file name
 				String fileName = queryDir + "/img" + i; 				
 				File img = new File(fileName);
-				URL url = new URL(imageURLs[i]);						// Creates URL object from URL String
-				InputStream is = url.openStream();						// Opens input stream on image at end of URL
+				URL url = new URL(imageURLs[i]);			// Creates URL object from URL String
+				InputStream is = url.openStream();			// Opens input stream on image at end of URL
 			
-			OutputStream os = new FileOutputStream(img.toString());		// Opens writer to img file
+			OutputStream os = new FileOutputStream(img.toString());	// Opens writer to img file
 
 			byte[] b = new byte[2048];
 			int length;
 			
 			// Loops to the end of the file
 			while ((length = is.read(b)) != -1) {
-				//Writes length bytes from the specified byte array b starting at offset 0 to this output stream.
+				// Writes length bytes from the specified byte array b
+				// Starting at offset 0 to this output stream.
 				os.write(b, 0, length);
 			}
 
-			is.close();					// Close inputStream
-			os.close();					// Close outputStream
+			is.close();				// Close inputStream
+			os.close();				// Close outputStream
 			
-			imageCount++;				// Increments for final download count.
+			imageCount++;			// Increments for final download count.
 			} catch (IOException e) {
 			}
 			
@@ -152,15 +153,13 @@ public class imageDownloader {
 		
 		File logFile = new File(queryDir + "/" + rawQueryTerm + ".txt");
 		Writer output = new BufferedWriter(new FileWriter(logFile));
-			
-			try {
-				for(String i : this.imageURLs)
-					output.write(i + "\n");
+		try {
+			for(String i : this.imageURLs)
+				output.write(i + "\n");
 				output.write("\nProcess Completed in " + seconds + " seconds.");
-		    }
-			finally {
-		      output.close();
-		    }
+		} finally {
+			output.close();
+		}
 	}
 	
 }

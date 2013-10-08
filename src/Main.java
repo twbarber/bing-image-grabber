@@ -1,5 +1,5 @@
 /* 
-	Bing Image Grabber - Version 0.1.1
+	Bing Image Grabber - Version 0.2.0
 
 	Main class. Gets BingID from user and makes objects.
 	
@@ -7,6 +7,7 @@
 		- Make iterations to run multiple querys
 */
 
+import java.io.File;
 import java.util.Scanner;
 
 public class Main {
@@ -21,6 +22,8 @@ public class Main {
 			int numImages = 30;
 			
 			System.out.println("\nBing Image Grabber 0.1.1\n");
+			firstRun();
+			
 			String queryChoice = queryMenu();
 			if(!queryChoice.equals("random")) {
 				adult = filterMenu();
@@ -31,9 +34,22 @@ public class Main {
 			mySerialGrabber.run();	
 	}
 	
+	public static void firstRun() {
+		
+		String user = System.getProperty("user.name");
+		String strDirectory = "/home/" + user + "/big";
+		File bigDir = new File(strDirectory);
+
+		if (!bigDir.exists()) {
+			boolean success = bigDir.mkdir();
+				if(success)	
+					System.out.println("Directory Initialized\n");
+		}
+	}
+	
 	public static String queryMenu() {
 
-		System.out.println("\nChoose Search Term: \n" +
+		System.out.println("Choose Search Term: \n" +
 				"\n1) Random \n2) Custom");  
 		System.out.print("\nChoice: ");
 

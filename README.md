@@ -1,7 +1,7 @@
 bing-image-grabber
 ==================
 
-Bing Image Grabber - Version 0.1.1
+Bing Image Grabber - Version 0.2.0
 
 	It generates a JSON object with results from the Bing search, which
 	we parse to extract the URLs of images. After that, they are downloaded
@@ -31,11 +31,16 @@ Bing Image Grabber - Version 0.1.1
 	accessed by the saveImages() method. The size of the array is equal to the
 	number of images requested per search term (imageCount parameter in the constructor).
 	
-	TODO 0.2.0: 
-	
-		- Implement Tab completion when choosing directory in imageDownload
-		- Log file for previously used keys
 		
+	TODO 0.3.0: 
+	
+		- Default Download Directory
+		
+	TODO: 
+	
+		- GUI for standalone
+		- Documentation
+	
 	DONE: 
 	
 		- Make "Random" query auto set parameters in Main
@@ -44,3 +49,6 @@ Bing Image Grabber - Version 0.1.1
 		- Make log file for each query in imageDownloader
 			-- Contains search term, results grabbed, list of URLs, time to download
 		- Fix input issues in Main
+		- Log file for previously used keys
+		- Fisrt Time run files, populates Keys.text in user dir,
+
