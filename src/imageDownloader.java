@@ -1,7 +1,5 @@
 /*
- 	Bing Image Grabber - Version 0.2.0
- 	
- 	Image downloader class that handles the actual retrieval of images.
+ 	imageDownloader class that handles the actual retrieval of images.
  	
  	The imageDownloader is passed in a serialGrabber object, and it uses
  	the fields to populate:
@@ -99,7 +97,7 @@ public class imageDownloader {
 	// Saves images from array of URLs locally. 
 	// 
 	public void download() throws IOException {
-		// Counts downloaded images
+
 		int imageCount = 0; 											
 		
 		// Lets user know downloading started, starts timer
@@ -118,23 +116,23 @@ public class imageDownloader {
 				File img = new File(fileName);
 				URL url = new URL(imageURLs[i]);			// Creates URL object from URL String
 				InputStream is = url.openStream();			// Opens input stream on image at end of URL
-			
-			OutputStream os = new FileOutputStream(img.toString());	// Opens writer to img file
 
-			byte[] b = new byte[2048];
-			int length;
-			
-			// Loops to the end of the file
-			while ((length = is.read(b)) != -1) {
-				// Writes length bytes from the specified byte array b
-				// Starting at offset 0 to this output stream.
-				os.write(b, 0, length);
-			}
+				OutputStream os = new FileOutputStream(img.toString());	// Opens writer to img file
 
-			is.close();				// Close inputStream
-			os.close();				// Close outputStream
-			
-			imageCount++;			// Increments for final download count.
+				byte[] b = new byte[2048];
+				int length;
+
+				// Loops to the end of the file
+				while ((length = is.read(b)) != -1) {
+					// Writes length bytes from the specified byte array b
+					// Starting at offset 0 to this output stream.
+					os.write(b, 0, length);
+				}
+
+				is.close();				// Close inputStream
+				os.close();				// Close outputStream
+
+				imageCount++;			// Increments for final download count.
 			} catch (IOException e) {
 			}
 			
@@ -142,9 +140,12 @@ public class imageDownloader {
 		long endTime = System.nanoTime();
 		long duration = endTime - startTime;
 		double seconds = duration / 1000000000.0; // Converts time to download all images to seconds
+		
 		makeLog(seconds);
+		
 		System.out.printf("\n\nSaved %d images in %.2f seconds.", imageCount, seconds);
 	}
+	
 	
 	
 	// Writes a log file to the download directory.

@@ -1,6 +1,4 @@
 /* 
-	Bing Image Grabber - Version 0.2.0
-
 
  */
 
@@ -18,28 +16,36 @@ import java.util.Scanner;
 import org.apache.commons.codec.binary.Base64;
 
 public class keyHandler {
-	
+
 	String encryptedKey;
 	File keyFile;
 	Scanner sc = new Scanner(System.in);
-	
+
 	public void getUserKey() throws IOException {
 
+		String userHome = System.getProperty("user.home");
 		boolean goodKey = false;
 
+		this.keyFile = new File(userHome + "/big/keyList.txt");
+		if(this.keyFile.exists()) {
+			Scanner fileReader = new Scanner(this.keyFile);
+			try {
+				if(fileReader.hasNextLine())
+					this.encryptedKey = fileReader.nextLine();
+					goodKey = true;
+			} finally {
+				fileReader.close();
+			}
+		}
+		
 		while(!goodKey) {
 			System.out.print("\nEnter Bing AppID: ");
 			String userAccountKey = sc.next();
 			// Found this encryption on GitHub and StackOverflow... Required by MSoft
 			byte[] byteKey = Base64.encodeBase64((userAccountKey + ":" + userAccountKey).getBytes());
 			String testKey = new String(byteKey);
-			if(isRepeatKey(testKey)) {
-				goodKey = true;
-				sc.nextLine();
-				System.out.println("\nKey Accepted");
-				this.encryptedKey = testKey;
-			}
-			else if(verifyKey(testKey)) {
+
+			if(verifyKey(testKey)) {
 				goodKey = true;
 				sc.nextLine();
 				System.out.println("\nKey Accepted");
@@ -69,15 +75,15 @@ public class keyHandler {
 		}catch (Exception e) {
 			return false;
 		}
-		
+
 		return true;
 	}
 	
-	public boolean isRepeatKey(String testKey) throws IOException {
-		
-		String user = System.getProperty("user.name");
-		
-		this.keyFile = new File("/home/" + user + "/big/keyList.txt");
+	public boolean getKey(String testKey) throws IOException {
+
+		String userHome = System.getProperty("user.home");
+
+		this.keyFile = new File(userHome + "/big/keyList.txt");
 		if(this.keyFile.exists()) {
 			Scanner fileReader = new Scanner(this.keyFile);
 			try {
@@ -90,9 +96,9 @@ public class keyHandler {
 		}
 		return false;
 	}
-	
+
 	public void writeKey() throws IOException {
-		
+
 		if(!this.keyFile.exists()) {
 			boolean success = false;
 			try {
@@ -102,7 +108,7 @@ public class keyHandler {
 			if(success)	
 				System.out.println("Key File Created");
 		}
-		
+
 		Writer output = new BufferedWriter(new FileWriter(keyFile));
 		try {
 			output.append(this.encryptedKey);

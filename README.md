@@ -1,7 +1,7 @@
 bing-image-grabber
 ==================
 
-Bing Image Grabber - Version 0.2.0
+Bing Image Grabber - Version 0.2.1
 
 	It generates a JSON object with results from the Bing search, which
 	we parse to extract the URLs of images. After that, they are downloaded
@@ -50,5 +50,15 @@ Bing Image Grabber - Version 0.2.0
 			-- Contains search term, results grabbed, list of URLs, time to download
 		- Fix input issues in Main
 		- Log file for previously used keys
-		- Fisrt Time run files, populates Keys.text in user dir,
+		- First Time run files, populates Keys.text in user dir,
+		- If keyFile has valid stored key, doesn't ask for it
+		- Multiword searches are scrubbed to work with Bing
+		
+	BUGS FIXED:
+	
+		- Multi word strings can be entered with spaces
+		- Removed duplicate prints of menus by making a boolean instead
+			of recursive call.
+		- firstRun() now grabs the user.home directory per machine, instead
+			of assuming it's on Linux. "big" folder created there.
 
