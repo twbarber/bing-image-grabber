@@ -33,8 +33,9 @@ Bing Image Grabber - Version 0.2.1
 	
 		
 	TODO 0.3.0: 
-	
-		- Default Download Directory
+		
+		- Make more than 50 images per query downloadable
+			-- API limit is 1000 per query
 		
 	TODO: 
 	
@@ -53,6 +54,7 @@ Bing Image Grabber - Version 0.2.1
 		- First Time run files, populates Keys.text in user dir,
 		- If keyFile has valid stored key, doesn't ask for it
 		- Multiword searches are scrubbed to work with Bing
+		- Default Download Directory
 		
 	BUGS FIXED:
 	
