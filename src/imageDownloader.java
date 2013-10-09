@@ -40,7 +40,6 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.Writer;
 import java.net.URL;
-import java.util.Scanner;
 
 public class imageDownloader {
 	
@@ -70,27 +69,23 @@ public class imageDownloader {
 	// Print to console any time a directory is made
 	// Returns directory to be used with download() method
 	public String makeDirectories() {
+
+		String userHome = System.getProperty("user.home");
+
+		File imageDir = new File(userHome + "/big/images");
+		File queryDir = new File(imageDir + "/" + this.rawQueryTerm);
 		
-		Scanner sc = new Scanner(System.in);
-		
-		System.out.print("\nEnter Storage Directory: ");
-		String strDirectory = sc.nextLine();
-		
-		File bingDir = new File(strDirectory);
-		File queryDir = new File(strDirectory + "/" + this.rawQueryTerm);
-		
-		if (!bingDir.exists()) {
-			boolean success = bingDir.mkdir();
+		if (!imageDir.exists()) {
+			boolean success = imageDir.mkdir();
 			if (success)
-				System.out.println("\nBing Directory: " + strDirectory + " created");
+				System.out.println("\nBing Directory: " + imageDir.toString() + " created");
 		}
 		
 		if (!queryDir.exists()) {
 			boolean success = queryDir.mkdir();
 			if (success)
-				System.out.println("Query Directory: " + queryDir.toString() + " created");
+				System.out.println("\nQuery Directory: " + queryDir.toString() + " created");
 		}
-		sc.close();
 		return queryDir.toString();
 	}
 	

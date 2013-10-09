@@ -22,7 +22,7 @@ public class Main {
 		int numImages = -1;
 		boolean goodNumber = false;
 		
-		System.out.println("\nBing Image Grabber 0.2.0\n");
+		System.out.println("\nBing Image Grabber 0.2.1\n");
 
 		firstRun();
 
@@ -31,11 +31,13 @@ public class Main {
 			numImages = 30;
 		else{
 			adult = filterMenu();
+			System.out.print("\nDesired Number of Images (Max 50): ");
+			numImages = in.nextInt();
 			while(!goodNumber) {
-				System.out.print("\nDesired Number of Images (Max 50: ");
-				numImages = in.nextInt();
-				if(numImages < 0 || numImages > 1000)
-					System.out.println("\nPlease enter a valid number of images...");
+				if(numImages < 0 || numImages > 50) {
+					System.out.print("\nPlease enter a valid number of images: ");
+					numImages = in.nextInt();
+				}
 				else goodNumber = true;
 			}
 		}
@@ -44,18 +46,21 @@ public class Main {
 	}
 
 	public static void firstRun() {
-
-
-
+		
 		String userHome = System.getProperty("user.home");
 		String strDirectory = userHome + "/big";
-
+		String imageDirectory = strDirectory + "/images";
+	
 		File bigDir = new File(strDirectory);
-
+		File imgDir = new File(imageDirectory);
+		
 		if (!bigDir.exists()) {
 			boolean success = bigDir.mkdir();
-			if(success)	
-				System.out.println("BIG Directory Initialized\n");
+			if(success)	{
+				boolean success2 = imgDir.mkdir();
+				if(success2)	
+					System.out.println("BIG Directory Initialized\n");
+			}	
 		}
 	}
 
