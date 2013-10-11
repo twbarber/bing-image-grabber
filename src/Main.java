@@ -41,8 +41,7 @@ public class Main {
 				else goodNumber = true;
 			}
 		}
-		urlGrabber mySerialGrabber = new urlGrabber(queryChoice, numImages, adult);
-		mySerialGrabber.run();	
+		bigHandler myBigHandler = new bigHandler(queryChoice, numImages, adult);
 	}
 
 	public static void firstRun() {

@@ -54,11 +54,7 @@ public class urlGrabber {
 	public String rawQueryTerm;
 	public int imagesRemaining = 1;
 	
-	Scanner sc = new Scanner(System.in);
-
-
-		this.storedAddresses = new String[imageCount]; 			// Array containing URLs to download
-	}
+	this.storedAddresses = new String[imageCount]; 			// Array containing URLs to download
 
 	// Encompasses all the methods we need to create a folder full of images.
 	// Makes the test class super easy to write.
