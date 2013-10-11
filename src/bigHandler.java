@@ -1,3 +1,5 @@
+import java.io.IOException;
+
 
 public class bigHandler {
 	
@@ -6,7 +8,10 @@ public class bigHandler {
 	public urlGrabber myUrlGrabber;
 	public imageDownloader myImageDownloader;
 	
-	public bigHandler(String queryChoice, int numImages, String adult) {
+	public bigHandler(String queryChoice, int numImages, String adult) throws IOException {
+		
+		myKeyHandler = new keyHandler();
+		myKeyHandler.getUserKey();
 		
 		
 	}
