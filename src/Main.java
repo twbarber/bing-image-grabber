@@ -31,10 +31,10 @@ public class Main {
 			numImages = 30;
 		else{
 			adult = filterMenu();
-			System.out.print("\nDesired Number of Images (Max 50): ");
+			System.out.print("\nDesired Number of Images (Max 1000): ");
 			numImages = in.nextInt();
 			while(!goodNumber) {
-				if(numImages < 0 || numImages > 50) {
+				if(numImages < 0 || numImages > 1000) {
 					System.out.print("\nPlease enter a valid number of images: ");
 					numImages = in.nextInt();
 				}

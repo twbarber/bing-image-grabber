@@ -52,67 +52,30 @@ public class urlGrabber {
 	public String queryOffset;				// Used if Result amount > 50
 	public String[] storedAddresses; 		// Array of parsed URLs from JSON object
 	public String rawQueryTerm;
-	public int imagesRemaining;
+	public int imagesRemaining = 1;
 	
 	Scanner sc = new Scanner(System.in);
 
-	public urlGrabber(String queryChoice, int imageCount, String queryFilter) throws IOException {
 
-		keyHandler myKeyHandler = new keyHandler();				// Used to get users App Key
-		myKeyHandler.getUserKey();								// Actually gets users App Key
-		this.encryptedKey = myKeyHandler.encryptedKey;			// Passes encrypted key to this
-		if(queryChoice.equals("random"))
-			this.queryTerm = generateTerm();					// Search term, 6 digit int
-		else this.queryTerm = queryChoice;						// Search term, user input
-		this.queryFilter = queryFilter;
-		this.rawQueryTerm = queryTerm; 							// Used later for directories
-		this.queryResultAmount = String.valueOf(imageCount);	// Image download count
 		this.storedAddresses = new String[imageCount]; 			// Array containing URLs to download
 	}
 
 	// Encompasses all the methods we need to create a folder full of images.
 	// Makes the test class super easy to write.
 	public void run() throws Exception {
-
-		encodeParameters();					// Formats Parameters for URL
-		makeQuery();						// Builds URL
-		String jsonLine = runQuery();		// Pulls JSON string from URL
-		parseURLs(jsonLine);				// Parses URL from JSON string
-		imageDownloader myImageDownloader = new imageDownloader(this);
-		myImageDownloader.run();			// Runs through array, downloads images
+		
+		while(this.imagesRemaining > 0) {
+			this.imagesRemaining -= Integer.parseInt(this.queryResultAmount);
+			String jsonLine = runQuery();		// Pulls JSON string from URL
+			parseURLs(jsonLine);				// Parses URL from JSON string
+			imageDownloader myImageDownloader = new imageDownloader(this);
+			myImageDownloader.run(); // Runs through array, downloads images
+			this.queryOffset += 50;
+			if(this.imagesRemaining < 50) {
+				this.queryResultAmount = String.valueOf(imagesRemaining);
+			}
+		}
 	}
-
-	// Formats parameters to comply with URL needs
-	// Example: 
-	public void encodeParameters() {
-
-		this.queryTerm = "?Query=%27" + this.queryTerm + "%27";
-		this.queryFilter = "&Adult=%27" + this.queryFilter + "%27";
-		this.queryMarket = "&Market=%27" + this.queryMarket + "%27";
-		this.queryResultAmount = "&$top=" + this.queryResultAmount; 
-		// this.queryOffset = "&$skip=" + this.queryOffset;
-		this.queryRetrunType = "&$format=" + this.queryRetrunType;
-	}
-
-	// Generated the Query to be thrown at Bing. Composed of the root Bing search URL,
-	// the search term, the search region, and the content filter. 
-	public void makeQuery() {
-
-		String rootURL = "https://api.datamarket.azure.com/Bing/Search/Image";
-
-		this.queryURL = rootURL + 
-
-				// Necessary field for search
-				this.queryTerm +
-
-				// Optional fields beyond this point, filling for URL completeness
-				this.queryFilter +
-				this.queryMarket +
-				this.queryResultAmount +
-
-				// Specifies return Object will be a JSON object
-				this.queryRetrunType;
-	} 
 
 	// This method is largely based on Mark Watson's wrapper found at the GitHub repo mentioned
 	// above. Put the code in a method for my own organizational structure.
@@ -135,15 +98,6 @@ public class urlGrabber {
 		in.close();
 		return sb.toString();
 	}
-
-	// Generates a random integer between 100000 and 999999 to be used
-	// as the query by the imageGrabber.
-	public String generateTerm() {
-
-		int generatedNum = 100000 + (int)(Math.random() * ((899999) + 1));
-		return String.valueOf(generatedNum);
-	}
-
 
 	// Parameter is JSON string returned by Bing
 	// GSON used as library for parsing

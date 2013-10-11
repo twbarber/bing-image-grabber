@@ -47,6 +47,7 @@ public class imageDownloader {
 	public String rawQueryTerm;		// Query for directory organization
 	public String queryDir;			// Storage Directory
 	
+	
 	// Constructor copies the imageURL array into this object.
 	// It also copies in the raw query for directory structure
 	public imageDownloader(urlGrabber myUrlGrabber) {
