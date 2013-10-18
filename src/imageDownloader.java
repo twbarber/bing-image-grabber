@@ -51,10 +51,9 @@ public class imageDownloader {
 	// Constructor copies the imageURL array into this object.
 	// It also copies in the raw query for directory structure
 	public imageDownloader(urlGrabber myUrlGrabber) {
-		this.imageURLs = new String[myUrlGrabber.storedAddresses.length];
+		this.imageURLs = new String[myUrlGrabber.parsedURLs.length];
 		for(int i = 0; i < imageURLs.length; i++)
-			imageURLs[i] = myUrlGrabber.storedAddresses[i];
-		this.rawQueryTerm = myUrlGrabber.rawQueryTerm;
+			imageURLs[i] = myUrlGrabber.parsedURLs[i];
 	}
 	
 	public void run() throws IOException {
