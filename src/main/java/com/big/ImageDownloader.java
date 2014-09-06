@@ -1,8 +1,6 @@
 package com.big;
 /*
- 	Bing Image Grabber - Version 0.2.0
- 	
- 	Image downloader class that handles the actual retrieval of images.
+ 	imageDownloader class that handles the actual retrieval of images.
  	
  	The imageDownloader is passed in a serialGrabber object, and it uses
  	the fields to populate:
@@ -43,7 +41,6 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.Writer;
 import java.net.URL;
-import java.util.Scanner;
 
 public class ImageDownloader {
 	
@@ -51,13 +48,13 @@ public class ImageDownloader {
 	public String rawQueryTerm;		// Query for directory organization
 	public String queryDir;			// Storage Directory
 	
+	
 	// Constructor copies the imageURL array into this object.
 	// It also copies in the raw query for directory structure
-	public ImageDownloader(urlGrabber myUrlGrabber) {
-		this.imageURLs = new String[myUrlGrabber.storedAddresses.length];
+	public ImageDownloader(URLGrabber myUrlGrabber) {
+		this.imageURLs = new String[myUrlGrabber.parsedURLs.length];
 		for(int i = 0; i < imageURLs.length; i++)
-			imageURLs[i] = myUrlGrabber.storedAddresses[i];
-		this.rawQueryTerm = myUrlGrabber.rawQueryTerm;
+			imageURLs[i] = myUrlGrabber.parsedURLs[i];
 	}
 	
 	public void run() throws IOException {
@@ -73,34 +70,30 @@ public class ImageDownloader {
 	// Print to console any time a directory is made
 	// Returns directory to be used with download() method
 	public String makeDirectories() {
+
+		String userHome = System.getProperty("user.home");
+
+		File imageDir = new File(userHome + "/big/images");
+		File queryDir = new File(imageDir + "/" + this.rawQueryTerm);
 		
-		Scanner sc = new Scanner(System.in);
-		
-		System.out.print("\nEnter Storage Directory: ");
-		String strDirectory = sc.nextLine();
-		
-		File bingDir = new File(strDirectory);
-		File queryDir = new File(strDirectory + "/" + this.rawQueryTerm);
-		
-		if (!bingDir.exists()) {
-			boolean success = bingDir.mkdir();
+		if (!imageDir.exists()) {
+			boolean success = imageDir.mkdir();
 			if (success)
-				System.out.println("\nBing Directory: " + strDirectory + " created");
+				System.out.println("\nBing Directory: " + imageDir.toString() + " created");
 		}
 		
 		if (!queryDir.exists()) {
 			boolean success = queryDir.mkdir();
 			if (success)
-				System.out.println("Query Directory: " + queryDir.toString() + " created");
+				System.out.println("\nQuery Directory: " + queryDir.toString() + " created");
 		}
-		sc.close();
 		return queryDir.toString();
 	}
 	
 	// Saves images from array of URLs locally. 
 	// 
 	public void download() throws IOException {
-		// Counts downloaded images
+
 		int imageCount = 0; 											
 		
 		// Lets user know downloading started, starts timer
@@ -119,23 +112,23 @@ public class ImageDownloader {
 				File img = new File(fileName);
 				URL url = new URL(imageURLs[i]);			// Creates URL object from URL String
 				InputStream is = url.openStream();			// Opens input stream on image at end of URL
-			
-			OutputStream os = new FileOutputStream(img.toString());	// Opens writer to img file
 
-			byte[] b = new byte[2048];
-			int length;
-			
-			// Loops to the end of the file
-			while ((length = is.read(b)) != -1) {
-				// Writes length bytes from the specified byte array b
-				// Starting at offset 0 to this output stream.
-				os.write(b, 0, length);
-			}
+				OutputStream os = new FileOutputStream(img.toString());	// Opens writer to img file
 
-			is.close();				// Close inputStream
-			os.close();				// Close outputStream
-			
-			imageCount++;			// Increments for final download count.
+				byte[] b = new byte[2048];
+				int length;
+
+				// Loops to the end of the file
+				while ((length = is.read(b)) != -1) {
+					// Writes length bytes from the specified byte array b
+					// Starting at offset 0 to this output stream.
+					os.write(b, 0, length);
+				}
+
+				is.close();				// Close inputStream
+				os.close();				// Close outputStream
+
+				imageCount++;			// Increments for final download count.
 			} catch (IOException e) {
 			}
 			
@@ -143,9 +136,12 @@ public class ImageDownloader {
 		long endTime = System.nanoTime();
 		long duration = endTime - startTime;
 		double seconds = duration / 1000000000.0; // Converts time to download all images to seconds
+		
 		makeLog(seconds);
+		
 		System.out.printf("\n\nSaved %d images in %.2f seconds.", imageCount, seconds);
 	}
+	
 	
 	
 	// Writes a log file to the download directory.
