@@ -11,7 +11,7 @@ package com.big;
 import java.io.File;
 import java.util.Scanner;
 
-public class Main {
+public class BingImageGrabber {
 
 	public static Scanner in = new Scanner(System.in);
 
@@ -31,7 +31,7 @@ public class Main {
 				System.out.print("\nDesired Number of Images (Max 50): ");
 				numImages = in.nextInt();
 			}
-			urlGrabber mySerialGrabber = new urlGrabber(queryChoice, numImages, adult);
+			URLGrabber mySerialGrabber = new URLGrabber(queryChoice, numImages, adult);
 			mySerialGrabber.run();	
 	}
 	

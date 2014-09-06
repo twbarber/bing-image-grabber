@@ -45,7 +45,7 @@ import java.io.Writer;
 import java.net.URL;
 import java.util.Scanner;
 
-public class imageDownloader {
+public class ImageDownloader {
 	
 	public String[] imageURLs;		// Array of parsed URLs
 	public String rawQueryTerm;		// Query for directory organization
@@ -53,7 +53,7 @@ public class imageDownloader {
 	
 	// Constructor copies the imageURL array into this object.
 	// It also copies in the raw query for directory structure
-	public imageDownloader(urlGrabber myUrlGrabber) {
+	public ImageDownloader(URLGrabber myUrlGrabber) {
 		this.imageURLs = new String[myUrlGrabber.storedAddresses.length];
 		for(int i = 0; i < imageURLs.length; i++)
 			imageURLs[i] = myUrlGrabber.storedAddresses[i];

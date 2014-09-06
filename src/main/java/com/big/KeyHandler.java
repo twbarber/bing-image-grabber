@@ -18,7 +18,7 @@ import java.util.Scanner;
 
 import org.apache.commons.codec.binary.Base64;
 
-public class keyHandler {
+public class KeyHandler {
 	
 	String encryptedKey;
 	File keyFile;
