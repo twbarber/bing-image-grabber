@@ -1,4 +1,4 @@
-package com.big;
+package src.main.java.com.big;
 /* 
 	Bing Image Grabber - Version 0.2.0
 
@@ -56,9 +56,8 @@ public class URLGrabber {
 	public String rawQueryTerm;
 	Scanner sc = new Scanner(System.in);
 	
-	public URLGrabber(String queryChoice, int imageCount, String queryFilter) throws IOException {
-		
-		KeyHandler myKeyHandler = new KeyHandler();				// Used to get users App Key
+	public URLGrabber(String queryChoice, int imageCount, String queryFilter) throws IOExckeyHandler	
+		KeyHandler myKeykeyHandlernew KeyHandler();				// Used to get users App Key
 		myKeyHandler.getUserKey();								// Actually gets users App Key
 		this.encryptedKey = myKeyHandler.encryptedKey;			// Passes encrypted key to this
 		if(queryChoice.equals("random"))

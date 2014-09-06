@@ -1,4 +1,4 @@
-package com.big;
+package src.main.java.com.big;
 /* 
 	Bing Image Grabber - Version 0.2.0
 

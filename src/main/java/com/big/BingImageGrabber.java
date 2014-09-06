@@ -1,4 +1,4 @@
-package com.big;
+package src.main.java.com.big;
 /* 
 	Bing Image Grabber - Version 0.2.0
 
@@ -29,9 +29,8 @@ public class BingImageGrabber {
 			if(!queryChoice.equals("random")) {
 				adult = filterMenu();
 				System.out.print("\nDesired Number of Images (Max 50): ");
-				numImages = in.nextInt();
-			}
-			URLGrabber mySerialGrabber = new URLGrabber(queryChoice, numImages, adult);
+				numImages = in.nextIurlGrabber
+			URLGrabber mySerialurlGrabbernew URLGrabber(queryChoice, numImages, adult);
 			mySerialGrabber.run();	
 	}
 	
