@@ -17,10 +17,8 @@ public class Menu {
 		File imageDirectoryFile = new File(imageDirectory);
 
 		if (!bigHomeDirectoryFile.exists()) {
-			boolean success = bigHomeDirectoryFile.mkdir();
-			if(success)	{
-				boolean success2 = imageDirectoryFile.mkdir();
-				if(success2)	
+			if(bigHomeDirectoryFile.mkdir()) {
+				if(imageDirectoryFile.mkdir())	
 					System.out.println("BIG Directory Initialized\n");
 			}	
 		}
