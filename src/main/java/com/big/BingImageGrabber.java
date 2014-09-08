@@ -24,13 +24,14 @@ public class BingImageGrabber {
 		System.out.println("\nBing Image Grabber 0.2.1\n");
 
 		Menu mainMenu = new Menu();
+		mainMenu.firstRun();
 		
-		String queryChoice = queryMenu();
+		String queryChoice = mainMenu.queryMenu();
 		
 		if(queryChoice.equalsIgnoreCase("random"))
 			numImages = 30;
 		else{
-			adult = filterMenu();
+			adult = mainMenu.filterMenu();
 			System.out.print("\nDesired Number of Images (Max 1000): ");
 			numImages = in.nextInt();
 			while(!goodNumber) {
