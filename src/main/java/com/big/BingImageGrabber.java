@@ -18,8 +18,8 @@ public class BingImageGrabber {
 	public static void main(String[] args) throws Exception {
 
 		String adult = "Moderate";
-		int numImages = -1;
-		boolean goodNumber = false;
+		int numberImages = -1;
+		
 		
 		System.out.println("\nBing Image Grabber 0.2.1\n");
 
@@ -29,19 +29,10 @@ public class BingImageGrabber {
 		String queryChoice = mainMenu.queryMenu();
 		
 		if(queryChoice.equalsIgnoreCase("random"))
-			numImages = 30;
+			numberImages = 30;
 		else{
 			adult = mainMenu.filterMenu();
-			System.out.print("\nDesired Number of Images (Max 1000): ");
-			numImages = in.nextInt();
-			while(!goodNumber) {
-				if(numImages < 0 || numImages > 1000) {
-					System.out.print("\nPlease enter a valid number of images: ");
-					numImages = in.nextInt();
-				}
-				else goodNumber = true;
-			}
+			numberImages = mainMenu.countMenu();
 		}
-		BIGHandler myBigHandler = new BIGHandler(queryChoice, numImages, adult);
 	}
 }

@@ -78,4 +78,18 @@ public class Menu {
 		return "Moderate";	// Returns Moderate as default if somehow it gets here
 
 	}
+	
+	public int countMenu() {
+		System.out.print("\nDesired Number of Images (Max 1000): ");
+		boolean goodNumber = false;
+		int numberImages = this.systemInput.nextInt();
+		while(!goodNumber) {
+			if(numberImages < 0 || numberImages > 1000) {
+				System.out.print("\nPlease enter a valid number of images: ");
+				numberImages = this.systemInput.nextInt();
+			}
+			else goodNumber = true;
+		}
+		return numberImages;
+	}
 }
