@@ -7,6 +7,7 @@ public class BingImageGrabber {
 
 	private String adult;
 	private int numberImages;
+	private final String BIG_VERSION_NUMBER = "0.2.1";
 	
 	public BingImageGrabber() {
 		this.adult = "Moderate";
@@ -14,17 +15,25 @@ public class BingImageGrabber {
 	}
 	
 	public void runBingImageGrabber() {
-		System.out.println("\nBing Image Grabber 0.2.1\n");
-
+		System.out.println("\nBing Image Grabber " + BIG_VERSION_NUMBER + "\n");
+		displayMenus();
+		authenticate();
+	}
+	
+	public void displayMenus() {
 		Menu mainMenu = new Menu();
 		mainMenu.firstRun();
 		String queryChoice = mainMenu.queryMenu();
-		
 		if(queryChoice.equalsIgnoreCase("random"))
 			this.numberImages = 30;
 		else{
-			adult = mainMenu.filterMenu();
-			numberImages = mainMenu.countMenu();
+			this.adult = mainMenu.filterMenu();
+			this.numberImages = mainMenu.countMenu();
 		}
 	}
+	
+	public void authenticate() {
+		KeyHandler keyHandler = new KeyHandler();
+	}
+	
 }
