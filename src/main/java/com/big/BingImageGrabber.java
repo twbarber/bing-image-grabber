@@ -20,7 +20,7 @@ public class BingImageGrabber {
 		authenticate();
 	}
 	
-	public void displayMenus() {
+	private void displayMenus() {
 		Menu mainMenu = new Menu();
 		mainMenu.firstRun();
 		String queryChoice = mainMenu.queryMenu();
@@ -32,7 +32,7 @@ public class BingImageGrabber {
 		}
 	}
 	
-	public void authenticate() {
+	private void authenticate() {
 		KeyHandler keyHandler = new KeyHandler();
 	}
 	
