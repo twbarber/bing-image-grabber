@@ -118,4 +118,19 @@ public class KeyHandler {
 			output.close();
 		}
 	}
+
+	public boolean isValidKey() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public boolean keyExists() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public void promptForKey() {
+		// TODO Auto-generated method stub
+		
+	}
 }

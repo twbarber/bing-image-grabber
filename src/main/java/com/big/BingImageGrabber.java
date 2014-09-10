@@ -1,4 +1,6 @@
 package com.big;
+
+import java.io.IOException;
 /* 
 	Bing Image Grabber - Version 0.2.1
  */
@@ -34,6 +36,15 @@ public class BingImageGrabber {
 	
 	private void authenticate() {
 		KeyHandler keyHandler = new KeyHandler();
+		while (!keyHandler.isValidKey()) {
+			keyHandler.promptForKey();
+			try {
+				keyHandler.writeKey();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}	
+		}
+		
 	}
 	
 }
