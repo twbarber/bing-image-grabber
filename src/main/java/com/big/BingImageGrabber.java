@@ -4,6 +4,7 @@ import java.io.IOException;
 /* 
 	Bing Image Grabber - Version 0.2.1
  */
+import java.util.ArrayList;
 
 public class BingImageGrabber {
 
@@ -44,6 +45,21 @@ public class BingImageGrabber {
 				e.printStackTrace();
 			}	
 		}
+	}
+	
+	private String buildQuery() {
+		
+		return null;
+		
+	}
+	
+	private ArrayList<String> getImageURLList(String query) {
+		
+		return new ArrayList<String>(); 
+	}
+	
+	private void downloadImages() { 
+		
 		
 	}
 	
