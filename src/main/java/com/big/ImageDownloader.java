@@ -41,13 +41,13 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.Writer;
 import java.net.URL;
+import java.util.ArrayList;
 
 public class ImageDownloader {
 	
-	public String[] imageURLs;		// Array of parsed URLs
-	public String rawQueryTerm;		// Query for directory organization
-	public String queryDir;			// Storage Directory
-	
+	private ArrayList<String> imageURLs;		// Array of parsed URLs
+	private String rawQueryTerm;		// Query for directory organization
+	private String queryDir;			// Storage Directory
 	
 	// Constructor copies the imageURL array into this object.
 	// It also copies in the raw query for directory structure

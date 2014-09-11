@@ -18,9 +18,9 @@ import org.apache.commons.codec.binary.Base64;
 
 public class KeyHandler {
 
-	String encryptedKey;
-	File keyFile;
-	Scanner sc = new Scanner(System.in);
+	private String encryptedKey;
+	private File keyFile;
+	private Scanner sc = new Scanner(System.in);
 
 	public void getUserKey() throws IOException {
 
