@@ -45,16 +45,15 @@ import java.util.ArrayList;
 
 public class ImageDownloader {
 	
-	private ArrayList<String> imageURLs;		// Array of parsed URLs
+	private ArrayList<String> imageURLs = new ArrayList<String>();		// Array of parsed URLs
 	private String rawQueryTerm;		// Query for directory organization
 	private String queryDir;			// Storage Directory
 	
 	// Constructor copies the imageURL array into this object.
 	// It also copies in the raw query for directory structure
 	public ImageDownloader(URLGrabber myUrlGrabber) {
-		this.imageURLs = new String[myUrlGrabber.parsedURLs.length];
-		for(int i = 0; i < imageURLs.length; i++)
-			imageURLs[i] = myUrlGrabber.parsedURLs[i];
+		for(String imageURL : myUrlGrabber.parsedURLs)
+			this.imageURLs.add(imageURL);
 	}
 	
 	public void run() throws IOException {
@@ -101,7 +100,7 @@ public class ImageDownloader {
 		long startTime = System.nanoTime();
 		
 		// Loops over all URLs in array
-		for(int i = 0; i < imageURLs.length; i++) {						
+		for(int i = 0; i < imageURLs.size(); i++) {						
 			
 			// Lets user know there's progress
 			System.out.print(".");					
@@ -110,7 +109,7 @@ public class ImageDownloader {
 				// Builds string for img file name
 				String fileName = queryDir + "/img" + i; 				
 				File img = new File(fileName);
-				URL url = new URL(imageURLs[i]);			// Creates URL object from URL String
+				URL url = new URL(imageURLs.get(i));			// Creates URL object from URL String
 				InputStream is = url.openStream();			// Opens input stream on image at end of URL
 
 				OutputStream os = new FileOutputStream(img.toString());	// Opens writer to img file
