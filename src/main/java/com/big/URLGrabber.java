@@ -33,6 +33,7 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.Collection;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -41,12 +42,11 @@ import com.google.gson.JsonParser;
 
 public class URLGrabber {
 
-	public String encryptedKey;
-	public String[] parsedURLs; 	// Array of parsed URLs from JSON object
-	public String[] bingURLs;
+	private String encryptedKey;
+	private Collection<URL> parsedURLs; 
+	private Collection<URL> bingURLs;
 	
 	public URLGrabber(String encryptedKey, String[] bingURLs) {
-		
 		this.encryptedKey = encryptedKey;
 		this.bingURLs = bingURLs.clone();
 	}
