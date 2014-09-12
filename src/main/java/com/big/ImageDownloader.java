@@ -45,53 +45,51 @@ import java.util.ArrayList;
 
 public class ImageDownloader {
 	
-	private ArrayList<String> imageURLs = new ArrayList<String>();		// Array of parsed URLs
-	private String rawQueryTerm;		// Query for directory organization
-	private String queryDir;			// Storage Directory
+	private ArrayList<String> imageURLs = new ArrayList<String>();
+	private String rawQueryTerm;		
+	private File queryDir;			
 	
 	// Constructor copies the imageURL array into this object.
 	// It also copies in the raw query for directory structure
 	public ImageDownloader(URLGrabber myUrlGrabber) {
 		for(String imageURL : myUrlGrabber.parsedURLs)
 			this.imageURLs.add(imageURL);
-	}
-	
-	public void run() throws IOException {
-		
 		this.queryDir = makeDirectories();
-		download();
+		try {
+			downloadImages();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
-	// Code is pretty self explanatory.
-	// Asks the user for a directory to write the image files to.
-	// If it exists, go inside and create sub-folder
-	// If it doesn't exist, make it, then make sub-folder inside of it
-	// Print to console any time a directory is made
-	// Returns directory to be used with download() method
-	public String makeDirectories() {
+	/**
+	 * Creates directories in <user_home>/big/images/<query_term> where images will be 
+	 * saved
+	 * 
+	 * @return Directory where images where be saved. 
+	 */
+	public File makeDirectories() {
 
 		String userHome = System.getProperty("user.home");
 
-		File imageDir = new File(userHome + "/big/images");
-		File queryDir = new File(imageDir + "/" + this.rawQueryTerm);
+		File imageDirectory = new File(userHome + "/big/images");
+		File queryDirectory = new File(imageDirectory + "/" + this.rawQueryTerm);
 		
-		if (!imageDir.exists()) {
-			boolean success = imageDir.mkdir();
-			if (success)
-				System.out.println("\nBing Directory: " + imageDir.toString() + " created");
+		if (!imageDirectory.exists()) {
+			if (imageDirectory.mkdir())
+				System.out.println("\nBing Directory: " + imageDirectory.toString() + " created");
 		}
-		
-		if (!queryDir.exists()) {
-			boolean success = queryDir.mkdir();
-			if (success)
-				System.out.println("\nQuery Directory: " + queryDir.toString() + " created");
+		if (!queryDirectory.exists()) {
+			if (queryDirectory.mkdir())
+				System.out.println("\nQuery Directory: " + queryDirectory.toString() + " created");
 		}
-		return queryDir.toString();
+		return queryDirectory;
 	}
 	
 	// Saves images from array of URLs locally. 
 	// 
-	public void download() throws IOException {
+	public void downloadImages() throws IOException {
 
 		int imageCount = 0; 											
 		
