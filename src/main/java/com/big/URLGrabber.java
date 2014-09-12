@@ -34,6 +34,7 @@ import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.ArrayList;
 import java.util.Collection;
 
 import com.google.gson.JsonArray;
@@ -44,48 +45,39 @@ import com.google.gson.JsonParser;
 public class URLGrabber {
 
 	private String encryptedKey;
-	private Collection<URL> parsedURLs; 
-	private Collection<URL> bingURLs;
 	
-	public URLGrabber(String encryptedKey, Collection<URL> queryURLs) {
+	public URLGrabber(String encryptedKey) {
 		this.encryptedKey = encryptedKey;
-		this.bingURLs = queryURLs;
-	}
-	
-	public void retrieveImageURLs() throws Exception {
-		for (URL bingURL : bingURLs) {
-			String jsonLine = runQuery(bingURL);
-			parseURLs(jsonLine);
-		}
 	}
 
-	// This method is largely based on Mark Watson's wrapper found at the GitHub repo mentioned
-	// above. Put the code in a method for my own organizational structure.
-	// Creates URL object based on the String generated from users parameters, and opens an URL 
-	// connection to that address. That connections is then passed the authentication we encrypted
-	// when this serialGrabber object was created. The resulting JSON string is passed into a string
-	// called sb, which is returned to the run method to be used as a parameter for parsing.
 	public String runQuery(URL aQueryURL) throws Exception {
 		URLConnection urlConnection = aQueryURL.openConnection();
-		String s1 = "Basic " + this.encryptedKey;
-		urlConnection.setRequestProperty("Authorization", s1);
-		BufferedReader in = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
-		String inputLine;
-		StringBuffer sb = new StringBuffer();
-		while ((inputLine = in.readLine()) != null)
-			sb.append(inputLine);
-		in.close();
-		return sb.toString();
+		String authKey = "Basic " + this.encryptedKey;
+		urlConnection.setRequestProperty("Authorization", authKey);
+		BufferedReader responseReader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
+		String inputLine = responseReader.readLine();
+		StringBuffer jsonString = new StringBuffer();
+		
+		while (inputLine != null) {
+			jsonString.append(inputLine); 
+			inputLine = responseReader.readLine();
+		}
+		
+		return jsonString.toString();
 	}
 
-	public void parseURLs(String jsonLine) throws MalformedURLException {
+	public Collection<URL> parseURLs(String jsonLine) throws MalformedURLException {
+		ArrayList<URL> parsedURLs = new ArrayList<>();
 		JsonParser jsonParser = new JsonParser();					
 		JsonArray results = jsonParser.parse(jsonLine).getAsJsonObject().get("d").getAsJsonObject()
 				.getAsJsonArray("results");
+
 		for (JsonElement result : results) {
-			JsonObject resObject = result.getAsJsonObject();	// Turns result element into Object
-			URL mediaURL = new URL(resObject.get("MediaUrl").getAsString()); // Grabs MediaUrl field from object
-			this.parsedURLs.add(mediaURL);					// Puts string val of MediaUrl in array
+			JsonObject resObject = result.getAsJsonObject();
+			URL mediaURL = new URL(resObject.get("MediaUrl").getAsString());
+			parsedURLs.add(mediaURL);
 		}
+		
+		return parsedURLs;
 	}
 }

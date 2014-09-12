@@ -34,7 +34,7 @@ public class QueryBuilder {
 		this.queryOffset = "&$skip=" + this.queryOffset;
 	}
 
-	public Collection<URL> makeQuerys() throws MalformedURLException {
+	public Collection<URL> generateQuerys() throws MalformedURLException {
 		ArrayList<URL> queryURLs = new ArrayList<URL>();
 		for(int i = 0; i < this.remainingImages; i++) {
 			String queryString = ROOT_URL + this.queryTerm + this.queryFilter + QUERY_MARKET +

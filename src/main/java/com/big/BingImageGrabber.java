@@ -10,14 +10,11 @@ import java.util.Collection;
 
 public class BingImageGrabber {
 
-	private final String BIG_VERSION_NUMBER = "0.2.1";
-	private String queryFilter;
-	private int numberImages;
-	private String queryTerm;
+	private final String BIG_VERSION_NUMBER = "0.2.2";
+	private String encryptedKey;
 	
 	public BingImageGrabber() {
-		this.queryFilter = "Moderate";
-		this.numberImages = -1;
+
 	}
 	
 	public void runBingImageGrabber() {
@@ -27,15 +24,20 @@ public class BingImageGrabber {
 	}
 	
 	private void displayMenus() {
+		int numberImages;
+		String queryFilter;
+		
 		Menu mainMenu = new Menu();
 		mainMenu.firstRun();
-		this.queryTerm = mainMenu.queryMenu();
-		if (this.queryTerm.equalsIgnoreCase("random")) {
-			this.numberImages = 30;
-			this.queryTerm = generateQueryTerm();
+		String queryTerm = mainMenu.queryMenu();
+		
+		if (queryTerm.equalsIgnoreCase("random")) {
+			numberImages = 30;
+			queryTerm = generateQueryTerm();
+			
 		} else {
-			this.queryFilter = mainMenu.filterMenu();
-			this.numberImages = mainMenu.countMenu();
+			queryFilter = mainMenu.filterMenu();
+			numberImages = mainMenu.countMenu();
 		}
 	}
 	
@@ -51,15 +53,24 @@ public class BingImageGrabber {
 		}
 	}
 	
-	private Collection<URL> buildQuery() {
-		QueryBuilder queryBuilder = new QueryBuilder(this.queryTerm, this.numberImages, this.queryFilter);
+	private Collection<URL> buildQuery(String queryTerm, int numberImages, String queryFilter) {
+		QueryBuilder queryBuilder = new QueryBuilder(queryTerm, numberImages, queryFilter);
 		
 		return null;
 	}
 	
-	private Collection<URL> getImageURLList(String query) {
-		
-		return new ArrayList<URL>(); 
+	private Collection<URL> getImageURLList(Collection<URL> bingURLs) {
+		ArrayList<URL> imageURLList = new ArrayList<URL>();
+		URLGrabber urlGrabber = new URLGrabber(this.encryptedKey);
+		for (URL aBingURL : bingURLs) {
+			try {
+				String jsonString = urlGrabber.runQuery(aBingURL);
+				imageURLList.addAll(urlGrabber.parseURLs(jsonString));
+			} catch (Exception e) {
+				
+			}
+		}
+		return imageURLList; 
 	}
 	
 	private void downloadImages() { 
