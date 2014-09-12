@@ -45,16 +45,15 @@ import java.util.ArrayList;
 
 public class ImageDownloader {
 	
-	private ArrayList<String> imageURLs = new ArrayList<String>();
+	private ArrayList<URL> imageURLs = new ArrayList<URL>();
 	private String rawQueryTerm;		
-	private File queryDir;			
+	private File queryDirectory;			
 	
 	// Constructor copies the imageURL array into this object.
 	// It also copies in the raw query for directory structure
 	public ImageDownloader(URLGrabber myUrlGrabber) {
-		for(String imageURL : myUrlGrabber.parsedURLs)
-			this.imageURLs.add(imageURL);
-		this.queryDir = makeDirectories();
+		this.imageURLs.addAll(myUrlGrabber.parsedURLs);
+		this.queryDirectory = makeDirectories();
 		try {
 			downloadImages();
 		} catch (IOException e) {
@@ -87,8 +86,11 @@ public class ImageDownloader {
 		return queryDirectory;
 	}
 	
-	// Saves images from array of URLs locally. 
-	// 
+	/**
+	 * 
+	 * 
+	 * @throws IOException
+	 */
 	public void downloadImages() throws IOException {
 
 		int imageCount = 0; 											
@@ -96,29 +98,22 @@ public class ImageDownloader {
 		// Lets user know downloading started, starts timer
 		System.out.print("\nDownloading Images");	
 		long startTime = System.nanoTime();
-		
+		int imageIndex = 0;
 		// Loops over all URLs in array
-		for(int i = 0; i < imageURLs.size(); i++) {						
-			
+		for(URL imageURL : imageURLs) {						
 			// Lets user know there's progress
 			System.out.print(".");					
-			// Try - Catch to make sure URL is good
 			try {								
-				// Builds string for img file name
-				String fileName = queryDir + "/img" + i; 				
+				String fileName = this.queryDirectory + "/img" + imageIndex; 				
 				File img = new File(fileName);
-				URL url = new URL(imageURLs.get(i));			// Creates URL object from URL String
-				InputStream is = url.openStream();			// Opens input stream on image at end of URL
-
-				OutputStream os = new FileOutputStream(img.toString());	// Opens writer to img file
+				InputStream is = imageURL.openStream();			
+				
+				OutputStream os = new FileOutputStream(img.toString());
 
 				byte[] b = new byte[2048];
 				int length;
 
-				// Loops to the end of the file
 				while ((length = is.read(b)) != -1) {
-					// Writes length bytes from the specified byte array b
-					// Starting at offset 0 to this output stream.
 					os.write(b, 0, length);
 				}
 
@@ -139,17 +134,13 @@ public class ImageDownloader {
 		System.out.printf("\n\nSaved %d images in %.2f seconds.", imageCount, seconds);
 	}
 	
-	
-	
-	// Writes a log file to the download directory.
-	// Contains all URLs and time to download full directory
 	public void makeLog(Double seconds) throws IOException {
 		
-		File logFile = new File(queryDir + "/" + rawQueryTerm + ".txt");
+		File logFile = new File(queryDirectory + "/" + rawQueryTerm + ".txt");
 		Writer output = new BufferedWriter(new FileWriter(logFile));
 		try {
-			for(String i : this.imageURLs)
-				output.write(i + "\n");
+			for(URL imageURL : this.imageURLs)
+				output.write(imageURL.toString() + "\n");
 				output.write("\nProcess Completed in " + seconds + " seconds.");
 		} finally {
 			output.close();
