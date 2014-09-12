@@ -42,6 +42,7 @@ import java.io.OutputStream;
 import java.io.Writer;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collection;
 
 public class ImageDownloader {
 	
@@ -53,8 +54,8 @@ public class ImageDownloader {
 	 * 
 	 * 
 	 */
-	public ImageDownloader(URLGrabber myUrlGrabber) {
-		this.imageURLs.addAll(myUrlGrabber.parsedURLs);
+	public ImageDownloader(Collection<URL> parsedURLs) {
+		this.imageURLs.addAll(parsedURLs);
 		this.queryDirectory = makeDirectories();
 		try {
 			downloadImages();
@@ -71,9 +72,7 @@ public class ImageDownloader {
 	 * @return Directory where images where be saved. 
 	 */
 	public File makeDirectories() {
-
 		String userHome = System.getProperty("user.home");
-
 		File imageDirectory = new File(userHome + "/big/images");
 		File queryDirectory = new File(imageDirectory + "/" + this.rawQueryTerm);
 		

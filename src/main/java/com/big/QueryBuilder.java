@@ -16,7 +16,7 @@ public class QueryBuilder {
 	private String queryOffset;
 	private int remainingImages;
 	
-	public QueryBuilder(String queryChoice, int imageCount, String queryFilter) {			
+	public QueryBuilder(String queryChoice, int imageCount, String queryFilter) {
 		this.queryTerm = queryChoice;
 		this.queryFilter = queryFilter;
 		if(imageCount > 50) {

@@ -1,19 +1,22 @@
 package com.big;
 
 import java.io.IOException;
+import java.net.URL;
 /* 
 	Bing Image Grabber - Version 0.2.1
  */
 import java.util.ArrayList;
+import java.util.Collection;
 
 public class BingImageGrabber {
 
-	private String adult;
-	private int numberImages;
 	private final String BIG_VERSION_NUMBER = "0.2.1";
+	private String queryFilter;
+	private int numberImages;
+	private String queryTerm;
 	
 	public BingImageGrabber() {
-		this.adult = "Moderate";
+		this.queryFilter = "Moderate";
 		this.numberImages = -1;
 	}
 	
@@ -26,11 +29,12 @@ public class BingImageGrabber {
 	private void displayMenus() {
 		Menu mainMenu = new Menu();
 		mainMenu.firstRun();
-		String queryChoice = mainMenu.queryMenu();
-		if(queryChoice.equalsIgnoreCase("random"))
+		this.queryTerm = mainMenu.queryMenu();
+		if (this.queryTerm.equalsIgnoreCase("random")) {
 			this.numberImages = 30;
-		else{
-			this.adult = mainMenu.filterMenu();
+			this.queryTerm = generateQueryTerm();
+		} else {
+			this.queryFilter = mainMenu.filterMenu();
 			this.numberImages = mainMenu.countMenu();
 		}
 	}
@@ -47,20 +51,25 @@ public class BingImageGrabber {
 		}
 	}
 	
-	private String buildQuery() {
+	private Collection<URL> buildQuery() {
+		QueryBuilder queryBuilder = new QueryBuilder(this.queryTerm, this.numberImages, this.queryFilter);
 		
 		return null;
-		
 	}
 	
-	private ArrayList<String> getImageURLList(String query) {
+	private Collection<URL> getImageURLList(String query) {
 		
-		return new ArrayList<String>(); 
+		return new ArrayList<URL>(); 
 	}
 	
 	private void downloadImages() { 
 		
 		
+	}
+	
+	public String generateQueryTerm() {
+		int generatedNum = 100000 + (int)(Math.random() * ((899999) + 1));
+		return String.valueOf(generatedNum);
 	}
 	
 }

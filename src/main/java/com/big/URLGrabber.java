@@ -31,6 +31,7 @@ package com.big;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.Collection;
@@ -46,19 +47,15 @@ public class URLGrabber {
 	private Collection<URL> parsedURLs; 
 	private Collection<URL> bingURLs;
 	
-	public URLGrabber(String encryptedKey, String[] bingURLs) {
+	public URLGrabber(String encryptedKey, Collection<URL> queryURLs) {
 		this.encryptedKey = encryptedKey;
-		this.bingURLs = bingURLs.clone();
+		this.bingURLs = queryURLs;
 	}
 	
-	// Encompasses all the methods we need to create a folder full of images.
-	// Makes the test class super easy to write.
-	public void run() throws Exception {
-		
-		for(int i = 0; i < bingURLs.length; i++) {
-			String queryURL = bingURLs[i];
-			String jsonLine = runQuery(queryURL);		// Pulls JSON string from URL
-			parseURLs(jsonLine);				// Parses URL from JSON string
+	public void retrieveImageURLs() throws Exception {
+		for (URL bingURL : bingURLs) {
+			String jsonLine = runQuery(bingURL);
+			parseURLs(jsonLine);
 		}
 	}
 
@@ -68,14 +65,11 @@ public class URLGrabber {
 	// connection to that address. That connections is then passed the authentication we encrypted
 	// when this serialGrabber object was created. The resulting JSON string is passed into a string
 	// called sb, which is returned to the run method to be used as a parameter for parsing.
-	public String runQuery(String queryURL) throws Exception {
-
-		URL url = new URL(queryURL);
-		URLConnection urlConnection = url.openConnection();
+	public String runQuery(URL aQueryURL) throws Exception {
+		URLConnection urlConnection = aQueryURL.openConnection();
 		String s1 = "Basic " + this.encryptedKey;
 		urlConnection.setRequestProperty("Authorization", s1);
-		BufferedReader in = new BufferedReader(new InputStreamReader(
-				urlConnection.getInputStream()));
+		BufferedReader in = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
 		String inputLine;
 		StringBuffer sb = new StringBuffer();
 		while ((inputLine = in.readLine()) != null)
@@ -84,21 +78,14 @@ public class URLGrabber {
 		return sb.toString();
 	}
 
-	// Parameter is JSON string returned by Bing
-	// GSON used as library for parsing
-	public void parseURLs(String jsonLine) {
-
-		JsonParser jsonParser = new JsonParser();					// New Parser
-		JsonArray results = jsonParser.parse(jsonLine)				// Parses JSON into "results" array
-				.getAsJsonObject().get("d").getAsJsonObject()
+	public void parseURLs(String jsonLine) throws MalformedURLException {
+		JsonParser jsonParser = new JsonParser();					
+		JsonArray results = jsonParser.parse(jsonLine).getAsJsonObject().get("d").getAsJsonObject()
 				.getAsJsonArray("results");
-		// Iterator for Array, puts URL in each index
-		int i = 0;												
-		for(JsonElement result : results) {
+		for (JsonElement result : results) {
 			JsonObject resObject = result.getAsJsonObject();	// Turns result element into Object
-			String MediaUrl = resObject.get("MediaUrl").getAsString(); // Grabs MediaUrl field from object
-			this.parsedURLs[i] = MediaUrl;					// Puts string val of MediaUrl in array
-			i++;
+			URL mediaURL = new URL(resObject.get("MediaUrl").getAsString()); // Grabs MediaUrl field from object
+			this.parsedURLs.add(mediaURL);					// Puts string val of MediaUrl in array
 		}
 	}
 }
