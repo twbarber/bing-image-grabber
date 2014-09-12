@@ -1,6 +1,6 @@
 package com.big;
-/*
- 	imageDownloader class that handles the actual retrieval of images.
+/**
+ * imageDownloader class that handles the actual retrieval of images.
  	
  	The imageDownloader is passed in a serialGrabber object, and it uses
  	the fields to populate:
@@ -49,8 +49,10 @@ public class ImageDownloader {
 	private String rawQueryTerm;		
 	private File queryDirectory;			
 	
-	// Constructor copies the imageURL array into this object.
-	// It also copies in the raw query for directory structure
+	/**
+	 * 
+	 * 
+	 */
 	public ImageDownloader(URLGrabber myUrlGrabber) {
 		this.imageURLs.addAll(myUrlGrabber.parsedURLs);
 		this.queryDirectory = makeDirectories();
@@ -134,6 +136,11 @@ public class ImageDownloader {
 		System.out.printf("\n\nSaved %d images in %.2f seconds.", imageCount, seconds);
 	}
 	
+	/**
+	 * 
+	 * @param seconds
+	 * @throws IOException
+	 */
 	public void makeLog(Double seconds) throws IOException {
 		
 		File logFile = new File(queryDirectory + "/" + rawQueryTerm + ".txt");
