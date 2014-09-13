@@ -13,6 +13,9 @@ public class BingImageGrabber {
 
 	private final String BIG_VERSION_NUMBER = "0.2.2";
 	private String encryptedKey;
+	int numberImages = -1;
+	String queryFilter = "Moderate";
+	String queryTerm;
 	
 	public BingImageGrabber() {
 		
@@ -22,15 +25,20 @@ public class BingImageGrabber {
 		System.out.println("\nBing Image Grabber " + BIG_VERSION_NUMBER + "\n");
 		displayMenus();
 		authenticate();
+		try {
+			Collection<URL> bingURLs = buildQuery(this.queryTerm, this.numberImages, this.queryFilter);
+			Collection<URL> imageURLs = getImageURLList(bingURLs);
+			downloadImages(imageURLs);
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	private void displayMenus() {
-		int numberImages = -1;
-		String queryFilter = "Moderate";
 		
 		Menu mainMenu = new Menu();
 		mainMenu.firstRun();
-		String queryTerm = mainMenu.queryMenu();
+		queryTerm = mainMenu.queryMenu();
 		
 		if (queryTerm.equalsIgnoreCase("random")) {
 			numberImages = 30;
@@ -56,7 +64,7 @@ public class BingImageGrabber {
 	
 	private Collection<URL> buildQuery(String queryTerm, int numberImages, String queryFilter) throws MalformedURLException {
 		QueryBuilder queryBuilder = new QueryBuilder(queryTerm, numberImages, queryFilter);
-		
+		queryBuilder.encodeParameters();
 		return queryBuilder.generateQuerys();
 	}
 	
