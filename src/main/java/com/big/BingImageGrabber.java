@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 /* 
-	Bing Image Grabber - Version 0.2.1
+	Bing Image Grabber - Version 0.2.2
  */
 import java.util.ArrayList;
 import java.util.Collection;
@@ -38,15 +38,15 @@ public class BingImageGrabber {
 		
 		Menu mainMenu = new Menu();
 		mainMenu.firstRun();
-		queryTerm = mainMenu.queryMenu();
+		this.queryTerm = mainMenu.queryMenu();
 		
 		if (queryTerm.equalsIgnoreCase("random")) {
-			numberImages = 30;
-			queryTerm = generateQueryTerm();
+			this.numberImages = 30;
+			this.queryTerm = generateQueryTerm();
 			
 		} else {
-			queryFilter = mainMenu.filterMenu();
-			numberImages = mainMenu.countMenu();
+			this.queryFilter = mainMenu.filterMenu();
+			this.numberImages = mainMenu.countMenu();
 		}
 	}
 	
@@ -57,7 +57,7 @@ public class BingImageGrabber {
 			try {
 				keyHandler.writeKey();
 			} catch (IOException e) {
-				e.printStackTrace();
+				System.err.println("There was a problem with authentication.");
 			}	
 		}
 	}
@@ -73,10 +73,10 @@ public class BingImageGrabber {
 		URLGrabber urlGrabber = new URLGrabber(this.encryptedKey);
 		for (URL aBingURL : bingURLs) {
 			try {
-				String jsonString = urlGrabber.runQuery(aBingURL);
-				imageURLList.addAll(urlGrabber.parseURLs(jsonString));
+				String jsonAsString = urlGrabber.runQuery(aBingURL);
+				imageURLList.addAll(urlGrabber.parseURLs(jsonAsString));
 			} catch (Exception e) {
-				
+				System.err.println("There was a problem getting the image URLs.");
 			}
 		}
 		return imageURLList; 
@@ -84,6 +84,11 @@ public class BingImageGrabber {
 	
 	private void downloadImages(Collection<URL> imageURLs) { 
 		ImageDownloader imageDownloader = new ImageDownloader(imageURLs);
+		try {
+			imageDownloader.downloadImages();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		
 	}
 	
