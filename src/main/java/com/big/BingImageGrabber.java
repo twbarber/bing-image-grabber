@@ -1,6 +1,7 @@
 package com.big;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
 /* 
 	Bing Image Grabber - Version 0.2.1
@@ -14,7 +15,7 @@ public class BingImageGrabber {
 	private String encryptedKey;
 	
 	public BingImageGrabber() {
-
+		
 	}
 	
 	public void runBingImageGrabber() {
@@ -24,8 +25,8 @@ public class BingImageGrabber {
 	}
 	
 	private void displayMenus() {
-		int numberImages;
-		String queryFilter;
+		int numberImages = -1;
+		String queryFilter = "Moderate";
 		
 		Menu mainMenu = new Menu();
 		mainMenu.firstRun();
@@ -53,10 +54,10 @@ public class BingImageGrabber {
 		}
 	}
 	
-	private Collection<URL> buildQuery(String queryTerm, int numberImages, String queryFilter) {
+	private Collection<URL> buildQuery(String queryTerm, int numberImages, String queryFilter) throws MalformedURLException {
 		QueryBuilder queryBuilder = new QueryBuilder(queryTerm, numberImages, queryFilter);
 		
-		return null;
+		return queryBuilder.generateQuerys();
 	}
 	
 	private Collection<URL> getImageURLList(Collection<URL> bingURLs) {
