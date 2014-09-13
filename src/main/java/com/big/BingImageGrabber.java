@@ -73,8 +73,8 @@ public class BingImageGrabber {
 		return imageURLList; 
 	}
 	
-	private void downloadImages() { 
-		
+	private void downloadImages(Collection<URL> imageURLs) { 
+		ImageDownloader imageDownloader = new ImageDownloader(imageURLs);
 		
 	}
 	

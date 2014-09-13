@@ -48,8 +48,6 @@ public class Menu {
 		return "random";	// Returns random as default if somehow it gets here
 	}
 
-	// Displays menu of available content filters.
-	// User chooses by entering number, loops until good input
 	public String filterMenu() {
 		
 		boolean validChoice = false;

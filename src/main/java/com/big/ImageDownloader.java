@@ -95,14 +95,11 @@ public class ImageDownloader {
 	public void downloadImages() throws IOException {
 
 		int imageCount = 0; 											
-		
-		// Lets user know downloading started, starts timer
 		System.out.print("\nDownloading Images");	
 		long startTime = System.nanoTime();
 		int imageIndex = 0;
-		// Loops over all URLs in array
+
 		for(URL imageURL : imageURLs) {						
-			// Lets user know there's progress
 			System.out.print(".");					
 			try {								
 				String fileName = this.queryDirectory + "/img" + imageIndex; 				
@@ -118,10 +115,10 @@ public class ImageDownloader {
 					os.write(b, 0, length);
 				}
 
-				is.close();				// Close inputStream
-				os.close();				// Close outputStream
+				is.close();
+				os.close();
 
-				imageCount++;			// Increments for final download count.
+				imageCount++;			
 			} catch (IOException e) {
 			}
 			
@@ -141,16 +138,14 @@ public class ImageDownloader {
 	 * @throws IOException
 	 */
 	public void makeLog(Double seconds) throws IOException {
-		
 		File logFile = new File(queryDirectory + "/" + rawQueryTerm + ".txt");
 		Writer output = new BufferedWriter(new FileWriter(logFile));
-		try {
-			for(URL imageURL : this.imageURLs)
-				output.write(imageURL.toString() + "\n");
-				output.write("\nProcess Completed in " + seconds + " seconds.");
-		} finally {
-			output.close();
+		
+		for(URL imageURL : this.imageURLs) {
+			output.write(imageURL.toString() + "\n");
 		}
+		output.write("\nProcess Completed in " + seconds + " seconds.");
+		output.close();	
 	}
 	
 }
