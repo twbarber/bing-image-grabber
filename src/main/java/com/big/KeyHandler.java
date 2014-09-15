@@ -22,8 +22,7 @@ public class KeyHandler {
 	private File keyFile;
 	private Scanner sc = new Scanner(System.in);
 
-	public void getUserKey() throws IOException {
-
+	public KeyHandler() {
 		String userHome = System.getProperty("user.home");
 		boolean goodKey = false;
 
@@ -38,25 +37,8 @@ public class KeyHandler {
 				fileReader.close();
 			}
 		}
-		
-		while(!goodKey) {
-			System.out.print("\nEnter Bing AppID: ");
-			String userAccountKey = sc.next();
-			// Found this encryption on GitHub and StackOverflow... Required by MSoft
-			byte[] byteKey = Base64.encodeBase64((userAccountKey + ":" + userAccountKey).getBytes());
-			String testKey = new String(byteKey);
-
-			if(verifyKey(testKey)) {
-				goodKey = true;
-				sc.nextLine();
-				System.out.println("\nKey Accepted");
-				this.encryptedKey = testKey;
-				writeKey();
-			}
-			else System.out.println("\nInvalid Key");
-		}
 	}
-
+	
 	public boolean verifyKey(String testKey) {
 
 		try{

@@ -13,9 +13,9 @@ public class BingImageGrabber {
 
 	private final String BIG_VERSION_NUMBER = "0.2.2";
 	private String encryptedKey;
-	int numberImages = -1;
-	String queryFilter = "Moderate";
-	String queryTerm;
+	private int numberImages = -1;
+	private String queryFilter = "Moderate";
+	private String queryTerm;
 	
 	public BingImageGrabber() {
 		
@@ -89,7 +89,6 @@ public class BingImageGrabber {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
 	}
 	
 	public String generateQueryTerm() {

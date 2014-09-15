@@ -1,12 +1,15 @@
 package com.big;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.Scanner;
 
+import org.apache.commons.codec.binary.Base64;
+
 public class Menu {
-	
+
 	private Scanner systemInput = new Scanner(System.in);
-	
+
 	public void firstRun() {
 
 		String userHome = System.getProperty("user.home");
@@ -49,7 +52,7 @@ public class Menu {
 	}
 
 	public String filterMenu() {
-		
+
 		boolean validChoice = false;
 
 		System.out.println("\nChoose Adult Content Settings: \n" +
@@ -74,7 +77,7 @@ public class Menu {
 		return "Moderate";	// Returns Moderate as default if somehow it gets here
 
 	}
-	
+
 	public int countMenu() {
 		System.out.print("\nDesired Number of Images (Max 1000): ");
 		boolean goodNumber = false;
@@ -87,5 +90,25 @@ public class Menu {
 			else goodNumber = true;
 		}
 		return numberImages;
+	}
+
+	public String keyMenu() {
+
+		while(!goodKey) {
+			System.out.print("\nEnter Bing AppID: ");
+			String userAccountKey = sc.next();
+			// Found this encryption on GitHub and StackOverflow... Required by MSoft
+			byte[] byteKey = Base64.encodeBase64((userAccountKey + ":" + userAccountKey).getBytes());
+			String testKey = new String(byteKey);
+
+			if(verifyKey(testKey)) {
+				goodKey = true;
+				sc.nextLine();
+				System.out.println("\nKey Accepted");
+				this.encryptedKey = testKey;
+				writeKey();
+			}
+			else System.out.println("\nInvalid Key");
+		}
 	}
 }
