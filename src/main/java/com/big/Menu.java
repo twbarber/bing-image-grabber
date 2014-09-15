@@ -93,22 +93,10 @@ public class Menu {
 	}
 
 	public String keyMenu() {
-
-		while(!goodKey) {
-			System.out.print("\nEnter Bing AppID: ");
-			String userAccountKey = sc.next();
-			// Found this encryption on GitHub and StackOverflow... Required by MSoft
-			byte[] byteKey = Base64.encodeBase64((userAccountKey + ":" + userAccountKey).getBytes());
-			String testKey = new String(byteKey);
-
-			if(verifyKey(testKey)) {
-				goodKey = true;
-				sc.nextLine();
-				System.out.println("\nKey Accepted");
-				this.encryptedKey = testKey;
-				writeKey();
-			}
-			else System.out.println("\nInvalid Key");
-		}
+		System.out.print("\nEnter Bing AppID: ");
+		String userAccountKey = systemInput.next();
+		// Found this encryption on GitHub and StackOverflow... Required by MSoft
+		byte[] byteKey = Base64.encodeBase64((userAccountKey + ":" + userAccountKey).getBytes());
+		return new String(byteKey);
 	}
 }

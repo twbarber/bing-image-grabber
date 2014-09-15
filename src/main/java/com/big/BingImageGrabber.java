@@ -16,11 +16,12 @@ public class BingImageGrabber {
 	private int numberImages = -1;
 	private String queryFilter = "Moderate";
 	private String queryTerm;
-	
+	private Menu mainMenu = new Menu();
+
 	public BingImageGrabber() {
-		
+
 	}
-	
+
 	public void runBingImageGrabber() {
 		System.out.println("\nBing Image Grabber " + BIG_VERSION_NUMBER + "\n");
 		displayMenus();
@@ -33,41 +34,45 @@ public class BingImageGrabber {
 			e.printStackTrace();
 		}
 	}
-	
+
 	private void displayMenus() {
-		
-		Menu mainMenu = new Menu();
-		mainMenu.firstRun();
-		this.queryTerm = mainMenu.queryMenu();
-		
+
+		this.mainMenu.firstRun();
+		this.queryTerm = this.mainMenu.queryMenu();
+
 		if (queryTerm.equalsIgnoreCase("random")) {
 			this.numberImages = 30;
 			this.queryTerm = generateQueryTerm();
-			
+
 		} else {
-			this.queryFilter = mainMenu.filterMenu();
-			this.numberImages = mainMenu.countMenu();
+			this.queryFilter = this.mainMenu.filterMenu();
+			this.numberImages = this.mainMenu.countMenu();
 		}
 	}
-	
+
 	private void authenticate() {
 		KeyHandler keyHandler = new KeyHandler();
-		while (!keyHandler.isValidKey()) {
-			keyHandler.promptForKey();
-			try {
-				keyHandler.writeKey();
-			} catch (IOException e) {
-				System.err.println("There was a problem with authentication.");
-			}	
+		try {
+			String userKey = keyHandler.getExistingKey();
+			while (keyHandler.isValidKey(userKey)) {
+				userKey = this.mainMenu.keyMenu();
+				if (keyHandler.isValidKey(userKey)) {
+					keyHandler.writeKey(userKey);
+					this.encryptedKey = userKey;
+					return;
+				}
+			}
+		} catch (IOException e) {
+			System.err.println("There was an error authenticating your key.");
 		}
 	}
-	
+
 	private Collection<URL> buildQuery(String queryTerm, int numberImages, String queryFilter) throws MalformedURLException {
 		QueryBuilder queryBuilder = new QueryBuilder(queryTerm, numberImages, queryFilter);
 		queryBuilder.encodeParameters();
 		return queryBuilder.generateQuerys();
 	}
-	
+
 	private Collection<URL> getImageURLList(Collection<URL> bingURLs) {
 		ArrayList<URL> imageURLList = new ArrayList<URL>();
 		URLGrabber urlGrabber = new URLGrabber(this.encryptedKey);
@@ -81,7 +86,7 @@ public class BingImageGrabber {
 		}
 		return imageURLList; 
 	}
-	
+
 	private void downloadImages(Collection<URL> imageURLs) { 
 		ImageDownloader imageDownloader = new ImageDownloader(imageURLs);
 		try {
@@ -90,10 +95,10 @@ public class BingImageGrabber {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public String generateQueryTerm() {
 		int generatedNum = 100000 + (int)(Math.random() * ((899999) + 1));
 		return String.valueOf(generatedNum);
 	}
-	
+
 }

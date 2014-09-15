@@ -12,75 +12,39 @@ import java.io.InputStreamReader;
 import java.io.Writer;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 import org.apache.commons.codec.binary.Base64;
 
 public class KeyHandler {
 
-	private String encryptedKey;
 	private File keyFile;
 	private Scanner sc = new Scanner(System.in);
 
 	public KeyHandler() {
-		String userHome = System.getProperty("user.home");
-		boolean goodKey = false;
 
-		this.keyFile = new File(userHome + "/big/keyList.txt");
-		if(this.keyFile.exists()) {
-			Scanner fileReader = new Scanner(this.keyFile);
-			try {
-				if(fileReader.hasNextLine())
-					this.encryptedKey = fileReader.nextLine();
-					goodKey = true;
-			} finally {
-				fileReader.close();
-			}
-		}
 	}
-	
-	public boolean verifyKey(String testKey) {
 
-		try{
-			URL url = new URL("https://api.datamarket.azure.com/Data.ashx/" +
-					"Bing/Search/Web?Query=%27test%27&$top=50&$format=json");
-
-			URLConnection urlConnection = url.openConnection();
-			String s1 = "Basic " + testKey;
-			urlConnection.setRequestProperty("Authorization", s1);
-			BufferedReader in = new BufferedReader(new InputStreamReader(
-					urlConnection.getInputStream()));
-			String inputLine;
-			StringBuffer sb = new StringBuffer();
-			while ((inputLine = in.readLine()) != null)
-				sb.append(inputLine);
-			in.close();
-		}catch (Exception e) {
-			return false;
-		}
-
-		return true;
-	}
-	
-	public boolean getKey(String testKey) throws IOException {
+	public String getExistingKey() throws IOException {
 
 		String userHome = System.getProperty("user.home");
 
-		this.keyFile = new File(userHome + "/big/keyList.txt");
-		if(this.keyFile.exists()) {
-			Scanner fileReader = new Scanner(this.keyFile);
-			try {
-				while(fileReader.hasNextLine())
-					if(testKey.equals(fileReader.nextLine()))
-						return true;
-			} finally {
-				fileReader.close();
+		try {
+			this.keyFile = new File(userHome + "/big/keyList.txt");
+			if(this.keyFile.exists()) {
+				Scanner fileReader = new Scanner(this.keyFile);
+				return fileReader.nextLine();
 			}
+		} catch(NullPointerException e) {
+			System.err.println("Key file does not exist.");
+		} catch(NoSuchElementException e) {
+			System.err.println("Key file is empty.");
 		}
-		return false;
+		return null;
 	}
 
-	public void writeKey() throws IOException {
+	public void writeKey(String encryptedKey) throws IOException {
 
 		if(!this.keyFile.exists()) {
 			boolean success = false;
@@ -94,25 +58,29 @@ public class KeyHandler {
 
 		Writer output = new BufferedWriter(new FileWriter(keyFile));
 		try {
-			output.append(this.encryptedKey);
+			output.append(encryptedKey);
 			output.append("\n");
 		} finally {
 			output.close();
 		}
 	}
 
-	public boolean isValidKey() {
-		// TODO Auto-generated method stub
-		return false;
-	}
+	public boolean isValidKey(String aBingKey) {
+		try {
+			URL bingTestURL = new URL("https://api.datamarket.azure.com/Bing/Search/Image?"
+					+ "$format=json&Query=%27test%27");
 
-	public boolean keyExists() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	public void promptForKey() {
-		// TODO Auto-generated method stub
-		
+			URLConnection urlConnection = bingTestURL.openConnection();
+			String formattedKey = "Basic " + aBingKey;
+			urlConnection.setRequestProperty("Authorization", formattedKey);
+			BufferedReader in = new BufferedReader(new InputStreamReader(
+					urlConnection.getInputStream()));
+			if (in.readLine() != null)
+				in.close();
+		} catch (Exception e) {
+			System.err.println("There was an error validating your key 111.");
+			return false;
+		}
+		return true;
 	}
 }
