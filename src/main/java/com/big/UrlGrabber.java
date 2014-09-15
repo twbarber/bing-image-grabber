@@ -50,8 +50,8 @@ public class UrlGrabber {
 		this.encryptedKey = encryptedKey;
 	}
 
-	public String runQuery(URL aQueryURL) throws Exception {
-		URLConnection urlConnection = aQueryURL.openConnection();
+	public String runQuery(URL aQueryUrl) throws Exception {
+		URLConnection urlConnection = aQueryUrl.openConnection();
 		String authKey = "Basic " + this.encryptedKey;
 		urlConnection.setRequestProperty("Authorization", authKey);
 		BufferedReader responseReader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
@@ -67,17 +67,17 @@ public class UrlGrabber {
 	}
 
 	public Collection<URL> parseURLs(String jsonLine) throws MalformedURLException {
-		ArrayList<URL> parsedURLs = new ArrayList<>();
+		ArrayList<URL> parsedUrls = new ArrayList<>();
 		JsonParser jsonParser = new JsonParser();					
 		JsonArray results = jsonParser.parse(jsonLine).getAsJsonObject().get("d").getAsJsonObject()
 				.getAsJsonArray("results");
 
 		for (JsonElement result : results) {
 			JsonObject resObject = result.getAsJsonObject();
-			URL mediaURL = new URL(resObject.get("MediaUrl").getAsString());
-			parsedURLs.add(mediaURL);
+			URL mediaUrl = new URL(resObject.get("MediaUrl").getAsString());
+			parsedUrls.add(mediaUrl);
 		}
 		
-		return parsedURLs;
+		return parsedUrls;
 	}
 }

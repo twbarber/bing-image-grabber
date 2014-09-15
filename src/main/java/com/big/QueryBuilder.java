@@ -39,8 +39,8 @@ public class QueryBuilder {
 		for(int i = 0; i < this.remainingImages; i++) {
 			String queryString = ROOT_URL + this.queryTerm + this.queryFilter + QUERY_MARKET +
 					this.queryResultAmount + this.queryOffset + QUERY_RETURN_TYPE;
-			URL queryURL = new URL(queryString);
-			queryURLs.add(queryURL);
+			URL queryUrl = new URL(queryString);
+			queryURLs.add(queryUrl);
 			adjustRemainingImageCount();
 		}
 		return queryURLs;

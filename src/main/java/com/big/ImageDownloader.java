@@ -54,8 +54,8 @@ public class ImageDownloader {
 	 * 
 	 * 
 	 */
-	public ImageDownloader(Collection<URL> parsedURLs) {
-		this.imageURLs.addAll(parsedURLs);
+	public ImageDownloader(Collection<URL> parsedUrls) {
+		this.imageURLs.addAll(parsedUrls);
 		this.queryDirectory = makeDirectories();
 		try {
 			downloadImages();

@@ -67,10 +67,10 @@ public class KeyHandler {
 
 	public boolean isValidKey(String aBingKey) {
 		try {
-			URL bingTestURL = new URL("https://api.datamarket.azure.com/Bing/Search/Image?"
+			URL bingTestUrl = new URL("https://api.datamarket.azure.com/Bing/Search/Image?"
 					+ "$format=json&Query=%27test%27");
 
-			URLConnection urlConnection = bingTestURL.openConnection();
+			URLConnection urlConnection = bingTestUrl.openConnection();
 			String formattedKey = "Basic " + aBingKey;
 			urlConnection.setRequestProperty("Authorization", formattedKey);
 			BufferedReader in = new BufferedReader(new InputStreamReader(
