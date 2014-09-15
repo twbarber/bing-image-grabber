@@ -28,7 +28,7 @@ public class BingImageGrabber {
 		authenticate();
 		try {
 			Collection<URL> bingURLs = buildQuery(this.queryTerm, this.numberImages, this.queryFilter);
-			Collection<URL> imageURLs = getImageURLList(bingURLs);
+			Collection<URL> imageURLs = getImageUrlList(bingURLs);
 			downloadImages(imageURLs);
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
@@ -73,9 +73,9 @@ public class BingImageGrabber {
 		return queryBuilder.generateQuerys();
 	}
 
-	private Collection<URL> getImageURLList(Collection<URL> bingURLs) {
+	private Collection<URL> getImageUrlList(Collection<URL> bingURLs) {
 		ArrayList<URL> imageURLList = new ArrayList<URL>();
-		URLGrabber urlGrabber = new URLGrabber(this.encryptedKey);
+		UrlGrabber urlGrabber = new UrlGrabber(this.encryptedKey);
 		for (URL aBingURL : bingURLs) {
 			try {
 				String jsonAsString = urlGrabber.runQuery(aBingURL);
@@ -87,8 +87,8 @@ public class BingImageGrabber {
 		return imageURLList; 
 	}
 
-	private void downloadImages(Collection<URL> imageURLs) { 
-		ImageDownloader imageDownloader = new ImageDownloader(imageURLs);
+	private void downloadImages(Collection<URL> imageUrls) { 
+		ImageDownloader imageDownloader = new ImageDownloader(imageUrls);
 		try {
 			imageDownloader.downloadImages();
 		} catch (IOException e) {

@@ -42,11 +42,11 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
-public class URLGrabber {
+public class UrlGrabber {
 
 	private String encryptedKey;
 	
-	public URLGrabber(String encryptedKey) {
+	public UrlGrabber(String encryptedKey) {
 		this.encryptedKey = encryptedKey;
 	}
 
