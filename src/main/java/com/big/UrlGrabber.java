@@ -67,7 +67,7 @@ public class UrlGrabber {
 	}
 
 	public Collection<URL> parseURLs(String jsonLine) throws MalformedURLException {
-		ArrayList<URL> parsedUrls = new ArrayList<>();
+		ArrayList<URL> parsedURLs = new ArrayList<>();
 		JsonParser jsonParser = new JsonParser();					
 		JsonArray results = jsonParser.parse(jsonLine).getAsJsonObject().get("d").getAsJsonObject()
 				.getAsJsonArray("results");
@@ -75,9 +75,9 @@ public class UrlGrabber {
 		for (JsonElement result : results) {
 			JsonObject resObject = result.getAsJsonObject();
 			URL mediaUrl = new URL(resObject.get("MediaUrl").getAsString());
-			parsedUrls.add(mediaUrl);
+			parsedURLs.add(mediaUrl);
 		}
 		
-		return parsedUrls;
+		return parsedURLs;
 	}
 }
