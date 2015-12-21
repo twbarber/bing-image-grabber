@@ -1,7 +1,6 @@
-package com.big;
+package big;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.Scanner;
 
 import org.apache.commons.codec.binary.Base64;

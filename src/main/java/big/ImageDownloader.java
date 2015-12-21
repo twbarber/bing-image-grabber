@@ -1,4 +1,4 @@
-package com.big;
+package big;
 /**
  * imageDownloader class that handles the actual retrieval of images.
  	
@@ -66,7 +66,7 @@ public class ImageDownloader {
 	}
 	
 	/**
-	 * Creates directories in <user_home>/big/images/<query_term> where images will be 
+	 * Creates directories in <user_home>/big/images/<query_term> where images will be
 	 * saved
 	 * 
 	 * @return Directory where images where be saved. 

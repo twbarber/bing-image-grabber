@@ -1,4 +1,4 @@
-package com.big;
+package big;
 /* 
 
  */
@@ -14,8 +14,6 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
-
-import org.apache.commons.codec.binary.Base64;
 
 public class KeyHandler {
 

@@ -1,4 +1,4 @@
-package com.big;
+package big;
 /* 
 	urlGrabber generates a JSON object with results from the Bing search, which
 	we parse to extract the URLs of images. After that, they are downloaded

@@ -1,4 +1,4 @@
-package com.big;
+package big;
 
 public class Main {
 	
