@@ -1,4 +1,4 @@
-package big;
+package grabber;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -12,19 +12,19 @@ import java.util.Collection;
 
 public class BingImageGrabber {
 
-	private final String BIG_VERSION_NUMBER = "0.2.2";
+	private Config config;
 	private String encryptedKey;
 	private int numberImages = -1;
 	private String queryFilter = "Moderate";
 	private String queryTerm;
 	private Menu mainMenu = new Menu();
 
-	public BingImageGrabber() {
-
+	public BingImageGrabber(Config config) {
+		this.config = config;
 	}
 
 	public void runBingImageGrabber() {
-		System.out.println("\nBing Image Grabber " + BIG_VERSION_NUMBER + "\n");
+		System.out.println("\nBing Image Grabber " + config.getVersion() + "\n");
 		displayMenus();
 		authenticate();
 		try {

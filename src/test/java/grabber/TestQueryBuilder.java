@@ -1,8 +1,8 @@
-package com.big;
-
-import static org.junit.Assert.*;
+package grabber;
 
 import org.junit.Test;
+
+import static org.junit.Assert.fail;
 
 public class TestQueryBuilder {
 
@@ -27,3 +27,5 @@ public class TestQueryBuilder {
 	}
 
 }
+
+
