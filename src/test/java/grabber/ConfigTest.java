@@ -3,7 +3,7 @@ package grabber;
 
 import org.junit.Test;
 
-import java.io.IOException;
+import java.io.InputStream;
 import java.util.Properties;
 
 import static org.junit.Assert.assertEquals;
@@ -18,17 +18,17 @@ public class ConfigTest {
 
     @Test
     public void testGetVersion() throws Exception {
-        assertEquals(getVersion(), this.configUnderTest.getVersion());
+        assertEquals("0.3.0-SNAPSHOT", this.configUnderTest.getVersion());
     }
 
     private String getVersion() {
-        java.io.InputStream is = this.getClass().getResourceAsStream("my.properties");
-        java.util.Properties p = new Properties();
         try {
+            InputStream is = ConfigTest.class.getResourceAsStream("/app.properties");
+            Properties p = new Properties();
             p.load(is);
-            return p.getProperty("version");
-        } catch (IOException e) {
-            return "Unkown";
+            return p.getProperty("app.version");
+        } catch (Exception e) {
+            return "Unknown";
         }
     }
 
