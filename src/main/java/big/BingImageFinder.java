@@ -201,4 +201,18 @@ public class BingImageFinder implements ImageFinder {
 		return parsedURLs;
 	}
 
+	private Collection<URL> getImageUrlList(Collection<URL> bingURLs) {
+		ArrayList<URL> imageURLList = new ArrayList<URL>();
+		for (URL aBingURL : bingURLs) {
+			try {
+				String jsonAsString = runQuery(aBingURL);
+				imageURLList.addAll(parseURLs(jsonAsString));
+			} catch (Exception e) {
+				System.err.println("There was a problem getting the image URLs.");
+			}
+		}
+		return imageURLList;
+	}
+
+
 }

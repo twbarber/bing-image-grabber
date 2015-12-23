@@ -60,4 +60,10 @@ public class QueryBuilder {
 		int generatedNum = 100000 + (int)(Math.random() * ((899999) + 1));
 		return String.valueOf(generatedNum);
 	}
+
+  private Collection<URL> buildQuery(String queryTerm, int numberImages, String queryFilter) throws MalformedURLException {
+    QueryBuilder queryBuilder = new QueryBuilder(queryTerm, numberImages, queryFilter);
+    queryBuilder.encodeParameters();
+    return queryBuilder.generateQuerys();
+  }
 }
