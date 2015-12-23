@@ -5,8 +5,12 @@ package grabber;
  */
 public class Config {
 
+    private String version;
+
     public String getVersion() {
         return System.getProperty("projectVersion");
     }
+
+
 
 }
