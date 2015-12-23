@@ -3,13 +3,13 @@ package grabber;
 /**
  * Created by Tyler on 12/23/15.
  */
-public enum FilterLevel {
+public enum AdultOption {
 
     OFF("Off"), MODERATE("Moderate"), STRICT("Strict");
 
     private final String filterLevel;
 
-    FilterLevel(final String filterLevel) {
+    AdultOption(final String filterLevel) {
         this.filterLevel = filterLevel;
     }
 
