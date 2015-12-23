@@ -5,12 +5,13 @@ package big;
  */
 public class Config {
 
-    private String version;
+    private final String apiKey;
 
-    public String getVersion() {
-        return System.getProperty("projectVersion");
+    public Config(String apiKey) {
+        this.apiKey = apiKey;
     }
 
-
-
+    public String getApiKey() {
+        return this.apiKey;
+    }
 }
