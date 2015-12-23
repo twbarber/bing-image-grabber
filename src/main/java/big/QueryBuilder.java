@@ -55,4 +55,9 @@ public class QueryBuilder {
 			this.remainingImages = 0;
 		}
 	}
+
+	public String generateQueryTerm() {
+		int generatedNum = 100000 + (int)(Math.random() * ((899999) + 1));
+		return String.valueOf(generatedNum);
+	}
 }

@@ -1,5 +1,6 @@
 package big;
 
+import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -10,18 +11,14 @@ import java.util.Collection;
     Bing Image Grabber - Version 0.2.2
  */
 
-public class BingImageGrabber {
+public class BingImageGrabber implements ImageGrabber {
 
-	private Config config;
-	private String encryptedKey;
-	private int numberImages = -1;
-	private String queryFilter = "Moderate";
-	private String queryTerm;
-	private Menu mainMenu = new Menu();
+	private final ImageDownloader.Config config;
 
-	public BingImageGrabber(Config config) {
+	public BingImageGrabber(ImageDownloader.Config config) {
 		this.config = config;
 	}
+
 
 	public void runBingImageGrabber() {
 		System.out.println("\nBing Image Grabber " + config.getVersion() + "\n");
@@ -33,21 +30,6 @@ public class BingImageGrabber {
 			downloadImages(imageURLs);
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
-		}
-	}
-
-	private void displayMenus() {
-
-		this.mainMenu.firstRun();
-		this.queryTerm = this.mainMenu.queryMenu();
-
-		if (queryTerm.equalsIgnoreCase("random")) {
-			this.numberImages = 30;
-			this.queryTerm = generateQueryTerm();
-
-		} else {
-			this.queryFilter = this.mainMenu.filterMenu();
-			this.numberImages = this.mainMenu.countMenu();
 		}
 	}
 
@@ -97,9 +79,24 @@ public class BingImageGrabber {
 		}
 	}
 
-	public String generateQueryTerm() {
-		int generatedNum = 100000 + (int)(Math.random() * ((899999) + 1));
-		return String.valueOf(generatedNum);
+	@Override
+	public Collection<BufferedImage> getImages(String searchTerm) {
+		return null;
 	}
 
+	@Override
+	public Collection<BufferedImage> getImages(String searchTerm, int numberOfImages) {
+		return null;
+	}
+
+	@Override
+	public Collection<BufferedImage> getImages(String searchTerm, int numberOfImages, AdultOption adultOption) {
+		return null;
+	}
+
+	@Override
+	public Collection<BufferedImage> getImages(String searchTerm, int numberOfImages, AdultOption adultOption,
+			Market market) {
+		return null;
+	}
 }
