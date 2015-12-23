@@ -14,7 +14,7 @@ import static org.junit.Assert.assertEquals;
  */
 public class ConfigTest {
 
-    private ImageDownloader.Config configUnderTest = new ImageDownloader.Config();
+    private BingImageFinder.Config configUnderTest = new BingImageFinder.Config();
 
     @Test
     public void testGetVersion() throws Exception {

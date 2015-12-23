@@ -11,26 +11,11 @@ import java.util.Collection;
     Bing Image Grabber - Version 0.2.2
  */
 
-public class BingImageGrabber implements ImageGrabber {
+public class BingImageDownloader implements ImageDownloader {
 
-	private final ImageDownloader.Config config;
-
-	public BingImageGrabber(ImageDownloader.Config config) {
-		this.config = config;
-	}
-
-
-	public void runBingImageGrabber() {
-		System.out.println("\nBing Image Grabber " + config.getVersion() + "\n");
-		displayMenus();
-		authenticate();
-		try {
-			Collection<URL> bingURLs = buildQuery(this.queryTerm, this.numberImages, this.queryFilter);
-			Collection<URL> imageURLs = getImageUrlList(bingURLs);
-			downloadImages(imageURLs);
-		} catch (MalformedURLException e) {
-			e.printStackTrace();
-		}
+	@Override
+	public Collection<BufferedImage> downloadImages(Collection<URL> imagesToDownload) {
+		return new ArrayList<BufferedImage>();
 	}
 
 	private void authenticate() {
@@ -70,33 +55,5 @@ public class BingImageGrabber implements ImageGrabber {
 		return imageURLList; 
 	}
 
-	private void downloadImages(Collection<URL> imageUrls) { 
-		ImageDownloader imageDownloader = new ImageDownloader(imageUrls);
-		try {
-			imageDownloader.downloadImages();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
 
-	@Override
-	public Collection<BufferedImage> getImages(String searchTerm) {
-		return null;
-	}
-
-	@Override
-	public Collection<BufferedImage> getImages(String searchTerm, int numberOfImages) {
-		return null;
-	}
-
-	@Override
-	public Collection<BufferedImage> getImages(String searchTerm, int numberOfImages, AdultOption adultOption) {
-		return null;
-	}
-
-	@Override
-	public Collection<BufferedImage> getImages(String searchTerm, int numberOfImages, AdultOption adultOption,
-			Market market) {
-		return null;
-	}
 }
