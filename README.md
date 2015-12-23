@@ -1,7 +1,7 @@
 bing-image-big
 ==================
 
-Bing Image Grabber - Version 0.3.0
+Bing Image Grabber - Version 0.1
 
 	The Bing Image Grabber library lets the user download images from Microsoft's Bing search engine.
 
