@@ -1,28 +1,28 @@
-package grabber;
+package big;
 
 import org.junit.Test;
 
 import static org.junit.Assert.fail;
 
-public class TestKeyHandler {
+public class TestImageDownloader {
 
 	@Test
-	public void testTestImageDownloader() {
+	public void testImageDownloader() {
 		fail("Not yet implemented");
 	}
 
 	@Test
-	public void testTestMakeDirectories() {
+	public void testMakeDirectories() {
 		fail("Not yet implemented");
 	}
 
 	@Test
-	public void testTestDownloadImages() {
+	public void testDownloadImages() {
 		fail("Not yet implemented");
 	}
 
 	@Test
-	public void testTestMakeLog() {
+	public void testMakeLog() {
 		fail("Not yet implemented");
 	}
 
