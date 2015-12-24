@@ -1,7 +1,7 @@
 package jig;
 
 
-import config.Config;
+import jig.config.Config;
 
 import static org.junit.Assert.assertEquals;
 

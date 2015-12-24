@@ -2,14 +2,18 @@ package jig;
 
 import java.awt.image.BufferedImage;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Collection;
 
-/**
- * Created by Tyler on 12/23/15.
+/*
+    Bing Image Grabber - Version 0.2.2
  */
-public interface ImageDownloader {
 
-  public Collection<BufferedImage> downloadImages(Collection<URL> imagesToDownload);
+public class ImageDownloader {
+
+	public Collection<BufferedImage> downloadImages(Collection<URL> imagesToDownload) {
+		return new ArrayList<BufferedImage>();
+	}
+
 
 }
-
