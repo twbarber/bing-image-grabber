@@ -5,11 +5,11 @@ import java.io.IOException;
 /**
  * Created by Tyler on 12/23/15.
  */
-public class BingImageGrabber {
+public class ImageGrabber {
 
   private final Config config;
 
-  public BingImageGrabber(Config config) {
+  public ImageGrabber(Config config) {
     this.config = config;
   }
 

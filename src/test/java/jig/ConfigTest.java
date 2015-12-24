@@ -14,22 +14,7 @@ import static org.junit.Assert.assertEquals;
  */
 public class ConfigTest {
 
-    private BingImageFinder.Config configUnderTest = new BingImageFinder.Config();
+    private Config configUnderTest = new Config("TEST");
 
-    @Test
-    public void testGetVersion() throws Exception {
-        assertEquals("0.3.0-SNAPSHOT", this.configUnderTest.getVersion());
-    }
-
-    private String getVersion() {
-        try {
-            InputStream is = ConfigTest.class.getResourceAsStream("/app.properties");
-            Properties p = new Properties();
-            p.load(is);
-            return p.getProperty("app.version");
-        } catch (Exception e) {
-            return "Unknown";
-        }
-    }
 
 }
