@@ -38,6 +38,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.hurdsbrook.jig.constants.AdultOption;
 import com.hurdsbrook.jig.constants.Market;
+import org.apache.log4j.Logger;
 
 import java.io.*;
 import java.net.MalformedURLException;
@@ -47,8 +48,9 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 public class ImageFinder {
-	
-	private ArrayList<URL> imageURLs = new ArrayList<URL>();
+
+  private Logger logger = Logger.getLogger(ImageFinder.class);
+  private ArrayList<URL> imageURLs = new ArrayList<URL>();
 	private String rawQueryTerm;		
 	private File queryDirectory;			
 	

@@ -1,13 +1,16 @@
 package com.hurdsbrook.jig.image;
 
+import org.apache.log4j.Logger;
+
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collection;
 
 public class QueryBuilder {
-	
-	private final String ROOT_URL = "https://api.datamarket.azure.com/Bing/Search/Image";
+
+  private Logger logger = Logger.getLogger(QueryBuilder.class);
+  private final String ROOT_URL = "https://api.datamarket.azure.com/Bing/Search/Image";
 	private final String QUERY_MARKET = "&Market=%27en-US%27";
 	private final String QUERY_RETURN_TYPE = "&$format=JSON";
 	private String queryTerm;

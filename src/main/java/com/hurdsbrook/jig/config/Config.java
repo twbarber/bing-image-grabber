@@ -2,12 +2,15 @@ package com.hurdsbrook.jig.config;
 
 import com.hurdsbrook.jig.constants.AdultOption;
 import com.hurdsbrook.jig.constants.Market;
+import com.sun.javafx.tools.packager.Log;
+import org.apache.log4j.Logger;
 
 /**
  * Created by Tyler on 12/23/15.
  */
 public class Config {
 
+  private Logger logger = Logger.getLogger(Config.class);
   private final String apiKey;
 
   public Config(String apiKey) {

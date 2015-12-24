@@ -3,6 +3,8 @@ package com.hurdsbrook.jig.config;
 
  */
 
+import org.apache.log4j.Logger;
+
 import java.io.*;
 import java.net.URL;
 import java.net.URLConnection;
@@ -11,6 +13,7 @@ import java.util.Scanner;
 
 public class KeyHandler {
 
+	private Logger logger = Logger.getLogger(KeyHandler.class);
 	private File keyFile;
 	private Scanner sc = new Scanner(System.in);
 
