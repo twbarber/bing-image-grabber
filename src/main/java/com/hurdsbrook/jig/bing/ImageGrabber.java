@@ -1,9 +1,12 @@
-package com.hurdsbrook.jig;
+package com.hurdsbrook.jig.bing;
 
 import com.hurdsbrook.jig.config.Config;
 import com.hurdsbrook.jig.config.KeyHandler;
 
+import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.net.URL;
+import java.util.Collection;
 
 /**
  * Created by Tyler on 12/23/15.
@@ -30,6 +33,16 @@ public class ImageGrabber {
     } catch (IOException e) {
       System.err.println("There was an error authenticating your key.");
     }
+  }
+
+  public Collection<BufferedImage> downloadImages(Collection<URL> imagesToDownload) {
+    ImageDownloader imageDownloader = new ImageDownloader();
+    return imageDownloader.downloadImages(imagesToDownload);
+  }
+
+  public Collection<URL> findImages(ImageQuery imageQuery) {
+    ImageFinder imageFinder = new ImageFinder();
+    return imageFinder.getImageUrls(imageQuery);
   }
 
 }

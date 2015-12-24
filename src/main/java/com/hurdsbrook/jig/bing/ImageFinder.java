@@ -1,4 +1,4 @@
-package com.hurdsbrook.jig.image;
+package com.hurdsbrook.jig.bing;
 /**
  * imageDownloader class that handles the actual retrieval of images.
  	
@@ -58,8 +58,7 @@ public class ImageFinder {
 	 * 
 	 * 
 	 */
-	public ImageFinder(Collection<URL> parsedUrls) {
-		this.imageURLs.addAll(parsedUrls);
+	public ImageFinder() {
 		this.queryDirectory = makeDirectories();
 		try {
 			downloadImages();
@@ -156,7 +155,11 @@ public class ImageFinder {
 		return null;
 	}
 
-	public Collection<URL> getImageUrls(String searchTerm, int numberOfImages) {
+  public Collection<URL> getImageUrls(ImageQuery imageQuery) {
+    return null;
+  }
+
+  public Collection<URL> getImageUrls(String searchTerm, int numberOfImages) {
 		return null;
 	}
 

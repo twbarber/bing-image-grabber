@@ -73,7 +73,7 @@ public class KeyHandler {
 			if (in.readLine() != null)
 				in.close();
 		} catch (Exception e) {
-			System.err.println("There was an error validating your key 111.");
+			logger.info("There was an error validating your key.");
 			return false;
 		}
 		return true;
