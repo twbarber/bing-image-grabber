@@ -1,31 +1,29 @@
-package jig.image;
+package com.hurdsbrook.jig.constants;
 
 import org.junit.Test;
 
 import static org.junit.Assert.fail;
 
-public class TestQueryBuilder {
+public class TestKeyHandler {
 
 	@Test
-	public void testQueryBuilder() {
+	public void testTestImageDownloader() {
 		fail("Not yet implemented");
 	}
 
 	@Test
-	public void testEncodeParameters() {
+	public void testTestMakeDirectories() {
 		fail("Not yet implemented");
 	}
 
 	@Test
-	public void testGenerateQuerys() {
+	public void testTestDownloadImages() {
 		fail("Not yet implemented");
 	}
 
 	@Test
-	public void testAdjustRemainingImageCount() {
+	public void testTestMakeLog() {
 		fail("Not yet implemented");
 	}
 
 }
-
-

@@ -1,7 +1,7 @@
-package jig.config;
+package com.hurdsbrook.jig.config;
 
-import jig.constants.AdultOption;
-import jig.constants.Market;
+import com.hurdsbrook.jig.constants.AdultOption;
+import com.hurdsbrook.jig.constants.Market;
 
 /**
  * Created by Tyler on 12/23/15.

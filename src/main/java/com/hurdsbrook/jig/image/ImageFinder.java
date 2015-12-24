@@ -1,4 +1,4 @@
-package jig.image;
+package com.hurdsbrook.jig.image;
 /**
  * imageDownloader class that handles the actual retrieval of images.
  	
@@ -36,8 +36,8 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import jig.constants.AdultOption;
-import jig.constants.Market;
+import com.hurdsbrook.jig.constants.AdultOption;
+import com.hurdsbrook.jig.constants.Market;
 
 import java.io.*;
 import java.net.MalformedURLException;
@@ -68,7 +68,7 @@ public class ImageFinder {
 	}
 	
 	/**
-	 * Creates directories in <user_home>/jig/images/<query_term> where images will be
+	 * Creates directories in <user_home>/com.hurdsbrook.jig/images/<query_term> where images will be
 	 * saved
 	 * 
 	 * @return Directory where images where be saved. 

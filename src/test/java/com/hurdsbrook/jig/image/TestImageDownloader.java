@@ -1,4 +1,4 @@
-package jig.image;
+package com.hurdsbrook.jig.image;
 
 import org.junit.Test;
 

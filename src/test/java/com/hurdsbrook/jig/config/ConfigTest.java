@@ -1,7 +1,5 @@
-package jig.config;
+package com.hurdsbrook.jig.config;
 
-
-import jig.config.Config;
 
 import static org.junit.Assert.assertEquals;
 

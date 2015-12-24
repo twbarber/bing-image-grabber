@@ -1,4 +1,4 @@
-package jig.config;
+package com.hurdsbrook.jig.config;
 /* 
 
  */

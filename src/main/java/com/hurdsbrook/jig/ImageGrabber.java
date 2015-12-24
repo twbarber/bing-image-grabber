@@ -1,7 +1,7 @@
-package jig;
+package com.hurdsbrook.jig;
 
-import jig.config.Config;
-import jig.config.KeyHandler;
+import com.hurdsbrook.jig.config.Config;
+import com.hurdsbrook.jig.config.KeyHandler;
 
 import java.io.IOException;
 

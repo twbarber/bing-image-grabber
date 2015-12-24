@@ -1,4 +1,4 @@
-package jig.image;
+package com.hurdsbrook.jig.image;
 
 import java.awt.image.BufferedImage;
 import java.net.URL;
