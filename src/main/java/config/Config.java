@@ -1,4 +1,4 @@
-package jig;
+package config;
 
 /**
  * Created by Tyler on 12/23/15.

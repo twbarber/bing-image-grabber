@@ -1,5 +1,7 @@
 package jig;
 
+import config.Config;
+
 import java.io.IOException;
 
 /**

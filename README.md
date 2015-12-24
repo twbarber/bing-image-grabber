@@ -23,9 +23,9 @@ JIG - Version 0.1
 
 	Defaults
 
-	    - AdultOption : off
+	    - AdultOption : Moderate
 	    - Market : en-us
-	    - Search Term : Randomly generated number
+	    - Search Term : Number, randomly generated at search time
 	    - Number of Images : 20
 
 	*In our case the search type is a constant, Images.
