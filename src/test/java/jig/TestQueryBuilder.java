@@ -1,29 +1,31 @@
-package big;
+package jig;
 
 import org.junit.Test;
 
 import static org.junit.Assert.fail;
 
-public class TestImageDownloader {
+public class TestQueryBuilder {
 
 	@Test
-	public void testImageDownloader() {
+	public void testQueryBuilder() {
 		fail("Not yet implemented");
 	}
 
 	@Test
-	public void testMakeDirectories() {
+	public void testEncodeParameters() {
 		fail("Not yet implemented");
 	}
 
 	@Test
-	public void testDownloadImages() {
+	public void testGenerateQuerys() {
 		fail("Not yet implemented");
 	}
 
 	@Test
-	public void testMakeLog() {
+	public void testAdjustRemainingImageCount() {
 		fail("Not yet implemented");
 	}
 
 }
+
+

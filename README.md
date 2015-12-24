@@ -1,10 +1,10 @@
-bing-image-big
+java-image-grabber
 ==================
 
-Bing Image Grabber - Version 0.1
+JIG - Version 0.1
 
-	The Bing Image Grabber library lets the user download images from Microsoft's Bing search engine.
-
+	The Java Image Grabber library lets the user download images from Microsoft's Bing search engine.
+	Users have the option to provide parameters, or use default configuration values.
 
     Required Configuration Information
 
@@ -20,6 +20,13 @@ Bing Image Grabber - Version 0.1
 		- Query Region, set as en-us for our searches
 		- Adult Option, so no adult content... hopefully
 		- Number of images per request.
+
+	Defaults
+
+	    - AdultOption : off
+	    - Market : en-us
+	    - Search Term : Randomly generated number
+	    - Number of Images : 20
 
 	*In our case the search type is a constant, Images.
 
