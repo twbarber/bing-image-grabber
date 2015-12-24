@@ -1,6 +1,7 @@
 package jig;
 
 import jig.config.Config;
+import jig.config.KeyHandler;
 
 import java.io.IOException;
 

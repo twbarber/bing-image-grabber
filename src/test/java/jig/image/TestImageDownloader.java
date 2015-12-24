@@ -1,4 +1,4 @@
-package jig;
+package jig.image;
 
 import org.junit.Test;
 

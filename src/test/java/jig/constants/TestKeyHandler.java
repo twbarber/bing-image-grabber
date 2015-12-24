@@ -1,4 +1,4 @@
-package jig;
+package jig.constants;
 
 import org.junit.Test;
 

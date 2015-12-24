@@ -1,4 +1,4 @@
-package jig;
+package jig.image;
 
 import java.net.MalformedURLException;
 import java.net.URL;

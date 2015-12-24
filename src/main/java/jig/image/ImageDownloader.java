@@ -1,4 +1,4 @@
-package jig;
+package jig.image;
 
 import java.awt.image.BufferedImage;
 import java.net.URL;

@@ -1,4 +1,4 @@
-package jig;
+package jig.config;
 
 
 import jig.config.Config;

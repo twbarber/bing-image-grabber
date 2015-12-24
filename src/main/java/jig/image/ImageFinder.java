@@ -1,4 +1,4 @@
-package jig;
+package jig.image;
 /**
  * imageDownloader class that handles the actual retrieval of images.
  	
