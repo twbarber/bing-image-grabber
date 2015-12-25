@@ -12,12 +12,7 @@ public class StringUtils {
     return (s == null || s.isEmpty());
   }
 
-  public static URL convertToUrl(String s) {
-    try {
-      URL imageRequestUrl = new URL(s);
-      return  imageRequestUrl;
-    } catch (MalformedURLException e) {
-
-    }
+  public static URL convertToUrl(String s) throws MalformedURLException {
+    return new URL(s);
   }
 }

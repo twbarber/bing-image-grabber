@@ -9,10 +9,10 @@ import java.net.URL;
 /**
  * Used to build search queries for the Java Image Grabber.
  */
-public class ImgeRequestFactory {
+public class ImageRequestFactory {
 
-  private static Logger logger = Logger.getLogger(ImgeRequestFactory.class);
-  private static final String ROOT_URL = "https://api.datamarket.azure.com/Bing/Search/Image?$format=JSON";
+  private static Logger logger = Logger.getLogger(ImageRequestFactory.class);
+  private static final String ROOT_URL = "https://api.datamarket.azure.com/Bing/Search/Image?";
   private int DEFAULT_COUNT = 50;
   private AdultOption DEFAULT_ADULT_OPTION = AdultOption.STRICT;
 
