@@ -22,4 +22,8 @@ public class ImageRequest {
   public URL getRequestUrl() {
     return requestUrl;
   }
+
+  public String getRequestUrlAsString() {
+    return this.requestUrl.toString();
+  }
 }
