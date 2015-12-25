@@ -1,6 +1,9 @@
 package jig.bing;
 
+import jig.constants.AdultOption;
+import jig.constants.Market;
 import org.apache.log4j.Logger;
+import sun.jvm.hotspot.oops.Mark;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -14,26 +17,13 @@ public class QueryBuilder {
 
   private Logger logger = Logger.getLogger(QueryBuilder.class);
   private final String ROOT_URL = "https://api.datamarket.azure.com/Bing/Search/Image";
-	private final String QUERY_MARKET = "&Market=%27en-US%27";
 	private final String QUERY_RETURN_TYPE = "&$format=JSON";
-	private String queryTerm;
-	private String queryFilter;
-	private String queryResultAmount;
 	private String queryOffset;
 	private int remainingImages;
-	
-	public QueryBuilder(String queryChoice, int imageCount, String queryFilter) {
-		this.queryTerm = queryChoice;
-		this.queryFilter = queryFilter;
-		if(imageCount > 50) {
-			this.queryResultAmount = "50";
-			this.remainingImages = imageCount - 50;
-		}
-		else this.queryResultAmount = String.valueOf(imageCount);	// Image download count
-		this.queryOffset = String.valueOf(0);
-	}
 
-	public void encodeParameters() {
+  public String
+
+	public void encodeParameters(QueryParameters queryParameters) {
 		this.queryTerm = "?Query=%27" + this.queryTerm + "%27";
 		this.queryFilter = "&Adult=%27" + this.queryFilter + "%27";
 		this.queryResultAmount = "&$top=" + this.queryResultAmount; 

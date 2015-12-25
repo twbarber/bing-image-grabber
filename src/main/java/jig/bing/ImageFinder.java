@@ -55,13 +55,9 @@ public class ImageFinder {
 
   private Logger logger = Logger.getLogger(ImageFinder.class);
   private ArrayList<URL> imageURLs = new ArrayList<URL>();
-	private String rawQueryTerm;		
-	private File queryDirectory;			
-	
-	/**
-	 * 
-	 * 
-	 */
+	private String rawQueryTerm;
+	private File queryDirectory;
+
 	public ImageFinder() {
 		this.queryDirectory = makeDirectories();
 		try {
@@ -71,18 +67,18 @@ public class ImageFinder {
 			e.printStackTrace();
 		}
 	}
-	
+
 	/**
 	 * Creates directories in <user_home>/jig/images/<query_term> where images will be
 	 * saved
-	 * 
-	 * @return Directory where images where be saved. 
+	 *
+	 * @return Directory where images where be saved.
 	 */
 	public File makeDirectories() {
 		String userHome = System.getProperty("user.home");
 		File imageDirectory = new File(userHome + "/grabber/images");
 		File queryDirectory = new File(imageDirectory + "/" + this.rawQueryTerm);
-		
+
 		if (!imageDirectory.exists()) {
 			if (imageDirectory.mkdir())
 				System.out.println("\nBing Directory: " + imageDirectory.toString() + " created");
@@ -93,26 +89,26 @@ public class ImageFinder {
 		}
 		return queryDirectory;
 	}
-	
+
 	/**
-	 * 
-	 * 
+	 *
+	 *
 	 * @throws IOException
 	 */
 	public void downloadImages() throws IOException {
 
-		int imageCount = 0; 											
-		System.out.print("\nDownloading Images");	
+		int imageCount = 0;
+		System.out.print("\nDownloading Images");
 		long startTime = System.nanoTime();
 		int imageIndex = 0;
 
-		for(URL imageURL : imageURLs) {						
-			System.out.print(".");					
-			try {								
-				String fileName = this.queryDirectory + "/img" + imageIndex; 				
+		for(URL imageURL : imageURLs) {
+			System.out.print(".");
+			try {
+				String fileName = this.queryDirectory + "/img" + imageIndex;
 				File img = new File(fileName);
-				InputStream is = imageURL.openStream();			
-				
+				InputStream is = imageURL.openStream();
+
 				OutputStream os = new FileOutputStream(img.toString());
 
 				byte[] b = new byte[2048];
@@ -125,53 +121,53 @@ public class ImageFinder {
 				is.close();
 				os.close();
 
-				imageCount++;			
+				imageCount++;
 			} catch (IOException e) {
 			}
-			
+
 		}
 		long endTime = System.nanoTime();
 		long duration = endTime - startTime;
 		double seconds = duration / 1000000000.0; // Converts time to download all images to seconds
-		
+
 		makeLog(seconds);
-		
+
 		System.out.printf("\n\nSaved %d images in %.2f seconds.", imageCount, seconds);
 	}
-	
+
 	/**
-	 * 
+	 *
 	 * @param seconds
 	 * @throws IOException
 	 */
 	public void makeLog(Double seconds) throws IOException {
 		File logFile = new File(queryDirectory + "/" + rawQueryTerm + ".txt");
 		Writer output = new BufferedWriter(new FileWriter(logFile));
-		
+
 		for(URL imageURL : this.imageURLs) {
 			output.write(imageURL.toString() + "\n");
 		}
 		output.write("\nProcess Completed in " + seconds + " seconds.");
-		output.close();	
+		output.close();
 	}
 
-	public Collection<URL> getImageUrls(String searchTerm) {
+	public Collection<URL> getImageResults(String searchTerm) {
 		return null;
 	}
 
-  public Collection<URL> getImageUrls(ImageQuery imageQuery) {
+  public Collection<URL> getImageResults(QueryParameters queryParameters) {
     return null;
   }
 
-  public Collection<URL> getImageUrls(String searchTerm, int numberOfImages) {
+  public Collection<URL> getImageResults(String searchTerm, int numberOfImages) {
 		return null;
 	}
 
-	public Collection<URL> getImageUrls(String searchTerm, int numberOfImages, AdultOption adultOption) {
+	public Collection<URL> getImageResults(String searchTerm, int numberOfImages, AdultOption adultOption) {
 		return null;
 	}
 
-	public Collection<URL> getImageUrls(String searchTerm, int numberOfImages, AdultOption adultOption, Market market) {
+	public Collection<URL> getImageResults(String searchTerm, int numberOfImages, AdultOption adultOption, Market market) {
 		return null;
 	}
 

@@ -40,9 +40,9 @@ public class ImageGrabber {
     return imageDownloader.downloadImages(imagesToDownload);
   }
 
-  public Collection<URL> findImages(ImageQuery imageQuery) {
+  public Collection<URL> findImages(QueryParameters queryParameters) {
     ImageFinder imageFinder = new ImageFinder();
-    return imageFinder.getImageUrls(imageQuery);
+    return imageFinder.getImageUrls(queryParameters);
   }
 
 }
