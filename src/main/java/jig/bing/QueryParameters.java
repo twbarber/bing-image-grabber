@@ -1,7 +1,6 @@
 package jig.bing;
 
 import jig.constants.AdultOption;
-import jig.constants.Market;
 import org.apache.log4j.Logger;
 
 import java.io.UnsupportedEncodingException;
@@ -17,13 +16,32 @@ public class QueryParameters {
   private String searchTerm;
   private int numberOfImages;
   private AdultOption adultOption;
-  private Market market;
 
-  public QueryParameters(String searchTerm, int numberOfImages, AdultOption adultOption, Market market) {
+  private int DEFAULT_COUNT = 50;
+  private AdultOption DEFAULT_ADULT_OPTION = AdultOption.STRICT;
+
+  public QueryParameters(String searchTerm, int numberOfImages, AdultOption adultOption) {
     this.searchTerm = searchTerm;
     this.numberOfImages = numberOfImages;
     this.adultOption = adultOption;
-    this.market = market;
+  }
+
+  public QueryParameters(String searchTerm, int numberOfImages) {
+    this.searchTerm = searchTerm;
+    this.numberOfImages = numberOfImages;
+    this.adultOption = DEFAULT_ADULT_OPTION;
+  }
+
+  public QueryParameters(String searchTerm, AdultOption adultOption) {
+    this.searchTerm = searchTerm;
+    this.numberOfImages = DEFAULT_COUNT;
+    this.adultOption = adultOption;
+  }
+
+  public QueryParameters(String searchTerm) {
+    this.searchTerm = searchTerm;
+    this.numberOfImages = DEFAULT_COUNT;
+    this.adultOption = DEFAULT_ADULT_OPTION;
   }
 
   public String getSearchTerm() {
@@ -38,10 +56,6 @@ public class QueryParameters {
     return adultOption;
   }
 
-  public Market getMarket() {
-    return market;
-  }
-
   public String getEncodedSearchTerm() {
     return "&Query=%27" + encodeParameter(searchTerm) + "%27";
   }
@@ -52,10 +66,6 @@ public class QueryParameters {
 
   public String getEncodedAdultOption() {
     return "&Adult=%27" + this.adultOption.toString() + "%27";
-  }
-
-  public String getEncodedMarket() {
-    return "&Market=" + market.toString();
   }
 
   private String encodeParameter(String toEncode) {

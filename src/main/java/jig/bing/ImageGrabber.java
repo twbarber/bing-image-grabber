@@ -6,6 +6,7 @@ import jig.config.KeyHandler;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Collection;
 
 /**
@@ -42,7 +43,7 @@ public class ImageGrabber {
 
   public Collection<URL> findImages(QueryParameters queryParameters) {
     ImageFinder imageFinder = new ImageFinder();
-    return imageFinder.getImageUrls(queryParameters);
+    return new ArrayList<>();
   }
 
 }

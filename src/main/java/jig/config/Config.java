@@ -1,7 +1,6 @@
 package jig.config;
 
 import jig.constants.AdultOption;
-import jig.constants.Market;
 import org.apache.log4j.Logger;
 
 /**
@@ -31,7 +30,6 @@ public class Config {
   class ConfigDefaults {
 
     public int IMAGE_COUNT = 20;
-    public Market MARKET = Market.EN_US;
     public AdultOption ADULT_OPTION = AdultOption.MODERATE;
     public String CONFIG_DIR = "";
 

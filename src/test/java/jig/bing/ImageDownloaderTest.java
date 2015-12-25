@@ -4,7 +4,7 @@ import org.junit.Test;
 
 import static org.junit.Assert.fail;
 
-public class TestImageDownloader {
+public class ImageDownloaderTest {
 
 	@Test
 	public void testImageDownloader() {

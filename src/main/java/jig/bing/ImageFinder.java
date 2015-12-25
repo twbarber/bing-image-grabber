@@ -37,7 +37,6 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import jig.constants.AdultOption;
-import jig.constants.Market;
 import org.apache.log4j.Logger;
 
 import java.io.*;
@@ -164,10 +163,6 @@ public class ImageFinder {
 	}
 
 	public Collection<URL> getImageResults(String searchTerm, int numberOfImages, AdultOption adultOption) {
-		return null;
-	}
-
-	public Collection<URL> getImageResults(String searchTerm, int numberOfImages, AdultOption adultOption, Market market) {
 		return null;
 	}
 
