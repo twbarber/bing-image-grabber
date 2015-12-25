@@ -2,7 +2,6 @@ package jig.bing;
 
 import jig.constants.AdultOption;
 import jig.constants.Market;
-import jig.util.StringUtils;
 
 /**
  * Object generated from the QueryBuilder. Contains full list of parameters
@@ -38,4 +37,19 @@ public class QueryParameters {
     return market;
   }
 
+  public String getEncodedSearchTerm() {
+    return searchTerm;
+  }
+
+  public String getEncodedNumberOfImages() {
+    return String.valueOf(numberOfImages);
+  }
+
+  public String getEncodedAdultOption() {
+    return adultOption.toString();
+  }
+
+  public String getEncodedMarket() {
+    return market.toString();
+  }
 }

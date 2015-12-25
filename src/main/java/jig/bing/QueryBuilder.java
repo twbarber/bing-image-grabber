@@ -18,12 +18,8 @@ public class QueryBuilder {
   private Logger logger = Logger.getLogger(QueryBuilder.class);
   private final String ROOT_URL = "https://api.datamarket.azure.com/Bing/Search/Image";
 	private final String QUERY_RETURN_TYPE = "&$format=JSON";
-	private String queryOffset;
-	private int remainingImages;
 
-  public String
-
-	public void encodeParameters(QueryParameters queryParameters) {
+	public void encodeParameters(QueryParameters parameters) {
 		this.queryTerm = "?Query=%27" + this.queryTerm + "%27";
 		this.queryFilter = "&Adult=%27" + this.queryFilter + "%27";
 		this.queryResultAmount = "&$top=" + this.queryResultAmount; 
