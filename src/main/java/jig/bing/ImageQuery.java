@@ -1,4 +1,4 @@
-package com.hurdsbrook.jig.bing;
+package jig.bing;
 
 /**
  * Object generated from the QueryBuilder. Contains full list of parameters

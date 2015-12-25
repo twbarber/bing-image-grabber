@@ -1,4 +1,4 @@
-package com.hurdsbrook.jig.constants;
+package jig.constants;
 
 /**
  * Created by Tyler on 12/23/15.

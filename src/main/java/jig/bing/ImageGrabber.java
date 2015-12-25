@@ -1,7 +1,7 @@
-package com.hurdsbrook.jig.bing;
+package jig.bing;
 
-import com.hurdsbrook.jig.config.Config;
-import com.hurdsbrook.jig.config.KeyHandler;
+import jig.config.Config;
+import jig.config.KeyHandler;
 
 import java.awt.image.BufferedImage;
 import java.io.IOException;

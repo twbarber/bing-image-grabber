@@ -1,4 +1,4 @@
-package com.hurdsbrook.jig.bing;
+package jig.bing;
 
 import org.apache.log4j.Logger;
 

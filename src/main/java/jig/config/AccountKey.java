@@ -1,4 +1,4 @@
-package com.hurdsbrook.jig.config;
+package jig.config;
 
 import org.apache.commons.codec.binary.Base64;
 

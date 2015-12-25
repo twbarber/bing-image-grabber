@@ -1,4 +1,4 @@
-package com.hurdsbrook.jig.config;
+package jig.config;
 
 
 import static org.junit.Assert.assertEquals;

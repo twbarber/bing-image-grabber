@@ -1,7 +1,7 @@
-package com.hurdsbrook.jig.config;
+package jig.config;
 
-import com.hurdsbrook.jig.constants.AdultOption;
-import com.hurdsbrook.jig.constants.Market;
+import jig.constants.AdultOption;
+import jig.constants.Market;
 import org.apache.log4j.Logger;
 
 /**
