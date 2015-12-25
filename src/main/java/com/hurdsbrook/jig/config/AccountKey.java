@@ -3,7 +3,10 @@ package com.hurdsbrook.jig.config;
 import org.apache.commons.codec.binary.Base64;
 
 /**
- * Created by Tyler on 12/24/15.
+ * Used for storing encrypted Bing Account Key.
+ *
+ * Stores the passed in account key using Base64 encoding for use
+ * with the Bing Search API.
  */
 public class AccountKey {
 

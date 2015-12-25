@@ -47,6 +47,10 @@ import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.Collection;
 
+/**
+ * ImageFinder acts as the messenger for the Bing Search API. Returns ImageResult
+ * Objects to the caller for future use.
+ */
 public class ImageFinder {
 
   private Logger logger = Logger.getLogger(ImageFinder.class);

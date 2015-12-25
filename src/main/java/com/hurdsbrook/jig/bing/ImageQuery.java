@@ -1,7 +1,8 @@
 package com.hurdsbrook.jig.bing;
 
 /**
- * Created by Tyler on 12/24/15.
+ * Object generated from the QueryBuilder. Contains full list of parameters
+ * to pass to the Bing Search API.
  */
 public class ImageQuery {
 }

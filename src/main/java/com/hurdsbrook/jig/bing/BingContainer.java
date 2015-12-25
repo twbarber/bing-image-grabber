@@ -1,7 +1,8 @@
 package com.hurdsbrook.jig.bing;
 
 /**
- * Created by Tyler on 12/24/15.
+ * Used as an intermediary layer for the Java Image Grabber and the
+ * Bing Search API.
  */
 public class BingContainer {
 

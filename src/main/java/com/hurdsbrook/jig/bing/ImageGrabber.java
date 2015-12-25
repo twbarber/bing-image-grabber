@@ -9,7 +9,7 @@ import java.net.URL;
 import java.util.Collection;
 
 /**
- * Created by Tyler on 12/23/15.
+ * Main interface for using the Java Image Grabber library.
  */
 public class ImageGrabber {
 

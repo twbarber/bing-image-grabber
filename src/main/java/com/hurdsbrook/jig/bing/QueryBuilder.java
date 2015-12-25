@@ -7,6 +7,9 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collection;
 
+/**
+ * Used to build search queries for the Java Image Grabber.
+ */
 public class QueryBuilder {
 
   private Logger logger = Logger.getLogger(QueryBuilder.class);

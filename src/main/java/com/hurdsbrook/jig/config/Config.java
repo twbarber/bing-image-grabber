@@ -2,11 +2,13 @@ package com.hurdsbrook.jig.config;
 
 import com.hurdsbrook.jig.constants.AdultOption;
 import com.hurdsbrook.jig.constants.Market;
-import com.sun.javafx.tools.packager.Log;
 import org.apache.log4j.Logger;
 
 /**
- * Created by Tyler on 12/23/15.
+ * Used for storing configuration information for the Java Image Grabber.
+ *
+ * Stores the users AccountKey and other preferences that can be written
+ * to disk for use at a later time.
  */
 public class Config {
 

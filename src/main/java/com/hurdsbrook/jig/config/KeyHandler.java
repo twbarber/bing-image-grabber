@@ -1,7 +1,4 @@
 package com.hurdsbrook.jig.config;
-/* 
-
- */
 
 import org.apache.log4j.Logger;
 
@@ -11,6 +8,9 @@ import java.net.URLConnection;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
+/**
+ * Used for Account Key validation.
+ */
 public class KeyHandler {
 
 	private Logger logger = Logger.getLogger(KeyHandler.class);

@@ -7,10 +7,9 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collection;
 
-/*
-    Bing Image Grabber - Version 0.2.2
+/**
+ * Used to download Images gathered by the ImageFinder.
  */
-
 public class ImageDownloader {
 
 	private Logger logger = Logger.getLogger(ImageDownloader.class);
