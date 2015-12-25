@@ -17,8 +17,7 @@ public class ImageResult {
   private String Thumbnail;
 
   public ImageResult(String id, String title, String mediaUrl, String sourceUrl, String displayUrl, int width,
-      int height,
-      int fileSize, String contentType, String thumbnail) {
+      int height, int fileSize, String contentType, String thumbnail) {
     this.id = id;
     this.title = title;
     this.mediaUrl = mediaUrl;

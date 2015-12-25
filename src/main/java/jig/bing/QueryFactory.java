@@ -5,9 +5,9 @@ import org.apache.log4j.Logger;
 /**
  * Used to build search queries for the Java Image Grabber.
  */
-public class QueryBuilder {
+public class QueryFactory {
 
-  private static Logger logger = Logger.getLogger(QueryBuilder.class);
+  private static Logger logger = Logger.getLogger(QueryFactory.class);
   private static final String ROOT_URL = "https://api.datamarket.azure.com/Bing/Search/Image?$format=JSON";
 
 	public static String generateQuery(QueryParameters parameters) {
