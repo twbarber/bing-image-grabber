@@ -2,6 +2,10 @@ package jig.bing;
 
 import jig.constants.AdultOption;
 import jig.constants.Market;
+import org.apache.log4j.Logger;
+
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 
 /**
  * Object generated from the QueryBuilder. Contains full list of parameters
@@ -9,6 +13,7 @@ import jig.constants.Market;
  */
 public class QueryParameters {
 
+  private Logger logger = Logger.getLogger(QueryParameters.class);
   private String searchTerm;
   private int numberOfImages;
   private AdultOption adultOption;
@@ -38,18 +43,26 @@ public class QueryParameters {
   }
 
   public String getEncodedSearchTerm() {
-    return searchTerm;
+    return "&Query=%27" + encodeParameter(searchTerm) + "%27";
   }
 
   public String getEncodedNumberOfImages() {
-    return String.valueOf(numberOfImages);
+    return  "&$top=" + String.valueOf(numberOfImages);
   }
 
   public String getEncodedAdultOption() {
-    return adultOption.toString();
+    return "&Adult=%27" + this.adultOption.toString() + "%27";
   }
 
   public String getEncodedMarket() {
-    return market.toString();
+    return "&Market=" + market.toString();
+  }
+
+  private String encodeParameter(String toEncode) {
+    try {
+       return URLEncoder.encode(toEncode, "UTF-8");
+    } catch (UnsupportedEncodingException e) {
+      throw new IllegalArgumentException("Bad Argument: " + toEncode);
+    }
   }
 }
