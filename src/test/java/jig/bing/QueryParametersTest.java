@@ -10,21 +10,21 @@ import static org.junit.Assert.*;
  */
 public class QueryParametersTest {
 
-  QueryParameters searchTermOnly = new QueryParameters("Test");
-  QueryParameters searchTermWithSpaces = new QueryParameters("Test Spaces");
-  QueryParameters adultOptionOnly = new QueryParameters(AdultOption.STRICT);
-  QueryParameters queryOptionsOnly = new QueryParameters(50, AdultOption.STRICT);
-  QueryParameters noQueryOptions = new QueryParameters();
+  ImageRequestParameters searchTermOnly = new ImageRequestParameters("Test");
+  ImageRequestParameters searchTermWithSpaces = new ImageRequestParameters("Test Spaces");
+  ImageRequestParameters adultOptionOnly = new ImageRequestParameters(AdultOption.STRICT);
+  ImageRequestParameters queryOptionsOnly = new ImageRequestParameters(50, AdultOption.STRICT);
+  ImageRequestParameters noQueryOptions = new ImageRequestParameters();
 
   @Test
   public void testSearchTermOnly() {
-    String expected = "&Query=%27Test%27";
+    String expected = "&ImageRequest=%27Test%27";
     assertEquals(expected, searchTermOnly.getEncodedSearchTerm());
   }
 
   @Test
   public void testSearchTermWithSpaces() {
-    String expected = "&Query=%27Test+Spaces%27";
+    String expected = "&ImageRequest=%27Test+Spaces%27";
     assertEquals(expected, searchTermOnly.getEncodedSearchTerm());
   }
 

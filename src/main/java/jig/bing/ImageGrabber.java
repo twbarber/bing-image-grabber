@@ -41,7 +41,7 @@ public class ImageGrabber {
     return imageDownloader.downloadImages(imagesToDownload);
   }
 
-  public Collection<URL> findImages(QueryParameters queryParameters) {
+  public Collection<URL> findImages(ImageRequestParameters queryParameters) {
     ImageFinder imageFinder = new ImageFinder();
     return new ArrayList<>();
   }

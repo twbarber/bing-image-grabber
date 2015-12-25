@@ -63,7 +63,7 @@ public class KeyHandler {
 	public boolean isValidKey(String aBingKey) {
 		try {
 			URL bingTestUrl = new URL("https://api.datamarket.azure.com/Bing/Search/Image?"
-					+ "$format=json&Query=%27test%27");
+					+ "$format=json&ImageRequest=%27test%27");
 
 			URLConnection urlConnection = bingTestUrl.openConnection();
 			String formattedKey = "Basic " + aBingKey;

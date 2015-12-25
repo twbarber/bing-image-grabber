@@ -16,7 +16,7 @@ package jig.bing;
  	result in the same folder, sub-folders are created starting with the first query, 
  	named after the query itself:
  	
- 		Example: Query - 456123 
+ 		Example: ImageRequest - 456123
  				 A folder inside the the users created directory named "456123" 
  				 will be created, and the images resulting form that search will
  				 be saved there.
@@ -84,7 +84,7 @@ public class ImageFinder {
 		}
 		if (!queryDirectory.exists()) {
 			if (queryDirectory.mkdir())
-				System.out.println("\nQuery Directory: " + queryDirectory.toString() + " created");
+				System.out.println("\nImageRequest Directory: " + queryDirectory.toString() + " created");
 		}
 		return queryDirectory;
 	}
@@ -154,7 +154,7 @@ public class ImageFinder {
 		return null;
 	}
 
-  public Collection<URL> getImageResults(QueryParameters queryParameters) {
+  public Collection<URL> getImageResults(ImageRequestParameters queryParameters) {
     return null;
   }
 
