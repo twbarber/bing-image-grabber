@@ -4,8 +4,6 @@ import jig.constants.AdultOption;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
 
 public class QueryBuilderTest {
 
@@ -43,9 +41,9 @@ public class QueryBuilderTest {
 
   @Test
   public void testQueryOnly() {
-    QueryParameters basicSearchParamters = new QueryParameters("Test One");
+    QueryParameters basicSearchParamters = new QueryParameters("Test");
     String expected = "https://api.datamarket.azure.com/Bing/Search/Image?$format=JSON" +
-        "&Query=%27Test+One%27&Adult=%27Strict%27&$top=50";
+        "&Query=%27Test+%27&Adult=%27Strict%27&$top=50";
     assertEquals(expected, QueryBuilder.generateQuery(basicSearchParamters));
   }
 

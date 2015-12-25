@@ -44,6 +44,24 @@ public class QueryParameters {
     this.adultOption = DEFAULT_ADULT_OPTION;
   }
 
+  public QueryParameters() {
+    this.searchTerm = generateRandomSearchTerm();
+    this.numberOfImages = DEFAULT_COUNT;
+    this.adultOption = DEFAULT_ADULT_OPTION;
+  }
+
+  private String encodeParameter(String toEncode) {
+    try {
+      return URLEncoder.encode(toEncode, "UTF-8");
+    } catch (UnsupportedEncodingException e) {
+      throw new IllegalArgumentException("Bad Argument: " + toEncode);
+    }
+  }
+
+  private String generateRandomSearchTerm() {
+    return String.valueOf(Math.random() * 1000000 + 1000000);
+  }
+
   public String getSearchTerm() {
     return searchTerm;
   }
@@ -68,11 +86,5 @@ public class QueryParameters {
     return "&Adult=%27" + this.adultOption.toString() + "%27";
   }
 
-  private String encodeParameter(String toEncode) {
-    try {
-       return URLEncoder.encode(toEncode, "UTF-8");
-    } catch (UnsupportedEncodingException e) {
-      throw new IllegalArgumentException("Bad Argument: " + toEncode);
-    }
-  }
+
 }
