@@ -1,7 +1,7 @@
-java-image-grabber
+JIG - Java Image Grabber
 ==================
 
-JIG - Version 0.1
+Version 0.1
 
 	The Java Image Grabber library lets the user download images from Microsoft's Bing search engine.
 	Users have the option to provide parameters, or use default configuration values.
