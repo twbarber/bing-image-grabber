@@ -3,6 +3,8 @@ package jig.config;
 import jig.constants.AdultOption;
 import org.apache.log4j.Logger;
 
+import java.io.File;
+
 /**
  * Used for storing configuration information for the Java Image Grabber.
  *
@@ -12,11 +14,15 @@ import org.apache.log4j.Logger;
 public class Config {
 
   private Logger logger = Logger.getLogger(Config.class);
-  private final String apiKey;
+  private final String accountKey;
 
-  public Config(String apiKey) {
-    this.apiKey = apiKey;
+  public Config(File file) {
+    this.apiKey = loadAccountKey(file);
     loadDefaults();
+  }
+
+  private String loadAccountKey(File file) {
+
   }
 
   private void loadDefaults() {
@@ -27,11 +33,4 @@ public class Config {
     return this.apiKey;
   }
 
-  class ConfigDefaults {
-
-    public int IMAGE_COUNT = 20;
-    public AdultOption ADULT_OPTION = AdultOption.MODERATE;
-    public String CONFIG_DIR = "";
-
-  }
 }

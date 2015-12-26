@@ -53,9 +53,6 @@ import java.util.Collection;
 public class ImageFinder {
 
   private Logger logger = Logger.getLogger(ImageFinder.class);
-  private ArrayList<URL> imageURLs = new ArrayList<URL>();
-	private String rawQueryTerm;
-	private File queryDirectory;
 
 	public ImageFinder() {
 		this.queryDirectory = makeDirectories();

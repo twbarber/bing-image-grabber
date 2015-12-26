@@ -1,5 +1,8 @@
-package jig.bing;
+package jig;
 
+import jig.bing.ImageDownloader;
+import jig.bing.ImageFinder;
+import jig.bing.ImageRequestParameters;
 import jig.config.Config;
 import jig.config.KeyHandler;
 
