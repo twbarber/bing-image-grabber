@@ -9,23 +9,25 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 /**
- * Used to download Images gathered by the ImageFinder.
+ * Used to download Images gathered by the BingService.
  */
 public class ImageDownloader {
 
 	private Logger logger = Logger.getLogger(ImageDownloader.class);
 
-	public Collection<BufferedImage> downloadImages(Collection<URL> imagesToDownload) {
+  public Collection<BufferedImage> images = new ArrayList<>();
+
+	public void saveImages(Collection<URL> imagesToDownload) {
 
     int imageCount = 0;
     System.out.print("\nDownloading Images");
     long startTime = System.nanoTime();
     int imageIndex = 0;
 
-    for(URL imageURL : imagesToDownload) {
+    for (URL imageURL : imagesToDownload) {
       System.out.print(".");
       try {
-        String fileName = this.queryDirectory + "/img" + imageIndex;
+        String fileName = "/img" + imageIndex;
         File img = new File(fileName);
         InputStream is = imageURL.openStream();
 
@@ -50,16 +52,7 @@ public class ImageDownloader {
     long duration = endTime - startTime;
     double seconds = duration / 1000000000.0; // Converts time to download all images to seconds
 
-    makeLog(seconds);
-
     System.out.printf("\n\nSaved %d images in %.2f seconds.", imageCount, seconds);
-
-    return downloadedImages;
-	}
-
-  private void saveImages() {
-
   }
-
 
 }
