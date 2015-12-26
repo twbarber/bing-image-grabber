@@ -26,22 +26,24 @@ public class ImageRequestFactory {
     return StringUtils.convertToUrl(queryBuilder.toString());
 	}
 
-  public ImageRequest createRequest(String searchTerm, int numberOfImages) {
-    ImageRequestParameters parameters =
-        new ImageRequestParameters(searchTerm, numberOfImages, DEFAULT_ADULT_OPTION);
-    return new ImageRequest(parameters, generateRequestUrl(parameters));
-  }
-
-  public ImageRequest createRequest(String searchTerm, AdultOption adultOption) {
-    ImageRequestParameters parameters =
-        new ImageRequestParameters(searchTerm, DEFAULT_COUNT, adultOption);
-    return new ImageRequest(parameters, generateRequestUrl(parameters));
+  public ImageRequest createRequest() {
+    return createRequest(generateRandomSearchTerm(), DEFAULT_COUNT, DEFAULT_ADULT_OPTION);
   }
 
   public ImageRequest createRequest(String searchTerm) {
-    ImageRequestParameters parameters =
-        new ImageRequestParameters(searchTerm, DEFAULT_COUNT, DEFAULT_ADULT_OPTION);
-    return new ImageRequest(parameters, generateRequestUrl(parameters));
+    return createRequest(searchTerm, DEFAULT_COUNT, DEFAULT_ADULT_OPTION);
+  }
+
+  public ImageRequest createRequest(String searchTerm, int numberOfImages) {
+    return createRequest(searchTerm, numberOfImages, DEFAULT_ADULT_OPTION);
+  }
+
+  public ImageRequest createRequest(String searchTerm, AdultOption adultOption) {
+    return createRequest(searchTerm, DEFAULT_COUNT, adultOption);
+  }
+
+  public ImageRequest createRequest(int numberOfImages, AdultOption adultOption) {
+    return createRequest(generateRandomSearchTerm(), numberOfImages, adultOption);
   }
 
   public ImageRequest createRequest(String searchTerm, int numberOfImages, AdultOption adultOption) {
@@ -53,6 +55,5 @@ public class ImageRequestFactory {
   private String generateRandomSearchTerm() {
     return String.valueOf(Math.random() * 1000000 + 1000000);
   }
-
 
 }
