@@ -1,10 +1,10 @@
-package jig.constants;
+package jig.config;
 
 import org.junit.Test;
 
 import static org.junit.Assert.fail;
 
-public class TestKeyHandler {
+public class KeyHandlerTest {
 
 	@Test
 	public void testTestImageDownloader() {

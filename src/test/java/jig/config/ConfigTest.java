@@ -9,7 +9,6 @@ import static org.junit.Assert.assertEquals;
  */
 public class ConfigTest {
 
-    private Config configUnderTest = new Config("TEST");
 
 
 }
