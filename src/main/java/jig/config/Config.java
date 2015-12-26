@@ -1,6 +1,5 @@
 package jig.config;
 
-import jig.constants.AdultOption;
 import org.apache.log4j.Logger;
 
 import java.io.File;
@@ -17,20 +16,20 @@ public class Config {
   private final String accountKey;
 
   public Config(File file) {
-    this.apiKey = loadAccountKey(file);
+    this.accountKey = loadAccountKey(file);
     loadDefaults();
   }
 
   private String loadAccountKey(File file) {
-
+    return "";
   }
 
   private void loadDefaults() {
 
   }
 
-  public String getApiKey() {
-    return this.apiKey;
+  public String getAccountKey() {
+    return this.accountKey;
   }
 
 }
