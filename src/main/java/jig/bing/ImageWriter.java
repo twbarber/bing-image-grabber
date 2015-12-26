@@ -3,7 +3,7 @@ package jig.bing;
 import java.io.File;
 
 /**
- * Created by Tyler on 12/26/15.
+ * Used to store save images to disk
  */
 public class ImageWriter {
 
