@@ -1,9 +1,11 @@
 package jig.bing;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.junit.Assert.fail;
 
+@Ignore
 public class ImageDownloaderTest {
 
 	@Test
