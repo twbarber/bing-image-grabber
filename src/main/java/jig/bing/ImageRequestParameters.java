@@ -42,11 +42,11 @@ public class ImageRequestParameters {
   }
 
   public String getEncodedSearchTerm() {
-    return "&ImageRequest=%27" + encodeParameter(searchTerm) + "%27";
+    return "&Query=%27" + encodeParameter(searchTerm) + "%27";
   }
 
   public String getEncodedNumberOfImages() {
-    return  "&$top=" + String.valueOf(numberOfImages);
+    return "&$top=" + String.valueOf(numberOfImages);
   }
 
   public String getEncodedAdultOption() {

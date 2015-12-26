@@ -1,18 +1,27 @@
 package jig.util;
 
+import org.apache.log4j.Logger;
+
 import java.net.MalformedURLException;
 import java.net.URL;
 
 /**
- * Created by Tyler on 12/25/15.
+ * Various utilities for working with strings in JIG.
  */
 public class StringUtils {
 
+  private static Logger logger = Logger.getLogger(StringUtils.class);
   public static boolean isNullOrEmpty(String s) {
     return (s == null || s.isEmpty());
   }
 
-  public static URL convertToUrl(String s) throws MalformedURLException {
-    return new URL(s);
+  public static URL convertToUrl(String s) {
+    URL converted = null;
+    try {
+      converted = new URL(s);
+    } catch (MalformedURLException e) {
+      logger.error("Bad URL");
+    }
+    return converted;
   }
 }
