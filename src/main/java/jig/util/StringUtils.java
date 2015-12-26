@@ -11,8 +11,8 @@ import java.net.URL;
 public class StringUtils {
 
   private static Logger logger = Logger.getLogger(StringUtils.class);
-  public static boolean isNullOrEmpty(String s) {
-    return (s == null || s.isEmpty());
+  public static boolean isNotNullOrEmpty(String s) {
+    return !(s == null || s.isEmpty());
   }
 
   public static URL convertToUrl(String s) {
