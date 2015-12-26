@@ -3,6 +3,7 @@ package jig.bing;
 import jig.constants.AdultOption;
 import org.junit.Test;
 
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import static org.junit.Assert.assertEquals;
@@ -22,26 +23,21 @@ public class ImageRequestFactoryTest {
 
   @Test
   public void testNumber() {
-    String expected = "https://api.datamarket.azure.com/Bing/Search/Image?$format=JSON" +
-        "&Query=%27" + Pattern.quote("/d+") + "%27&Adult=%27Strict%27&$top=49";
-    ImageRequest testRequest = testRequestFactory.createRequest(49);
-    assertEquals(expected, testRequest.getRequestUrlAsString());
+    ImageRequest testRequest = testRequestFactory.createRequest(100);
+    assertTrue(testRequest.getRequestUrlAsString().contains("top=100"));
   }
 
   @Test
   public void testAdult() {
-    String expected = "\\bhttps://api.datamarket.azure.com/Bing/Search/Image?$format=JSON\\b" +
-        "\\b&Query=%27\\b" + "\\d{7}" + "\\b%27&Adult=%27Strict%27&$top=50\\b";
     ImageRequest testRequest = testRequestFactory.createRequest(AdultOption.STRICT);
-    assertTrue(testRequest.getRequestUrlAsString().matches(expected)+);
+    assertTrue(testRequest.getRequestUrlAsString().contains("%27Strict%27"));
   }
 
   @Test
   public void testTermAndAdult() {
-    String expected = "https://api.datamarket.azure.com/Bing/Search/Image?$format=JSON" +
-        "&Query=%27" + "\\d{7}" + "%27&Adult=%27Strict%27&$top=50";
     ImageRequest testRequest = testRequestFactory.createRequest("Test", AdultOption.STRICT);
-    assertEquals(expected, testRequest.getRequestUrlAsString());
+    assertTrue(testRequest.getRequestUrlAsString().contains("%27Test%27"));
+    assertTrue(testRequest.getRequestUrlAsString().contains("%27Strict%27"));
   }
 
   @Test
@@ -54,18 +50,16 @@ public class ImageRequestFactoryTest {
 
   @Test
   public void testAdultAndNumber() {
-    String expected = "https://api.datamarket.azure.com/Bing/Search/Image?$format=JSON" +
-        "&Query=%27Test%27&Adult=%27Strict%27&$top=50";
     ImageRequest testRequest = testRequestFactory.createRequest(50, AdultOption.STRICT);
-    assertEquals(expected, testRequest.getRequestUrlAsString());
-  }
+    assertTrue(testRequest.getRequestUrlAsString().contains("top=50"));
+    assertTrue(testRequest.getRequestUrlAsString().contains("%27Strict%27"));  }
 
   @Test
   public void testTermNumberAndAdult() {
-    String expected = "https://api.datamarket.azure.com/Bing/Search/Image?$format=JSON" +
-        "&Query=%27Test%27&Adult=%27Strict%27&$top=50";
     ImageRequest testRequest = testRequestFactory.createRequest("Test", 50, AdultOption.STRICT);
-    assertEquals(expected, testRequest.getRequestUrlAsString());
+    assertTrue(testRequest.getRequestUrlAsString().contains("%27Test%27"));
+    assertTrue(testRequest.getRequestUrlAsString().contains("top=50"));
+    assertTrue(testRequest.getRequestUrlAsString().contains("%27Strict%27"));
   }
 
   @Test
