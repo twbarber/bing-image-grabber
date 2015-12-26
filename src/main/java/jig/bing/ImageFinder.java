@@ -59,12 +59,6 @@ public class ImageFinder {
 
 	public ImageFinder() {
 		this.queryDirectory = makeDirectories();
-		try {
-			downloadImages();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 	}
 
 	/**
@@ -91,51 +85,6 @@ public class ImageFinder {
 
 	/**
 	 *
-	 *
-	 * @throws IOException
-	 */
-	public void downloadImages() throws IOException {
-
-		int imageCount = 0;
-		System.out.print("\nDownloading Images");
-		long startTime = System.nanoTime();
-		int imageIndex = 0;
-
-		for(URL imageURL : imageURLs) {
-			System.out.print(".");
-			try {
-				String fileName = this.queryDirectory + "/img" + imageIndex;
-				File img = new File(fileName);
-				InputStream is = imageURL.openStream();
-
-				OutputStream os = new FileOutputStream(img.toString());
-
-				byte[] b = new byte[2048];
-				int length;
-
-				while ((length = is.read(b)) != -1) {
-					os.write(b, 0, length);
-				}
-
-				is.close();
-				os.close();
-
-				imageCount++;
-			} catch (IOException e) {
-			}
-
-		}
-		long endTime = System.nanoTime();
-		long duration = endTime - startTime;
-		double seconds = duration / 1000000000.0; // Converts time to download all images to seconds
-
-		makeLog(seconds);
-
-		System.out.printf("\n\nSaved %d images in %.2f seconds.", imageCount, seconds);
-	}
-
-	/**
-	 *
 	 * @param seconds
 	 * @throws IOException
 	 */
@@ -148,22 +97,6 @@ public class ImageFinder {
 		}
 		output.write("\nProcess Completed in " + seconds + " seconds.");
 		output.close();
-	}
-
-	public Collection<URL> getImageResults(String searchTerm) {
-		return null;
-	}
-
-  public Collection<URL> getImageResults(ImageRequestParameters queryParameters) {
-    return null;
-  }
-
-  public Collection<URL> getImageResults(String searchTerm, int numberOfImages) {
-		return null;
-	}
-
-	public Collection<URL> getImageResults(String searchTerm, int numberOfImages, AdultOption adultOption) {
-		return null;
 	}
 
 	private String encryptedKey;
@@ -211,6 +144,4 @@ public class ImageFinder {
 		}
 		return imageURLList;
 	}
-
-
 }
