@@ -12,7 +12,6 @@ import java.net.URLEncoder;
  */
 public class ImageRequestParameters {
 
-  private Logger logger = Logger.getLogger(ImageRequestParameters.class);
   private String searchTerm;
   private int numberOfImages;
   private AdultOption adultOption;
@@ -53,5 +52,14 @@ public class ImageRequestParameters {
     return "&Adult=%27" + this.adultOption.toString() + "%27";
   }
 
-
+  public String toString() {
+    StringBuilder builder = new StringBuilder();
+    builder.append("Search Term: ");
+    builder.append(searchTerm);
+    builder.append("\nNumber Of Images: ");
+    builder.append(numberOfImages);
+    builder.append("\nAdult Option: ");
+    builder.append(adultOption);
+    return builder.toString();
+  }
 }
