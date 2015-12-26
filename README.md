@@ -10,25 +10,19 @@ JIG - Version 0.1
 
 		- User's API Key
 
-	Query Param
+	Optional Query Parameters
 
-		- Search Term, we use a randomly generated integer
-		- Query Type (Web, Images*, Video, etc.)
+        - Search Term
+        - Size of Return Set
+        - Adult Option
 
-	The following parameters are optional, but we add them for completeness
+	Default Values if not Specified
 
-		- Query Region, set as en-us for our searches
-		- Adult Option, so no adult content... hopefully
-		- Number of images per request.
+	    - Search Term: Randomly generated 7 Digit Number
+	    - Size of Return Set: 50
+	    - Adult Option: Strict
 
-	Defaults
+    Market
 
-	    - AdultOption : Moderate
-	    - Market : en-us
-	    - Search Term : Number, randomly generated at search time
-	    - Number of Images : 20
-
-	*In our case the search type is a constant, Images.
-
-
-	
+        - By default, Bing will try to determine the Market via the connecting IP address.
+            Currently, there's no way to override this value.
