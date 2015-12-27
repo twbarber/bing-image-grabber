@@ -1,7 +1,7 @@
 package jig.main;
 
 /**
- * Main class to be used in jar.k
+ * Main class to be used in jar.
  */
 public class Jig {
 
