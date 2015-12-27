@@ -67,7 +67,7 @@
                     <archive>
                         <manifest>
                             <!-- Jar file entry point -->
-                            <mainClass>jig.main.Jig</mainClass>
+                            <mainClass>jig.main.App</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
