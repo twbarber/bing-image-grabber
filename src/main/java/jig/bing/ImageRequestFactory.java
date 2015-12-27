@@ -17,16 +17,6 @@ public class ImageRequestFactory {
   private int DEFAULT_COUNT = 50;
   private AdultOption DEFAULT_ADULT_OPTION = AdultOption.STRICT;
 
-	public URL generateRequestUrl(ImageRequestParameters parameters) {
-    logger.info("Building query with parameters: " + parameters.toString());
-    StringBuilder queryBuilder = new StringBuilder();
-    queryBuilder.append(ROOT_URL);
-    queryBuilder.append(parameters.getEncodedSearchTerm());
-    queryBuilder.append(parameters.getEncodedAdultOption());
-    queryBuilder.append(parameters.getEncodedNumberOfImages());
-    return StringUtils.convertToUrl(queryBuilder.toString());
-	}
-
   public ImageRequest createRequest() {
     return createRequest(generateRandomSearchTerm(), DEFAULT_COUNT, DEFAULT_ADULT_OPTION);
   }
@@ -59,6 +49,16 @@ public class ImageRequestFactory {
     ImageRequestParameters parameters =
         new ImageRequestParameters(searchTerm, numberOfImages, adultOption);
     return new ImageRequest(parameters, generateRequestUrl(parameters));
+  }
+
+  public URL generateRequestUrl(ImageRequestParameters parameters) {
+    logger.info("Building query with parameters: " + parameters.toString());
+    StringBuilder queryBuilder = new StringBuilder();
+    queryBuilder.append(ROOT_URL);
+    queryBuilder.append(parameters.getEncodedSearchTerm());
+    queryBuilder.append(parameters.getEncodedAdultOption());
+    queryBuilder.append(parameters.getEncodedNumberOfImages());
+    return StringUtils.convertToUrl(queryBuilder.toString());
   }
 
   private String generateRandomSearchTerm() {

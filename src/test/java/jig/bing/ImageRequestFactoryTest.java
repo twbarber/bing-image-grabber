@@ -10,6 +10,13 @@ public class ImageRequestFactoryTest {
 
   ImageRequestFactory testRequestFactory = new ImageRequestFactory();
 
+  @Test
+  public void testRandomQuery() {
+    ImageRequest testRequest = testRequestFactory.createRequest();
+    assertTrue(testRequest.getRequestUrlAsString().contains("top=50"));
+    assertTrue(testRequest.getRequestUrlAsString().contains("%27Strict%27"));
+  }
+
 	@Test
 	public void testTerm() {
     String expected = "https://api.datamarket.azure.com/Bing/Search/Image?$format=JSON" +
