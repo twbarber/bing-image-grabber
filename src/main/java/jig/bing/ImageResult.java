@@ -1,5 +1,9 @@
 package jig.bing;
 
+import jig.util.StringUtils;
+
+import java.net.URL;
+
 /**
  * Stores the POJO version of an Image Result from the Bing Search API.
  */
@@ -7,9 +11,9 @@ public class ImageResult {
 
   private String id;
   private String title;
-  private String mediaUrl;
-  private String sourceUrl;
-  private String displayUrl;
+  private URL mediaUrl;
+  private URL sourceUrl;
+  private URL displayUrl;
   private int width;
   private int height;
   private int fileSize;
@@ -20,9 +24,9 @@ public class ImageResult {
       int height, int fileSize, String contentType, String thumbnail) {
     this.id = id;
     this.title = title;
-    this.mediaUrl = mediaUrl;
-    this.sourceUrl = sourceUrl;
-    this.displayUrl = displayUrl;
+    this.mediaUrl = StringUtils.convertToUrl(mediaUrl);
+    this.sourceUrl = StringUtils.convertToUrl(sourceUrl);
+    this.displayUrl = StringUtils.convertToUrl(displayUrl);
     this.width = width;
     this.height = height;
     this.fileSize = fileSize;
@@ -38,15 +42,15 @@ public class ImageResult {
     return title;
   }
 
-  public String getMediaUrl() {
+  public URL getMediaUrl() {
     return mediaUrl;
   }
 
-  public String getSourceUrl() {
+  public URL getSourceUrl() {
     return sourceUrl;
   }
 
-  public String getDisplayUrl() {
+  public URL getDisplayUrl() {
     return displayUrl;
   }
 
