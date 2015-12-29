@@ -40,8 +40,9 @@ import jig.config.Config;
 import jig.config.KeyHandler;
 import org.apache.log4j.Logger;
 
-import java.awt.image.BufferedImage;
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
@@ -67,7 +68,7 @@ public class BingService {
     urlConnection.setRequestProperty("Authorization", authKey);
     BufferedReader responseReader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
     String inputLine = responseReader.readLine();
-    StringBuffer jsonString = new StringBuffer();
+    StringBuilder jsonString = new StringBuilder();
 
     while (inputLine != null) {
       jsonString.append(inputLine);
@@ -77,7 +78,7 @@ public class BingService {
     return jsonString.toString();
   }
 
-  public void downloadImages(Collection<URL> imagesToDownload) {
+  public void downloadImages(Collection<ImageResult> imagesToDownload) {
     ImageDownloader imageDownloader = new ImageDownloader();
     imageDownloader.saveImages(imagesToDownload);
   }

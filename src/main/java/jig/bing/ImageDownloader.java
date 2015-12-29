@@ -4,7 +4,6 @@ import org.apache.log4j.Logger;
 
 import java.awt.image.BufferedImage;
 import java.io.*;
-import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -16,7 +15,7 @@ public class ImageDownloader {
   private Logger logger = Logger.getLogger(ImageDownloader.class);
   public Collection<BufferedImage> images = new ArrayList<>();
 
-	public void saveImages(Collection<ImageResult> imagesToDownload, Path directoryToWriteTo) {
+	public void saveImages(Collection<ImageResult> imagesToDownload) {
       int imageIndex = 0;
       for (ImageResult image : imagesToDownload) {
         try {
@@ -38,6 +37,7 @@ public class ImageDownloader {
 
           imageIndex++;
         } catch (IOException e) {
+          this.logger.error("Error saving images.");
         }
 
       }
