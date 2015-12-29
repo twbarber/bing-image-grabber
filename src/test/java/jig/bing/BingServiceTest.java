@@ -11,6 +11,8 @@ import java.io.InputStream;
 import java.util.Collection;
 import java.util.Properties;
 
+import static org.junit.Assert.assertTrue;
+
 /**
  * Created by tyler on 12/28/15.
  */
@@ -43,18 +45,12 @@ public class BingServiceTest {
   public void testSearch() throws Exception {
     ImageRequest request = requestFactory.createRequest();
     Collection<ImageResult> results = this.serviceUnderTest.search(request);
-    for(ImageResult result : results) {
-      System.out.print(result.getMediaUrl());
-    }
+    assertTrue(results.size() != 0);
   }
 
   @Test
   public void testDownloadImages() throws Exception {
-
+    assertTrue(true);
   }
 
-  @Test
-  public void testParseURLs() throws Exception {
-
-  }
 }
