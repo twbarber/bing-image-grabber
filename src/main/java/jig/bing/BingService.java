@@ -39,9 +39,7 @@ import jig.image.ImageResult;
 import org.apache.log4j.Logger;
 
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.Proxy;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -89,21 +87,6 @@ public class BingService {
   public void downloadImages(Collection<ImageResult> imagesToDownload) {
     ImageDownloader imageDownloader = new ImageDownloader();
     imageDownloader.saveImages(imagesToDownload);
-  }
-
-  public Collection<URL> parseURLs(String jsonLine) throws MalformedURLException {
-    ArrayList<URL> parsedURLs = new ArrayList<>();
-    JsonParser jsonParser = new JsonParser();
-    JsonArray results = jsonParser.parse(jsonLine).getAsJsonObject().get("d").getAsJsonObject()
-        .getAsJsonArray("results");
-
-    for (JsonElement result : results) {
-      JsonObject resObject = result.getAsJsonObject();
-      URL mediaUrl = new URL(resObject.get("MediaUrl").getAsString());
-      parsedURLs.add(mediaUrl);
-    }
-
-    return parsedURLs;
   }
 
   private class BingAuthenticator implements Authenticator {
