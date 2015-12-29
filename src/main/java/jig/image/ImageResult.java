@@ -1,4 +1,4 @@
-package jig.bing;
+package jig.image;
 
 /**
  * Stores the POJO version of an Image Result from the Bing Search API.
@@ -14,10 +14,10 @@ public class ImageResult {
   private int height;
   private int fileSize;
   private String contentType;
-  private String Thumbnail;
+  private Thumbnail thumbnail;
 
   public ImageResult(String id, String title, String mediaUrl, String sourceUrl, String displayUrl, int width,
-      int height, int fileSize, String contentType, String thumbnail) {
+      int height, int fileSize, String contentType, Thumbnail thumbnail) {
     this.id = id;
     this.title = title;
     this.mediaUrl = mediaUrl;
@@ -27,7 +27,7 @@ public class ImageResult {
     this.height = height;
     this.fileSize = fileSize;
     this.contentType = contentType;
-    Thumbnail = thumbnail;
+    this.thumbnail = thumbnail;
   }
 
   public String getId() {
@@ -66,8 +66,8 @@ public class ImageResult {
     return contentType;
   }
 
-  public String getThumbnail() {
-    return Thumbnail;
+  public Thumbnail getThumbnail() {
+    return thumbnail;
   }
 
 }

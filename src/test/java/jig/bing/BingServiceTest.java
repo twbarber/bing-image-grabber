@@ -2,6 +2,7 @@ package jig.bing;
 
 import jig.config.AccountKey;
 import jig.config.Config;
+import jig.image.ImageResult;
 import org.junit.Before;
 import org.junit.Test;
 

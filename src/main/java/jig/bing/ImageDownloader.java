@@ -1,5 +1,6 @@
 package jig.bing;
 
+import jig.image.ImageResult;
 import org.apache.log4j.Logger;
 
 import java.awt.image.BufferedImage;

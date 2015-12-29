@@ -32,12 +32,10 @@ package jig.bing;
  	Download time varied depending on the size of the image.
  */
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
+import com.google.gson.*;
 import com.squareup.okhttp.*;
 import jig.config.Config;
+import jig.image.ImageResult;
 import org.apache.log4j.Logger;
 
 import java.io.IOException;
@@ -72,10 +70,20 @@ public class BingService {
 
   private Collection<ImageResult> getImageResults(String response) {
     System.out.print(response);
+    Gson gson = new Gson();
     JsonParser parser = new JsonParser();
-    JsonObject jsonResponse = parser.parse(response).getAsJsonObject();
-    jsonResponse.getAsJsonArray("results");
-    return new ArrayList<>();
+    JsonObject jsonResponse = parser.parse(response)
+        .getAsJsonObject()
+        .get("d")
+        .getAsJsonObject();
+    JsonArray results = jsonResponse.getAsJsonArray("results");
+    Collection<ImageResult> imageResults = new ArrayList<>();
+    for (JsonElement result : results) {
+      ImageResult anImageResult = gson.fromJson(result, ImageResult.class);
+      imageResults.add(anImageResult);
+    }
+    System.out.println(imageResults);
+    return imageResults;
   }
 
   public void downloadImages(Collection<ImageResult> imagesToDownload) {
