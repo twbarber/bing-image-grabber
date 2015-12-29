@@ -3,7 +3,10 @@ package jig.bing;
 import org.apache.log4j.Logger;
 
 import java.awt.image.BufferedImage;
-import java.io.*;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -21,18 +24,12 @@ public class ImageDownloader {
         try {
           String fileName = "/img" + imageIndex;
           File img = new File(fileName);
-          InputStream is = image.getSourceUrl().openStream();
 
           OutputStream os = new FileOutputStream(img.toString());
 
           byte[] b = new byte[2048];
           int length;
 
-          while ((length = is.read(b)) != -1) {
-            os.write(b, 0, length);
-          }
-
-          is.close();
           os.close();
 
           imageIndex++;

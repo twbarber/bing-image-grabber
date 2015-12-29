@@ -36,16 +36,14 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.squareup.okhttp.*;
 import jig.config.Config;
-import jig.config.KeyHandler;
 import org.apache.log4j.Logger;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.net.MalformedURLException;
+import java.net.Proxy;
 import java.net.URL;
-import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -56,26 +54,28 @@ import java.util.Collection;
 public class BingService {
 
   private Logger logger = Logger.getLogger(BingService.class);
+  private OkHttpClient client = new OkHttpClient();
   private Config config;
 
-  public BingService(Config config) {
+  public BingService(final Config config) {
     this.config = config;
+    this.client.setAuthenticator(new BingAuthenticator());
   }
 
-  public String search(ImageRequest request) throws Exception {
-    URLConnection urlConnection = request.getRequestUrl().openConnection();
-    String authKey = "Basic " + this.config.getAccountKey();
-    urlConnection.setRequestProperty("Authorization", authKey);
-    BufferedReader responseReader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
-    String inputLine = responseReader.readLine();
-    StringBuilder jsonString = new StringBuilder();
+  public Collection<ImageResult> search(ImageRequest request) throws Exception {
+    Request searchRequest = new Request.Builder()
+        .url(request.getRequestUrlAsString())
+        .build();
+    Response response = client.newCall(searchRequest).execute();
+    return getImageResults(response.body().string());
+  }
 
-    while (inputLine != null) {
-      jsonString.append(inputLine);
-      inputLine = responseReader.readLine();
-    }
-
-    return jsonString.toString();
+  private Collection<ImageResult> getImageResults(String response) {
+    System.out.print(response);
+    JsonParser parser = new JsonParser();
+    JsonObject jsonResponse = parser.parse(response).getAsJsonObject();
+    jsonResponse.getAsJsonArray("results");
+    return new ArrayList<>();
   }
 
   public void downloadImages(Collection<ImageResult> imagesToDownload) {
@@ -98,19 +98,22 @@ public class BingService {
     return parsedURLs;
   }
 
-  private void authenticate() {
-    KeyHandler keyHandler = new KeyHandler();
-    try {
-      String userKey = keyHandler.getExistingKey();
-      while (keyHandler.isValidKey(userKey)) {
-        userKey = this.config.getAccountKey();
-        if (keyHandler.isValidKey(userKey)) {
-          keyHandler.writeKey(userKey);
-          return;
-        }
-      }
-    } catch (IOException e) {
-      System.err.println("There was an error authenticating your key.");
+  private class BingAuthenticator implements Authenticator {
+
+    @Override
+    public Request authenticate(Proxy proxy, Response response) throws IOException {
+      String credential = Credentials.basic("", config.getAccountKey().getEncondedKey());
+      return response.request().newBuilder()
+          .header("Authorization", credential)
+          .build();
+    }
+
+    @Override
+    public Request authenticateProxy(Proxy proxy, Response response) throws IOException {
+      String credential = Credentials.basic("", config.getAccountKey().getEncondedKey());
+      return response.request().newBuilder()
+          .header("Proxy-Authorization", credential)
+          .build();
     }
   }
 

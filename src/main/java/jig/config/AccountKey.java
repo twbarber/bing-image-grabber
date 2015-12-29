@@ -1,7 +1,5 @@
 package jig.config;
 
-import org.apache.commons.codec.binary.Base64;
-
 /**
  * Used for storing encrypted Bing Account Key.
  *
@@ -10,14 +8,14 @@ import org.apache.commons.codec.binary.Base64;
  */
 public class AccountKey {
 
-  private final byte[] encondedKey;
+  private final String encodedKey;
 
   public AccountKey(String accountKey) {
-    this.encondedKey = Base64.encodeBase64(accountKey.getBytes());
+    this.encodedKey = accountKey;
   }
 
-  public byte[] getEncondedKey() {
-    return this.encondedKey;
+  public String getEncondedKey() {
+    return encodedKey;
   }
 
 }

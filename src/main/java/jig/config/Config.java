@@ -13,10 +13,10 @@ import java.io.File;
 public class Config {
 
   private Logger logger = Logger.getLogger(Config.class);
-  private final String accountKey;
+  private final AccountKey accountKey;
 
-  public Config(File file) {
-    this.accountKey = loadAccountKey(file);
+  public Config(AccountKey accountKey) {
+    this.accountKey = accountKey;
     loadDefaults();
   }
 
@@ -28,7 +28,7 @@ public class Config {
 
   }
 
-  public String getAccountKey() {
+  public AccountKey getAccountKey() {
     return this.accountKey;
   }
 
