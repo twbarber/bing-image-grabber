@@ -43,6 +43,9 @@ public class BingServiceTest {
   public void testSearch() throws Exception {
     ImageRequest request = requestFactory.createRequest();
     Collection<ImageResult> results = this.serviceUnderTest.search(request);
+    for(ImageResult result : results) {
+      System.out.print(result.getMediaUrl());
+    }
   }
 
   @Test

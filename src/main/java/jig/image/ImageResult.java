@@ -1,19 +1,31 @@
 package jig.image;
 
+import com.google.gson.annotations.SerializedName;
+
 /**
  * Stores the POJO version of an Image Result from the Bing Search API.
  */
 public class ImageResult {
 
+  @SerializedName("ID")
   private String id;
+  @SerializedName("Title")
   private String title;
+  @SerializedName("MediaUrl")
   private String mediaUrl;
+  @SerializedName("SourceUrl")
   private String sourceUrl;
+  @SerializedName("DisplayUrl")
   private String displayUrl;
+  @SerializedName("Width")
   private int width;
+  @SerializedName("Height")
   private int height;
+  @SerializedName("FileSize")
   private int fileSize;
+  @SerializedName("ContentType")
   private String contentType;
+  @SerializedName("Thumbnail")
   private Thumbnail thumbnail;
 
   public ImageResult(String id, String title, String mediaUrl, String sourceUrl, String displayUrl, int width,
