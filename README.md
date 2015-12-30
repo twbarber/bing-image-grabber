@@ -11,9 +11,11 @@ Users have the option to provide parameters, or use default configuration values
 **Usage**
 
 ```java
+// Creates new BingService for Search and Download
 Config config = new Config(accountKey);
 BingService bingService = new BingService(config);
 
+// ImageResult object stores return values for search term
 Collection<ImageResult> imageResults = bingService.search("cats");
 ```
 
