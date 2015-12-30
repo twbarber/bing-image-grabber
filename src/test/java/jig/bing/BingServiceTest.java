@@ -4,6 +4,7 @@ import jig.config.AccountKey;
 import jig.config.Config;
 import jig.image.ImageResult;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.io.IOException;
@@ -16,6 +17,7 @@ import static org.junit.Assert.assertTrue;
 /**
  * Created by tyler on 12/28/15.
  */
+@Ignore
 public class BingServiceTest {
 
   private Config config;
