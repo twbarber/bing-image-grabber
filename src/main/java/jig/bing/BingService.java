@@ -16,7 +16,7 @@ package jig.bing;
  	result in the same folder, sub-folders are created starting with the first query, 
  	named after the query itself:
  	
- 		Example: SearchRequest - 456123
+ 		Example: ImageRequest - 456123
  				 A folder inside the the users created directory named "456123" 
  				 will be created, and the images resulting form that search will
  				 be saved there.
@@ -47,11 +47,12 @@ import java.net.Proxy;
 import java.util.ArrayList;
 import java.util.Collection;
 import jig.bing.image.ImageResult;
+import jig.bing.search.ImageRequest;
 import jig.config.Config;
 import org.apache.log4j.Logger;
 
 /**
- * BingService acts as the messenger for the Bing SearchRequest API. Returns ImageResult
+ * BingService acts as the messenger for the Bing ImageRequest API. Returns ImageResult
  * Objects to the caller for future use.
  */
 public class BingService {
@@ -65,7 +66,7 @@ public class BingService {
     this.client.setAuthenticator(new BingAuthenticator());
   }
 
-  public Collection<ImageResult> search(SearchRequest request) throws Exception {
+  public Collection<ImageResult> search(ImageRequest request) throws Exception {
     Request searchRequest = new Request.Builder()
         .url(request.getRequestUrlAsString())
         .build();

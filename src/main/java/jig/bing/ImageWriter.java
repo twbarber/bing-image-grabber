@@ -24,7 +24,7 @@ public class ImageWriter {
     }
     if (!queryDirectory.exists()) {
       if (queryDirectory.mkdir())
-        System.out.println("\nSearchRequest Directory: " + queryDirectory.toString() + " created");
+        System.out.println("\nImageRequest Directory: " + queryDirectory.toString() + " created");
     }
     return queryDirectory;
   }

@@ -3,7 +3,7 @@ package jig.bing.image;
 import com.google.gson.annotations.SerializedName;
 
 /**
- * Stores the POJO version of an ImageResult from the Bing SearchRequest API.
+ * Stores the POJO version of an ImageResult from the Bing ImageRequest API.
  */
 public class ImageResult {
 
