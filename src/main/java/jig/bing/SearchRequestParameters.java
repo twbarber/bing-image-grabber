@@ -1,21 +1,20 @@
 package jig.bing;
 
-import jig.constants.AdultOption;
-
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import jig.bing.enums.AdultOption;
 
 /**
  * Object generated from the QueryBuilder. Contains full list of parameters
- * to pass to the Bing Search API.
+ * to pass to the Bing SearchRequest API.
  */
-public class ImageRequestParameters {
+public class SearchRequestParameters {
 
   private String searchTerm;
   private int numberOfImages;
   private AdultOption adultOption;
 
-  public ImageRequestParameters(String searchTerm, int numberOfImages, AdultOption adultOption) {
+  public SearchRequestParameters(String searchTerm, int numberOfImages, AdultOption adultOption) {
     this.searchTerm = searchTerm;
     this.numberOfImages = numberOfImages;
     this.adultOption = adultOption;
@@ -52,13 +51,8 @@ public class ImageRequestParameters {
   }
 
   public String toString() {
-    StringBuilder builder = new StringBuilder();
-    builder.append("Search Term: ");
-    builder.append(searchTerm);
-    builder.append("\nNumber Of Images: ");
-    builder.append(numberOfImages);
-    builder.append("\nAdult Option: ");
-    builder.append(adultOption);
-    return builder.toString();
+    return "SearchRequest Term: " + searchTerm + "\n"
+          + "Number Of Images: " + numberOfImages + "\n"
+          + "Adult Option: " + adultOption;
   }
 }

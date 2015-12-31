@@ -5,17 +5,17 @@ import java.net.URL;
 /**
  * Wrapper Object for Bing Image Request and it's Parameters.
  */
-public class ImageRequest {
+public class SearchRequest {
 
-  private ImageRequestParameters parameters;
+  private SearchRequestParameters parameters;
   private URL requestUrl;
 
-  public ImageRequest(ImageRequestParameters parameters, URL requestUrl) {
+  public SearchRequest(SearchRequestParameters parameters, URL requestUrl) {
     this.parameters = parameters;
     this.requestUrl = requestUrl;
   }
 
-  public ImageRequestParameters getParameters() {
+  public SearchRequestParameters getParameters() {
     return parameters;
   }
 

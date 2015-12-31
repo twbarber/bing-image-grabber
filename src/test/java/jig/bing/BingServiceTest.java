@@ -20,7 +20,7 @@ import static org.junit.Assert.assertTrue;
 public class BingServiceTest {
 
   private Config config;
-  private ImageRequestFactory requestFactory = new ImageRequestFactory();
+  private SearchRequestFactory requestFactory = new SearchRequestFactory();
   private BingService serviceUnderTest;
 
   @Before
@@ -45,7 +45,7 @@ public class BingServiceTest {
 
   @Test
   public void testSearch() throws Exception {
-    ImageRequest request = requestFactory.createRequest("cat gif");
+    SearchRequest request = requestFactory.createRequest("cat gif");
     Collection<ImageResult> results = this.serviceUnderTest.search(request);
     assertTrue(results.size() != 0);
   }

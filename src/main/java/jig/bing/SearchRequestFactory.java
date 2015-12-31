@@ -2,57 +2,57 @@ package jig.bing;
 
 import java.net.URL;
 import java.util.Random;
-import jig.constants.AdultOption;
+import jig.bing.enums.AdultOption;
 import jig.util.StringUtils;
 import org.apache.log4j.Logger;
 
 /**
  * Used to build search queries for the Java Image Grabber.
  */
-public class ImageRequestFactory {
+public class SearchRequestFactory {
 
-  private static Logger logger = Logger.getLogger(ImageRequestFactory.class);
-  private final String API_BASE = "https://api.datamarket.azure.com/Bing/Search/Image?";
+  private static Logger logger = Logger.getLogger(SearchRequestFactory.class);
+  private final String API_BASE = "https://api.datamarket.azure.com/Bing/SearchRequest/Image?";
   private final String DEFAULT_FORMAT = "$format=JSON";
   private int DEFAULT_COUNT = 50;
   private AdultOption DEFAULT_ADULT_OPTION = AdultOption.STRICT;
 
-  public ImageRequest createRequest() {
+  public SearchRequest createRequest() {
     return createRequest(generateRandomSearchTerm(), DEFAULT_COUNT, DEFAULT_ADULT_OPTION);
   }
 
-  public ImageRequest createRequest(String searchTerm) {
+  public SearchRequest createRequest(String searchTerm) {
     return createRequest(searchTerm, DEFAULT_COUNT, DEFAULT_ADULT_OPTION);
   }
 
-  public ImageRequest createRequest(AdultOption adultOption) {
+  public SearchRequest createRequest(AdultOption adultOption) {
     return createRequest(generateRandomSearchTerm(), DEFAULT_COUNT, adultOption);
   }
 
-  public ImageRequest createRequest(int numberOfImages) {
+  public SearchRequest createRequest(int numberOfImages) {
     return createRequest(generateRandomSearchTerm(), numberOfImages, DEFAULT_ADULT_OPTION);
   }
 
-  public ImageRequest createRequest(String searchTerm, int numberOfImages) {
+  public SearchRequest createRequest(String searchTerm, int numberOfImages) {
     return createRequest(searchTerm, numberOfImages, DEFAULT_ADULT_OPTION);
   }
 
-  public ImageRequest createRequest(String searchTerm, AdultOption adultOption) {
+  public SearchRequest createRequest(String searchTerm, AdultOption adultOption) {
     return createRequest(searchTerm, DEFAULT_COUNT, adultOption);
   }
 
-  public ImageRequest createRequest(int numberOfImages, AdultOption adultOption) {
+  public SearchRequest createRequest(int numberOfImages, AdultOption adultOption) {
     return createRequest(generateRandomSearchTerm(), numberOfImages, adultOption);
   }
 
-  public ImageRequest createRequest(String searchTerm, int numberOfImages,
+  public SearchRequest createRequest(String searchTerm, int numberOfImages,
       AdultOption adultOption) {
-    ImageRequestParameters parameters =
-        new ImageRequestParameters(searchTerm, numberOfImages, adultOption);
-    return new ImageRequest(parameters, generateRequestUrl(parameters));
+    SearchRequestParameters parameters =
+        new SearchRequestParameters(searchTerm, numberOfImages, adultOption);
+    return new SearchRequest(parameters, generateRequestUrl(parameters));
   }
 
-  public URL generateRequestUrl(ImageRequestParameters parameters) {
+  public URL generateRequestUrl(SearchRequestParameters parameters) {
     logger.info("Building query with parameters: " + parameters.toString());
     String search = API_BASE
       + DEFAULT_FORMAT

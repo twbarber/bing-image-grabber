@@ -1,12 +1,17 @@
 package jig.config;
 
-import org.apache.log4j.Logger;
-
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.Writer;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
+import org.apache.log4j.Logger;
 
 /**
  * Used for Account Key validation.
@@ -62,8 +67,8 @@ public class KeyHandler {
 
 	public boolean isValidKey(String aBingKey) {
 		try {
-			URL bingTestUrl = new URL("https://api.datamarket.azure.com/Bing/Search/Image?"
-					+ "$format=json&ImageRequest=%27test%27");
+			URL bingTestUrl = new URL("https://api.datamarket.azure.com/Bing/SearchRequest/Image?"
+					+ "$format=json&SearchRequest=%27test%27");
 
 			URLConnection urlConnection = bingTestUrl.openConnection();
 			String formattedKey = "Basic " + aBingKey;

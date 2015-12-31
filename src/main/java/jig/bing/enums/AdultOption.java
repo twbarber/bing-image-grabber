@@ -1,4 +1,4 @@
-package jig.constants;
+package jig.bing.enums;
 
 /**
  * Created by Tyler on 12/23/15.

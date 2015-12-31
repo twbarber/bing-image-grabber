@@ -16,7 +16,7 @@ package jig.bing;
  	result in the same folder, sub-folders are created starting with the first query, 
  	named after the query itself:
  	
- 		Example: ImageRequest - 456123
+ 		Example: SearchRequest - 456123
  				 A folder inside the the users created directory named "456123" 
  				 will be created, and the images resulting form that search will
  				 be saved there.
@@ -32,19 +32,26 @@ package jig.bing;
  	Download time varied depending on the size of the image.
  */
 
-import com.google.gson.*;
-import com.squareup.okhttp.*;
-import jig.config.Config;
-import jig.image.ImageResult;
-import org.apache.log4j.Logger;
-
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import com.squareup.okhttp.Authenticator;
+import com.squareup.okhttp.Credentials;
+import com.squareup.okhttp.OkHttpClient;
+import com.squareup.okhttp.Request;
+import com.squareup.okhttp.Response;
 import java.io.IOException;
 import java.net.Proxy;
 import java.util.ArrayList;
 import java.util.Collection;
+import jig.config.Config;
+import jig.image.ImageResult;
+import org.apache.log4j.Logger;
 
 /**
- * BingService acts as the messenger for the Bing Search API. Returns ImageResult
+ * BingService acts as the messenger for the Bing SearchRequest API. Returns ImageResult
  * Objects to the caller for future use.
  */
 public class BingService {
@@ -58,7 +65,7 @@ public class BingService {
     this.client.setAuthenticator(new BingAuthenticator());
   }
 
-  public Collection<ImageResult> search(ImageRequest request) throws Exception {
+  public Collection<ImageResult> search(SearchRequest request) throws Exception {
     Request searchRequest = new Request.Builder()
         .url(request.getRequestUrlAsString())
         .build();
@@ -93,7 +100,7 @@ public class BingService {
 
     @Override
     public Request authenticate(Proxy proxy, Response response) throws IOException {
-      String credential = Credentials.basic("", config.getAccountKey().getEncondedKey());
+      String credential = Credentials.basic("", config.getAccountKey().getAccountKey());
       return response.request().newBuilder()
           .header("Authorization", credential)
           .build();
@@ -101,7 +108,7 @@ public class BingService {
 
     @Override
     public Request authenticateProxy(Proxy proxy, Response response) throws IOException {
-      String credential = Credentials.basic("", config.getAccountKey().getEncondedKey());
+      String credential = Credentials.basic("", config.getAccountKey().getAccountKey());
       return response.request().newBuilder()
           .header("Proxy-Authorization", credential)
           .build();

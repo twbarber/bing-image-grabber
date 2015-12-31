@@ -1,15 +1,12 @@
 package jig.bing;
 
-import jig.image.ImageResult;
-import org.apache.log4j.Logger;
-
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.util.ArrayList;
 import java.util.Collection;
+import jig.image.ImageResult;
+import org.apache.log4j.Logger;
 
 /**
  * Used to download Images gathered by the BingService.
@@ -17,7 +14,6 @@ import java.util.Collection;
 public class ImageDownloader {
 
   private Logger logger = Logger.getLogger(ImageDownloader.class);
-  public Collection<BufferedImage> images = new ArrayList<>();
 
 	public void saveImages(Collection<ImageResult> imagesToDownload) {
       int imageIndex = 0;

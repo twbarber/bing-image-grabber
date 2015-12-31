@@ -3,7 +3,7 @@ package jig.image;
 import com.google.gson.annotations.SerializedName;
 
 /**
- * Stores the POJO version of an ImageResult from the Bing Search API.
+ * Stores the POJO version of an ImageResult from the Bing SearchRequest API.
  */
 public class ImageResult {
 
@@ -28,8 +28,8 @@ public class ImageResult {
   @SerializedName("Thumbnail")
   private Thumbnail thumbnail;
 
-  public ImageResult(String id, String title, String mediaUrl, String sourceUrl, String displayUrl, int width,
-      int height, int fileSize, String contentType, Thumbnail thumbnail) {
+  public ImageResult(String id, String title, String mediaUrl, String sourceUrl, String displayUrl,
+      int width, int height, int fileSize, String contentType, Thumbnail thumbnail) {
     this.id = id;
     this.title = title;
     this.mediaUrl = mediaUrl;

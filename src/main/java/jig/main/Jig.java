@@ -3,7 +3,7 @@ package jig.main;
 /**
  * Main class to be used in jar.
  *
- * Takes in Search term and download directory as args. First run will ask user
+ * Takes in SearchRequest term and download directory as args. First run will ask user
  * to properly configure the JIG Config file with Account Key and default download
  * directory if it isn't already configured.
  *
