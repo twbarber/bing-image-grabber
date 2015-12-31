@@ -46,8 +46,8 @@ import java.io.IOException;
 import java.net.Proxy;
 import java.util.ArrayList;
 import java.util.Collection;
+import jig.bing.image.ImageResult;
 import jig.config.Config;
-import jig.image.ImageResult;
 import org.apache.log4j.Logger;
 
 /**

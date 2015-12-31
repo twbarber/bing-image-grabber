@@ -4,9 +4,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Collection;
 import java.util.Properties;
+import jig.bing.image.ImageResult;
 import jig.config.AccountKey;
 import jig.config.Config;
-import jig.image.ImageResult;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -14,7 +14,7 @@ import org.junit.Test;
 import static org.junit.Assert.assertTrue;
 
 /**
- * Created by tyler on 12/28/15.
+ * Test class for the BingService Class.
  */
 @Ignore
 public class BingServiceTest {

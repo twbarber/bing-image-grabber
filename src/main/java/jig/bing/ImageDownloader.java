@@ -5,7 +5,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.Collection;
-import jig.image.ImageResult;
+import jig.bing.image.ImageResult;
 import org.apache.log4j.Logger;
 
 /**

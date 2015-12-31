@@ -1,4 +1,4 @@
-package jig.image;
+package jig.bing.image;
 
 import com.google.gson.annotations.SerializedName;
 
