@@ -1,9 +1,7 @@
 package jig.bing.search;
 
-import java.net.URL;
 import java.util.Random;
 import jig.bing.enums.AdultOption;
-import jig.util.StringUtils;
 import org.apache.log4j.Logger;
 
 /**
@@ -12,8 +10,6 @@ import org.apache.log4j.Logger;
 public class ImageRequestFactory {
 
   private static Logger logger = Logger.getLogger(ImageRequestFactory.class);
-  private final String API_BASE = "https://api.datamarket.azure.com/Bing/ImageRequest/Image?";
-  private final String DEFAULT_FORMAT = "$format=JSON";
   private int DEFAULT_COUNT = 50;
   private AdultOption DEFAULT_ADULT_OPTION = AdultOption.STRICT;
 
@@ -49,17 +45,7 @@ public class ImageRequestFactory {
       AdultOption adultOption) {
     ImageRequestParameters parameters =
         new ImageRequestParameters(searchTerm, numberOfImages, adultOption);
-    return new ImageRequest(parameters, generateRequestUrl(parameters));
-  }
-
-  public URL generateRequestUrl(ImageRequestParameters parameters) {
-    logger.info("Building query with parameters: " + parameters.toString());
-    String search = API_BASE
-      + DEFAULT_FORMAT
-      + parameters.getEncodedSearchTerm()
-      + parameters.getEncodedAdultOption()
-      + parameters.getEncodedNumberOfImages();
-    return StringUtils.convertToUrl(search);
+    return new ImageRequest(parameters);
   }
 
   private String generateRandomSearchTerm() {

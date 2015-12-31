@@ -48,6 +48,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import jig.bing.image.ImageResult;
 import jig.bing.search.ImageRequest;
+import jig.bing.search.ImageResponse;
 import jig.config.Config;
 import org.apache.log4j.Logger;
 
@@ -66,19 +67,19 @@ public class BingService {
     this.client.setAuthenticator(new BingAuthenticator());
   }
 
-  public Collection<ImageResult> search(ImageRequest request) throws Exception {
+  public ImageResponse search(ImageRequest request) throws Exception {
+    this.logger.info("Executing search: " + request.toString());
     Request searchRequest = new Request.Builder()
-        .url(request.getRequestUrlAsString())
+        .url(request.getRequestUrl())
         .build();
     Response response = client.newCall(searchRequest).execute();
-    return getImageResults(response.body().string());
+    return getImageResponse(response);
   }
 
-  private Collection<ImageResult> getImageResults(String response) {
-    System.out.print(response);
+  private ImageResponse getImageResponse(Response response) {
     Gson gson = new Gson();
     JsonParser parser = new JsonParser();
-    JsonObject jsonResponse = parser.parse(response)
+    JsonObject jsonResponse = parser.parse(response.toString())
         .getAsJsonObject()
         .get("d")
         .getAsJsonObject();
@@ -88,13 +89,12 @@ public class BingService {
       ImageResult anImageResult = gson.fromJson(result, ImageResult.class);
       imageResults.add(anImageResult);
     }
-    System.out.println(imageResults);
-    return imageResults;
+    return new ImageResponse(imageResults);
   }
 
-  public void downloadImages(Collection<ImageResult> imagesToDownload) {
+  public void downloadImages(ImageResponse response) {
     ImageDownloader imageDownloader = new ImageDownloader();
-    imageDownloader.saveImages(imagesToDownload);
+    imageDownloader.saveImages(response.getResults());
   }
 
   private class BingAuthenticator implements Authenticator {
