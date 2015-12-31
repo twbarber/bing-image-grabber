@@ -3,7 +3,7 @@ package jig.image;
 import com.google.gson.annotations.SerializedName;
 
 /**
- * Created by tyler on 12/28/15.
+ * Stores Thumbnail information for ImageResult.
  */
 public class Thumbnail {
 
