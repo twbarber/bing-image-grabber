@@ -1,11 +1,13 @@
 package jig.bing.enums;
 
 /**
- * Created by Tyler on 12/23/15.
+ * AdultOption enumeration for Bing Search Parameters.
  */
 public enum AdultOption {
 
-    OFF("Off"), MODERATE("Moderate"), STRICT("Strict");
+    OFF("Off"),
+    MODERATE("Moderate"),
+    STRICT("Strict");
 
     private final String adultOption;
 
