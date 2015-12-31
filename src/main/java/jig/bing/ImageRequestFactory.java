@@ -1,11 +1,10 @@
 package jig.bing;
 
+import java.net.URL;
+import java.util.Random;
 import jig.constants.AdultOption;
 import jig.util.StringUtils;
 import org.apache.log4j.Logger;
-
-import java.net.URL;
-import java.util.Random;
 
 /**
  * Used to build search queries for the Java Image Grabber.
@@ -13,7 +12,8 @@ import java.util.Random;
 public class ImageRequestFactory {
 
   private static Logger logger = Logger.getLogger(ImageRequestFactory.class);
-  private static final String ROOT_URL = "https://api.datamarket.azure.com/Bing/Search/Image?$format=JSON";
+  private final String API_BASE = "https://api.datamarket.azure.com/Bing/Search/Image?";
+  private final String DEFAULT_FORMAT = "$format=JSON";
   private int DEFAULT_COUNT = 50;
   private AdultOption DEFAULT_ADULT_OPTION = AdultOption.STRICT;
 
@@ -45,7 +45,8 @@ public class ImageRequestFactory {
     return createRequest(generateRandomSearchTerm(), numberOfImages, adultOption);
   }
 
-  public ImageRequest createRequest(String searchTerm, int numberOfImages, AdultOption adultOption) {
+  public ImageRequest createRequest(String searchTerm, int numberOfImages,
+      AdultOption adultOption) {
     ImageRequestParameters parameters =
         new ImageRequestParameters(searchTerm, numberOfImages, adultOption);
     return new ImageRequest(parameters, generateRequestUrl(parameters));
@@ -53,12 +54,12 @@ public class ImageRequestFactory {
 
   public URL generateRequestUrl(ImageRequestParameters parameters) {
     logger.info("Building query with parameters: " + parameters.toString());
-    StringBuilder queryBuilder = new StringBuilder();
-    queryBuilder.append(ROOT_URL);
-    queryBuilder.append(parameters.getEncodedSearchTerm());
-    queryBuilder.append(parameters.getEncodedAdultOption());
-    queryBuilder.append(parameters.getEncodedNumberOfImages());
-    return StringUtils.convertToUrl(queryBuilder.toString());
+    String search = API_BASE
+      + DEFAULT_FORMAT
+      + parameters.getEncodedSearchTerm()
+      + parameters.getEncodedAdultOption()
+      + parameters.getEncodedNumberOfImages();
+    return StringUtils.convertToUrl(search);
   }
 
   private String generateRandomSearchTerm() {

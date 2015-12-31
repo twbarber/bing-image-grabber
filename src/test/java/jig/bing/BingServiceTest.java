@@ -1,15 +1,14 @@
 package jig.bing;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Collection;
+import java.util.Properties;
 import jig.config.AccountKey;
 import jig.config.Config;
 import jig.image.ImageResult;
 import org.junit.Before;
 import org.junit.Test;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.Collection;
-import java.util.Properties;
 
 import static org.junit.Assert.assertTrue;
 
@@ -31,7 +30,8 @@ public class BingServiceTest {
   }
 
   private Properties loadConfigProperties() {
-    InputStream configStream = ClassLoader.getSystemClassLoader().getResourceAsStream("config.properties");
+    InputStream configStream =
+        ClassLoader.getSystemClassLoader().getResourceAsStream("config.properties");
     Properties properties = new Properties();
     try {
       properties.load(configStream);
@@ -43,7 +43,7 @@ public class BingServiceTest {
 
   @Test
   public void testSearch() throws Exception {
-    ImageRequest request = requestFactory.createRequest();
+    ImageRequest request = requestFactory.createRequest("cat gif");
     Collection<ImageResult> results = this.serviceUnderTest.search(request);
     assertTrue(results.size() != 0);
   }
