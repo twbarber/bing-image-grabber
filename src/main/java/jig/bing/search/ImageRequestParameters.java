@@ -14,13 +14,6 @@ public class ImageRequestParameters {
   private AdultOption adultOption;
   private Market market;
 
-  public ImageRequestParameters(String searchTerm, int numberOfImages, AdultOption adultOption) {
-    this.searchTerm = searchTerm;
-    this.numberOfImages = numberOfImages;
-    this.adultOption = adultOption;
-    this.market = Market.NONE;
-  }
-
   public ImageRequestParameters(String searchTerm, int numberOfImages, AdultOption adultOption,
       Market market) {
     this.searchTerm = searchTerm;
