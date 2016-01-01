@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 import jig.bing.search.ImageRequest;
-import jig.bing.search.ImageRequestFactory;
+import jig.bing.search.ImageRequestBuilder;
 import jig.bing.search.ImageResponse;
 import jig.config.AccountKey;
 import jig.config.Config;
@@ -21,7 +21,6 @@ import static org.junit.Assert.assertTrue;
 public class BingServiceTest {
 
   private Config config;
-  private ImageRequestFactory requestFactory = new ImageRequestFactory();
   private BingService serviceUnderTest;
 
   @Before
@@ -46,7 +45,8 @@ public class BingServiceTest {
 
   @Test
   public void testSearch() throws Exception {
-    ImageRequest request = requestFactory.createRequest("cat gif");
+    ImageRequestBuilder builder = new ImageRequestBuilder();
+    ImageRequest request = builder.buildRequest();
     ImageResponse response = this.serviceUnderTest.search(request);
     assertTrue(response.getResults().size() != 0);
   }

@@ -21,17 +21,25 @@ public class ImageRequestBuilder {
   private Market market;
 
   public ImageRequestBuilder() {
-    this.searchTerm = generateRandomSearchTerm();
-    this.numberOfImages = DEFAULT_IMAGE_NUMBER;
-    this.adultOption = DEFAULT_ADULT_OPTION;
-    this.market = DEFAULT_MARKET;
+    loadDefaults();
   }
 
-  public ImageRequest build() {
+  public ImageRequest buildRequest() {
     ImageRequestParameters parameters =
         new ImageRequestParameters(getSearchTerm(), getNumberOfImages(),
             getAdultOption(), getMarket());
     return new ImageRequest(parameters);
+  }
+
+  public void clear() {
+    loadDefaults();
+  }
+
+  public void loadDefaults() {
+    this.searchTerm = generateRandomSearchTerm();
+    this.numberOfImages = DEFAULT_IMAGE_NUMBER;
+    this.adultOption = DEFAULT_ADULT_OPTION;
+    this.market = DEFAULT_MARKET;
   }
 
   private String generateRandomSearchTerm() {

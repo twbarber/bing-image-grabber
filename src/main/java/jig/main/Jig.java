@@ -2,7 +2,7 @@ package jig.main;
 
 import jig.bing.BingService;
 import jig.bing.search.ImageRequest;
-import jig.bing.search.ImageRequestFactory;
+import jig.bing.search.ImageRequestBuilder;
 import jig.bing.search.ImageResponse;
 import jig.config.AccountKey;
 import jig.config.Config;
@@ -29,8 +29,8 @@ public class Jig {
       String searchTerm = args[0];
       String downloadDirectory = args[1];
       Config config = new Config(new AccountKey(""));
-      ImageRequestFactory factory = new ImageRequestFactory();
-      ImageRequest request = factory.createRequest();
+      ImageRequestBuilder builder = new ImageRequestBuilder();
+      ImageRequest request = builder.buildRequest();
       BingService bing = new BingService(config);
       try {
         ImageResponse response = bing.search(request);
