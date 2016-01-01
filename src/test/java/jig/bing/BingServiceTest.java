@@ -2,11 +2,10 @@ package jig.bing;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Collection;
 import java.util.Properties;
-import jig.bing.image.ImageResult;
 import jig.bing.search.ImageRequest;
 import jig.bing.search.ImageRequestFactory;
+import jig.bing.search.ImageResponse;
 import jig.config.AccountKey;
 import jig.config.Config;
 import org.junit.Before;
@@ -48,8 +47,8 @@ public class BingServiceTest {
   @Test
   public void testSearch() throws Exception {
     ImageRequest request = requestFactory.createRequest("cat gif");
-    Collection<ImageResult> results = this.serviceUnderTest.search(request);
-    assertTrue(results.size() != 0);
+    ImageResponse response = this.serviceUnderTest.search(request);
+    assertTrue(response.getResults().size() != 0);
   }
 
   @Test

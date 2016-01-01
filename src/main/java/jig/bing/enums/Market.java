@@ -5,6 +5,7 @@ package jig.bing.enums;
  */
 public enum Market {
 
+  NONE(""),
   AR_XA("ar-XA"),
   BG_BG("bg-BG"),
   CS_CZ("cs-CZ"),
