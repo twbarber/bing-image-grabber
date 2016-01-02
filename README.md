@@ -15,8 +15,14 @@ Users have the option to provide parameters, or use default configuration values
 Config config = new Config(accountKey);
 BingService bingService = new BingService(config);
 
-// ImageResult object stores return values for search term
-Collection<ImageResult> imageResults = bingService.search("cats");
+// Create new Search Request. See below for default values
+ImageRequestBuilder builder = new ImageRequestBuilder();
+builder.setSearchTerm("cats");
+ImageRequest request = builder.createRequest();
+
+// ImageResponse holds the collection of results
+ImageResponse response = bingService.search(request);
+Collection<ImageResult> results = response.getResults();
 ```
 
 **Required Configuration Information**
@@ -28,14 +34,11 @@ Collection<ImageResult> imageResults = bingService.search("cats");
     - Search Term
     - Size of Return Set
     - Adult Option
+    - Market
 
 **Default Values if not Specified**
 
     - Search Term: Randomly generated 7 Digit Number
     - Size of Return Set: 50
     - Adult Option: Strict
-
-**Market**
-
-    - By default, Bing will try to determine the Market via the connecting IP address.
-        Currently, there's no way to override this value.
+    - Market: None, determined by Bing using requesting IP
