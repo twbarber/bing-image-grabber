@@ -8,19 +8,20 @@ JIG - Java Image Grabber
 The Java Image Grabber library lets the user download images from Microsoft's Bing search engine.
 Users have the option to provide parameters, or use default configuration values.
 
-**Usage**
+**Using JIG**
 
 ```java
-// Creates new BingService for Search and Download
+// Creates new BingService for search and download.
 Config config = new Config(accountKey);
 BingService bingService = new BingService(config);
 
-// Create new Search Request. See below for default values
+// Create new Search Request. See below for default values.
 ImageRequestBuilder builder = new ImageRequestBuilder();
 builder.setSearchTerm("cats");
+builder.setNumberOfImages(100);
 ImageRequest request = builder.createRequest();
 
-// ImageResponse holds the collection of results
+// ImageResponse holds the collection of results.
 ImageResponse response = bingService.search(request);
 Collection<ImageResult> results = response.getResults();
 ```
