@@ -19,7 +19,7 @@ BingService bingService = new BingService(config);
 ImageRequestBuilder builder = new ImageRequestBuilder();
 builder.setSearchTerm("cats");
 builder.setNumberOfImages(100);
-ImageRequest request = builder.createRequest();
+ImageRequest request = builder.buildRequest();
 
 // ImageResponse holds the collection of results.
 ImageResponse response = bingService.search(request);
