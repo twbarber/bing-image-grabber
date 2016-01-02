@@ -45,19 +45,24 @@ public class BingService {
   }
 
   private ImageResponse getImageResponse(Response response) {
-    Gson gson = new Gson();
     JsonParser parser = new JsonParser();
     JsonObject jsonResponse = parser.parse(response.toString())
         .getAsJsonObject()
         .get("d")
         .getAsJsonObject();
-    JsonArray results = jsonResponse.getAsJsonArray("results");
+    JsonArray jsonImages = jsonResponse.getAsJsonArray("results");
+    Collection<ImageResult> imageResults = parseImageResults(jsonImages);
+    return new ImageResponse(imageResults);
+  }
+
+  private Collection<ImageResult> parseImageResults(JsonArray jsonImages) {
+    Gson gson = new Gson();
     Collection<ImageResult> imageResults = new ArrayList<>();
-    for (JsonElement result : results) {
+    for (JsonElement result : jsonImages) {
       ImageResult anImageResult = gson.fromJson(result, ImageResult.class);
       imageResults.add(anImageResult);
     }
-    return new ImageResponse(imageResults);
+    return imageResults;
   }
 
   public void downloadImages(ImageResponse response) {
@@ -85,4 +90,3 @@ public class BingService {
   }
 
 }
-
