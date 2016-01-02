@@ -26,7 +26,7 @@ public class ImageRequestBuilderTest {
     ImageRequestBuilder testBuilder = new ImageRequestBuilder();
     testBuilder.setSearchTerm("Test");
     ImageRequest testRequest = testBuilder.buildRequest();
-    String expected = API_BASE + "Query=%27Test%27&Adult=%27Strict%27&$top=50&$format=JSON";
+    String expected = API_BASE + "Query=%27Test%27&Adult=%27Strict%27&$top=50&$format=json";
     assertEquals(expected, testRequest.getRequestUrl());
 	}
 
@@ -70,7 +70,7 @@ public class ImageRequestBuilderTest {
     testBuilder.setNumberOfImages(50);
     testBuilder.setSearchTerm("Test");
     ImageRequest testRequest = testBuilder.buildRequest();
-    String expected = API_BASE + "Query=%27Test%27&Adult=%27Strict%27&$top=50&$format=JSON";
+    String expected = API_BASE + "Query=%27Test%27&Adult=%27Strict%27&$top=50&$format=json";
     assertEquals(expected, testRequest.getRequestUrl());
   }
 
@@ -102,7 +102,7 @@ public class ImageRequestBuilderTest {
     testBuilder.setNumberOfImages(50);
     testBuilder.setAdultOption(AdultOption.STRICT);
     ImageRequest testRequest = testBuilder.buildRequest();
-    String expected = API_BASE + "Query=%27Test+One%27&Adult=%27Strict%27&$top=50&$format=JSON";
+    String expected = API_BASE + "Query=%27Test+One%27&Adult=%27Strict%27&$top=50&$format=json";
     assertEquals(expected, testRequest.getRequestUrl());
   }
 
