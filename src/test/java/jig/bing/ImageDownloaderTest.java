@@ -14,6 +14,7 @@ import jig.bing.image.ImageResult;
 import jig.bing.search.ImageResponse;
 import org.apache.commons.io.IOUtils;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.junit.Assert.assertTrue;
@@ -59,6 +60,7 @@ public class ImageDownloaderTest {
   }
 
 	@Test
+  @Ignore
 	public void testImageDownloader() {
 		Collection<BufferedImage> downloadedImages =
         this.serviceUnderTest.downloadImages(testImageResponse.getResults());
