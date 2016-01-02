@@ -1,8 +1,7 @@
 package jig.config;
 
-import org.apache.log4j.Logger;
-
 import java.io.File;
+import org.apache.log4j.Logger;
 
 /**
  * Used for storing configuration information for the Java Image Grabber.
