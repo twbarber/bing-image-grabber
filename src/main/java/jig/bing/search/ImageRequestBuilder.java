@@ -31,15 +31,16 @@ public class ImageRequestBuilder {
     return new ImageRequest(parameters);
   }
 
-  public void clear() {
-    loadDefaults();
+  public ImageRequestBuilder clear() {
+    return loadDefaults();
   }
 
-  public void loadDefaults() {
+  private ImageRequestBuilder loadDefaults() {
     this.searchTerm = generateRandomSearchTerm();
     this.numberOfImages = DEFAULT_IMAGE_NUMBER;
     this.adultOption = DEFAULT_ADULT_OPTION;
     this.market = DEFAULT_MARKET;
+    return this;
   }
 
   private String generateRandomSearchTerm() {
