@@ -11,8 +11,8 @@ import org.apache.log4j.Logger;
 public class ImageRequest {
 
   private Logger logger = Logger.getLogger(ImageRequest.class);
-  private final String API_BASE = "https://api.datamarket.azure.com/Bing/ImageRequest/Image?";
-  private final String DEFAULT_FORMAT = "JSON";
+  private final String API_BASE = "https://api.datamarket.azure.com/Bing/Search/Image?";
+  private final String DEFAULT_FORMAT = "json";
   private final String EMPTY_MARKET_STRING = "";
   private final String QUERY = "Query=%%27%s%%27";
   private final String ADULT = "&Adult=%%27%s%%27";

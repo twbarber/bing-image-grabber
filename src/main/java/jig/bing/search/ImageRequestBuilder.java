@@ -15,7 +15,6 @@ public class ImageRequestBuilder {
   private AdultOption DEFAULT_ADULT_OPTION = AdultOption.STRICT;
   private Market DEFAULT_MARKET = Market.NONE;
   private String searchTerm;
-
   private int numberOfImages;
   private AdultOption adultOption;
   private Market market;
@@ -47,7 +46,7 @@ public class ImageRequestBuilder {
     Random rand = new Random();
     int max = 9999999;
     int min = 1000000;
-    int randomTerm = rand.nextInt((max - min) + 1 + min);
+    int randomTerm = rand.nextInt((max - min) + 1) + min;
     return String.valueOf(randomTerm);
   }
 

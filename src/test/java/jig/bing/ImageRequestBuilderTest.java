@@ -11,7 +11,7 @@ import static org.junit.Assert.assertTrue;
 
 public class ImageRequestBuilderTest {
 
-  private final String API_BASE = "https://api.datamarket.azure.com/Bing/ImageRequest/Image?";
+  private final String API_BASE = "https://api.datamarket.azure.com/Bing/Search/Image?";
 
   @Test
   public void testRandomQuery() {
