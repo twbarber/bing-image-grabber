@@ -24,15 +24,11 @@ public class ImageDownloader {
     ExecutorService executor = Executors.newCachedThreadPool();
     List<BingImage> imagesToDownload = convertToBingImages(imageSearchResults);
     Collection<BingImage> images = Collections.synchronizedList(imagesToDownload);
+    this.logger.info("Sync'd Size: " + images.size());
     for (BingImage image : images) {
       executor.execute(image);
     }
-    executor.shutdown();
-    try {
-      executor.awaitTermination(Long.MAX_VALUE, TimeUnit.NANOSECONDS);
-    } catch (InterruptedException e) {
-      this.logger.error("There was problem downloading all requested images.");
-    }
+    shutdownExecutor(executor);
     return extractDownloadedImages(imagesToDownload);
   }
 
@@ -49,9 +45,19 @@ public class ImageDownloader {
     for (BingImage imageResult : bingImages) {
       if (imageResult.getImage() != null) {
         images.add(imageResult.getImage());
+        this.logger.info("Adding Image");
       }
     }
     return images;
+  }
+
+  private void shutdownExecutor(ExecutorService executorService) {
+    executorService.shutdown();
+    try {
+      executorService.awaitTermination(Long.MAX_VALUE, TimeUnit.NANOSECONDS);
+    } catch (InterruptedException e) {
+      this.logger.error("There was problem downloading all requested images.");
+    }
   }
 
 }
