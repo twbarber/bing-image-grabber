@@ -54,32 +54,36 @@ public class ImageRequestBuilder {
     return searchTerm;
   }
 
-  public void setSearchTerm(String searchTerm) {
+  public ImageRequestBuilder setSearchTerm(String searchTerm) {
     this.searchTerm = searchTerm;
+    return this;
   }
 
   public int getNumberOfImages() {
     return numberOfImages;
   }
 
-  public void setNumberOfImages(int numberOfImages) {
+  public ImageRequestBuilder setNumberOfImages(int numberOfImages) {
     this.numberOfImages = numberOfImages;
+    return this;
   }
 
   public AdultOption getAdultOption() {
     return adultOption;
   }
 
-  public void setAdultOption(AdultOption adultOption) {
+  public ImageRequestBuilder setAdultOption(AdultOption adultOption) {
     this.adultOption = adultOption;
+    return this;
   }
 
   public Market getMarket() {
     return market;
   }
 
-  public void setMarket(Market market) {
+  public ImageRequestBuilder setMarket(Market market) {
     this.market = market;
+    return this;
   }
 
 }
