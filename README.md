@@ -30,6 +30,8 @@ Collection<ImageResult> results = response.getResults();
 
     - User's API Key
 
+    See the example_config.properties for more information.
+
 **Optional Query Parameters**
 
     - Search Term
