@@ -12,13 +12,17 @@ import static org.junit.Assert.assertTrue;
 public class ImageRequestBuilderTest {
 
   private final String API_BASE = "https://api.datamarket.azure.com/Bing/Search/Image?";
+  private final String TEST_ADULT = "%27Strict%27";
+  private final String TEST_NUMBER = "top=50";
+  private final String TEST_MARKET = "%27en-US%27";
+  private final String TEST_SEARCH = "%27Test%27";
 
   @Test
   public void testRandomQuery() {
     ImageRequestBuilder testBuilder = new ImageRequestBuilder();
     ImageRequest testRequest = testBuilder.buildRequest();
-    assertTrue(testRequest.getRequestUrl().contains("top=50"));
-    assertTrue(testRequest.getRequestUrl().contains("%27Strict%27"));
+    assertTrue(testRequest.getRequestUrl().contains(TEST_NUMBER));
+    assertTrue(testRequest.getRequestUrl().contains(TEST_ADULT));
   }
 
 	@Test
@@ -43,7 +47,7 @@ public class ImageRequestBuilderTest {
     ImageRequestBuilder testBuilder = new ImageRequestBuilder();
     testBuilder.setAdultOption(AdultOption.STRICT);
     ImageRequest testRequest = testBuilder.buildRequest();
-    assertTrue(testRequest.getRequestUrl().contains("%27Strict%27"));
+    assertTrue(testRequest.getRequestUrl().contains(TEST_ADULT));
   }
 
   @Test
@@ -51,7 +55,7 @@ public class ImageRequestBuilderTest {
     ImageRequestBuilder testBuilder = new ImageRequestBuilder();
     testBuilder.setMarket(Market.EN_US);
     ImageRequest testRequest = testBuilder.buildRequest();
-    assertTrue(testRequest.getRequestUrl().contains("%27en-US%27"));
+    assertTrue(testRequest.getRequestUrl().contains(TEST_MARKET));
   }
 
   @Test
@@ -60,8 +64,8 @@ public class ImageRequestBuilderTest {
     testBuilder.setAdultOption(AdultOption.STRICT);
     testBuilder.setSearchTerm("Test");
     ImageRequest testRequest = testBuilder.buildRequest();
-    assertTrue(testRequest.getRequestUrl().contains("%27Test%27"));
-    assertTrue(testRequest.getRequestUrl().contains("%27Strict%27"));
+    assertTrue(testRequest.getRequestUrl().contains(TEST_SEARCH));
+    assertTrue(testRequest.getRequestUrl().contains(TEST_ADULT));
   }
 
   @Test
@@ -80,8 +84,8 @@ public class ImageRequestBuilderTest {
     testBuilder.setNumberOfImages(50);
     testBuilder.setAdultOption(AdultOption.STRICT);
     ImageRequest testRequest = testBuilder.buildRequest();
-    assertTrue(testRequest.getRequestUrl().contains("top=50"));
-    assertTrue(testRequest.getRequestUrl().contains("%27Strict%27"));  }
+    assertTrue(testRequest.getRequestUrl().contains(TEST_NUMBER));
+    assertTrue(testRequest.getRequestUrl().contains(TEST_ADULT));  }
 
   @Test
   public void testTermNumberAndAdult() {
@@ -90,9 +94,9 @@ public class ImageRequestBuilderTest {
     testBuilder.setNumberOfImages(50);
     testBuilder.setAdultOption(AdultOption.STRICT);
     ImageRequest testRequest = testBuilder.buildRequest();
-    assertTrue(testRequest.getRequestUrl().contains("%27Test%27"));
-    assertTrue(testRequest.getRequestUrl().contains("top=50"));
-    assertTrue(testRequest.getRequestUrl().contains("%27Strict%27"));
+    assertTrue(testRequest.getRequestUrl().contains(TEST_SEARCH));
+    assertTrue(testRequest.getRequestUrl().contains(TEST_NUMBER));
+    assertTrue(testRequest.getRequestUrl().contains(TEST_ADULT));
   }
 
   @Test
