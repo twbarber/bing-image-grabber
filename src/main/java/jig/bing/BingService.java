@@ -41,12 +41,13 @@ public class BingService {
         .url(request.getRequestUrl())
         .build();
     Response response = client.newCall(searchRequest).execute();
-    return getImageResponse(response);
+    String jsonResponse = response.body().string();
+    return getImageResponse(jsonResponse);
   }
 
-  private ImageResponse getImageResponse(Response response) {
+  private ImageResponse getImageResponse(String response) {
     JsonParser parser = new JsonParser();
-    JsonObject jsonResponse = parser.parse(response.toString())
+    JsonObject jsonResponse = parser.parse(response)
         .getAsJsonObject()
         .get("d")
         .getAsJsonObject();
