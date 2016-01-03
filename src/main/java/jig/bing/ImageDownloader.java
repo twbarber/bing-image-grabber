@@ -79,16 +79,16 @@ public class ImageDownloader {
 
     @Override
     public void run() {
-      this.logger.info("Downloading Image from: " +  this.imageUrl);
-      Request downloadRequest = new Request.Builder()
-          .url(this.imageUrl)
-          .build();
       try {
+        this.logger.info("Downloading Image from: " +  this.imageUrl);
+        Request downloadRequest = new Request.Builder()
+            .url(this.imageUrl)
+            .build();
         Response response = client.newCall(downloadRequest).execute();
         InputStream in = response.body().byteStream();
         this.image = ImageIO.read(in);
-      } catch (IOException e) {
-        this.logger.error("Couldn't download image from " + this.imageUrl);
+      } catch (IOException | IllegalArgumentException e) {
+        this.logger.error(String.format("Couldn't download image from URL: \"%s\"", this.imageUrl));
       }
     }
 

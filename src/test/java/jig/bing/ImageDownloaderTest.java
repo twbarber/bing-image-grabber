@@ -79,4 +79,13 @@ public class ImageDownloaderTest {
     assertTrue(testImage.getHeight() == TEST_IMAGE_WIDTH);
   }
 
+  @Test
+  public void testImageDownloaderBadImage() {
+    Collection<String> imagesToDownload = new ArrayList<>();
+    imagesToDownload.add("");
+    ArrayList<BufferedImage> downloadedImages =
+        new ArrayList<>(this.serviceUnderTest.downloadImages(imagesToDownload));
+    assertTrue(downloadedImages.isEmpty());
+  }
+
 }
