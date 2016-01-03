@@ -1,6 +1,11 @@
 package jig.bing;
 
+import com.squareup.okhttp.OkHttpClient;
+import com.squareup.okhttp.Request;
+import com.squareup.okhttp.Response;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -8,6 +13,7 @@ import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
+import javax.imageio.ImageIO;
 import jig.bing.image.ImageResult;
 import org.apache.log4j.Logger;
 
@@ -60,16 +66,30 @@ public class ImageDownloader {
 
   private class DownloadTask implements Runnable{
 
+    private Logger logger = Logger.getLogger(DownloadTask.class);
     private ImageResult imageToDownload;
     private BufferedImage image;
+    private OkHttpClient client;
 
     public DownloadTask(ImageResult imageToDownload) {
       this.imageToDownload = imageToDownload;
+      this.client = new OkHttpClient();
     }
 
     @Override
     public void run() {
-
+      String imageUrl = this.imageToDownload.getMediaUrl();
+      this.logger.info("Downloading Image from: " +  imageUrl);
+      Request downloadRequest = new Request.Builder()
+          .url(imageUrl)
+          .build();
+      try {
+        Response response = client.newCall(downloadRequest).execute();
+        InputStream in = response.body().byteStream();
+        this.image = ImageIO.read(in);
+      } catch (IOException e) {
+        this.logger.error("Couldn't download image from " + imageUrl);
+      }
     }
 
     public BufferedImage getImage() {

@@ -31,9 +31,12 @@ public class Jig {
       "Usage: java -jar path/to/jar <search-term> <download-directory>";
 
   public static void main(String[] args) {
+    Jig jig = new Jig();
     if (args.length == 0) {
-      Config config = getConfig();
-      ImageRequestBuilder builder = new ImageRequestBuilder().setSearchTerm("cat");
+      Config config = jig.getConfig();
+      ImageRequestBuilder builder = new ImageRequestBuilder()
+          .setSearchTerm("cat")
+          .setNumberOfImages(5);
       ImageRequest request = builder.buildRequest();
       BingService bing = new BingService(config);
       ImageDownloader downloader = new ImageDownloader();
@@ -41,6 +44,9 @@ public class Jig {
         ImageResponse response = bing.search(request);
         logger.info(response.getResults().size());
         Collection<BufferedImage> images = downloader.downloadImages(response.getResults());
+        for (BufferedImage image : images) {
+          jig.drawImage(image);
+        }
         System.out.print("Images: " + images.size());
       } catch (Exception e) {
         e.printStackTrace();
@@ -48,13 +54,13 @@ public class Jig {
     }
   }
 
-  private static Config getConfig() {
+  private Config getConfig() {
     Properties configProperties = loadConfigProperties();
     AccountKey accountKey = new AccountKey(configProperties.getProperty("account.key"));
     return new Config(accountKey);
   }
 
-  private static Properties loadConfigProperties() {
+  private Properties loadConfigProperties() {
     InputStream configStream =
         ClassLoader.getSystemClassLoader().getResourceAsStream("config.properties");
     Properties properties = new Properties();
@@ -64,6 +70,10 @@ public class Jig {
       System.err.print("Couldn't load config.properties");
     }
     return properties;
+  }
+
+  private void drawImage(BufferedImage image) {
+
   }
 
   private boolean isValidSearchTerm(String searchTerm) {
