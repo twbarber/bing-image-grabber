@@ -82,18 +82,22 @@ public class ImageDownloader {
     public void run() {
       this.logger.info("Downloading Image from: " + this.imageUrl);
       if (jig.util.StringUtils.isNotNullOrEmpty(this.imageUrl)) {
-        try {
-          Request downloadRequest = new Request.Builder()
-              .url(this.imageUrl)
-              .build();
-          Response response = client.newCall(downloadRequest).execute();
-          InputStream in = response.body().byteStream();
-          this.image = ImageIO.read(in);
-        } catch (IOException | IllegalArgumentException e) {
-          this.logger.error(String.format("Couldn't download image from URL: \"%s\"", this.imageUrl));
-        }
+        downloadImage();
       } else {
         this.logger.info("Image URLs cannot be Null or Empty, skipping.");
+      }
+    }
+
+    private void downloadImage() {
+      try {
+        Request downloadRequest = new Request.Builder()
+            .url(this.imageUrl)
+            .build();
+        Response response = client.newCall(downloadRequest).execute();
+        InputStream in = response.body().byteStream();
+        this.image = ImageIO.read(in);
+      } catch (IOException | IllegalArgumentException e) {
+        this.logger.error(String.format("Couldn't download image from URL: \"%s\"", this.imageUrl));
       }
     }
 
