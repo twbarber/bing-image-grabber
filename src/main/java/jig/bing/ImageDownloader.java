@@ -16,6 +16,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import javax.imageio.ImageIO;
 import jig.bing.image.ImageResult;
+import org.apache.commons.codec.binary.StringUtils;
 import org.apache.log4j.Logger;
 
 /**
@@ -79,16 +80,20 @@ public class ImageDownloader {
 
     @Override
     public void run() {
-      try {
-        this.logger.info("Downloading Image from: " +  this.imageUrl);
-        Request downloadRequest = new Request.Builder()
-            .url(this.imageUrl)
-            .build();
-        Response response = client.newCall(downloadRequest).execute();
-        InputStream in = response.body().byteStream();
-        this.image = ImageIO.read(in);
-      } catch (IOException | IllegalArgumentException e) {
-        this.logger.error(String.format("Couldn't download image from URL: \"%s\"", this.imageUrl));
+      this.logger.info("Downloading Image from: " + this.imageUrl);
+      if (jig.util.StringUtils.isNotNullOrEmpty(this.imageUrl)) {
+        try {
+          Request downloadRequest = new Request.Builder()
+              .url(this.imageUrl)
+              .build();
+          Response response = client.newCall(downloadRequest).execute();
+          InputStream in = response.body().byteStream();
+          this.image = ImageIO.read(in);
+        } catch (IOException | IllegalArgumentException e) {
+          this.logger.error(String.format("Couldn't download image from URL: \"%s\"", this.imageUrl));
+        }
+      } else {
+        this.logger.info("Image URLs cannot be Null or Empty, skipping.");
       }
     }
 

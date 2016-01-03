@@ -20,6 +20,7 @@ import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
@@ -83,9 +84,10 @@ public class ImageDownloaderTest {
   public void testImageDownloaderBadImage() {
     Collection<String> imagesToDownload = new ArrayList<>();
     imagesToDownload.add("");
+    imagesToDownload.add(TEST_IMAGE_URL);
     ArrayList<BufferedImage> downloadedImages =
         new ArrayList<>(this.serviceUnderTest.downloadImages(imagesToDownload));
-    assertTrue(downloadedImages.isEmpty());
+    assertEquals(1, downloadedImages.size());
   }
 
 }
