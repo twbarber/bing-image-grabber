@@ -1,10 +1,11 @@
 package jig.bing.search;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import jig.bing.image.ImageResult;
 
 /**
- * Created by tyler on 12/31/15.
+ * Container object for full set of ImageResults.
  */
 public class ImageResponse {
 
@@ -20,6 +21,14 @@ public class ImageResponse {
 
   public int total() {
     return this.results.size();
+  }
+
+  public Collection<String> getImageUrls() {
+    ArrayList<String> urls = new ArrayList<>();
+    for (ImageResult result : getResults()) {
+      urls.add(result.getMediaUrl());
+    }
+    return urls;
   }
 
 }

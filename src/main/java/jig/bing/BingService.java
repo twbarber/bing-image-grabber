@@ -68,7 +68,7 @@ public class BingService {
 
   public void downloadImages(ImageResponse response) {
     ImageDownloader imageDownloader = new ImageDownloader();
-    imageDownloader.downloadImages(response.getResults());
+    imageDownloader.downloadImages(response.getImageUrls());
   }
 
   private class BingAuthenticator implements Authenticator {

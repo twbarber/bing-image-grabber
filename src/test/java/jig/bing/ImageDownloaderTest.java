@@ -6,8 +6,11 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collection;
 import jig.bing.image.ImageResult;
@@ -18,11 +21,16 @@ import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 public class ImageDownloaderTest {
 
   private ImageDownloader serviceUnderTest = new ImageDownloader();
   private ImageResponse testImageResponse;
+  private final String TEST_IMAGE_URL =
+      "https://github.com/twbarber/jig/blob/master/src/test/resources/test_image.jpg?raw=true";
+  private final int TEST_IMAGE_HEIGHT = 400;
+  private final int TEST_IMAGE_WIDTH = 400;
 
   @Before
   public void setup() {
@@ -60,13 +68,15 @@ public class ImageDownloaderTest {
   }
 
 	@Test
-  @Ignore
 	public void testImageDownloader() {
-		Collection<BufferedImage> downloadedImages =
-        this.serviceUnderTest.downloadImages(testImageResponse.getResults());
+    Collection<String> imagesToDownload = new ArrayList<>();
+    imagesToDownload.add(TEST_IMAGE_URL);
+    ArrayList<BufferedImage> downloadedImages =
+        new ArrayList<>(this.serviceUnderTest.downloadImages(imagesToDownload));
     assertTrue(!downloadedImages.isEmpty());
+    BufferedImage testImage = downloadedImages.get(0);
+    assertTrue(testImage.getHeight() == TEST_IMAGE_HEIGHT);
+    assertTrue(testImage.getHeight() == TEST_IMAGE_WIDTH);
   }
-
-
 
 }

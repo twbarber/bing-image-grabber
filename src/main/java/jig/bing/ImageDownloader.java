@@ -6,6 +6,7 @@ import com.squareup.okhttp.Response;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -25,7 +26,7 @@ public class ImageDownloader {
 
   private Logger logger = Logger.getLogger(ImageDownloader.class);
 
-  public Collection<BufferedImage> downloadImages(Collection<ImageResult> imageSearchResults) {
+  public Collection<BufferedImage> downloadImages(Collection<String> imageSearchResults) {
     this.logger.info("Downloading " + imageSearchResults.size() + " images.");
     ExecutorService executor = Executors.newCachedThreadPool();
     List<DownloadTask> imagesToDownload = convertToDownloadTasks(imageSearchResults);
@@ -37,10 +38,10 @@ public class ImageDownloader {
     return extractDownloadedImages(imagesToDownload);
   }
 
-  private List<DownloadTask> convertToDownloadTasks(Collection<ImageResult> imagesToDownload) {
+  private List<DownloadTask> convertToDownloadTasks(Collection<String> imagesToDownload) {
     List<DownloadTask> DownloadTasks = new ArrayList<>();
-    for (ImageResult imageResult : imagesToDownload) {
-      DownloadTasks.add(new DownloadTask(imageResult));
+    for (String imageUrl : imagesToDownload) {
+      DownloadTasks.add(new DownloadTask(imageUrl));
     }
     return DownloadTasks;
   }
@@ -67,28 +68,27 @@ public class ImageDownloader {
   private class DownloadTask implements Runnable{
 
     private Logger logger = Logger.getLogger(DownloadTask.class);
-    private ImageResult imageToDownload;
+    private String imageUrl;
     private BufferedImage image;
     private OkHttpClient client;
 
-    public DownloadTask(ImageResult imageToDownload) {
-      this.imageToDownload = imageToDownload;
+    public DownloadTask(String imageToDownload) {
+      this.imageUrl = imageToDownload;
       this.client = new OkHttpClient();
     }
 
     @Override
     public void run() {
-      String imageUrl = this.imageToDownload.getMediaUrl();
-      this.logger.info("Downloading Image from: " +  imageUrl);
+      this.logger.info("Downloading Image from: " +  this.imageUrl);
       Request downloadRequest = new Request.Builder()
-          .url(imageUrl)
+          .url(this.imageUrl)
           .build();
       try {
         Response response = client.newCall(downloadRequest).execute();
         InputStream in = response.body().byteStream();
         this.image = ImageIO.read(in);
       } catch (IOException e) {
-        this.logger.error("Couldn't download image from " + imageUrl);
+        this.logger.error("Couldn't download image from " + this.imageUrl);
       }
     }
 

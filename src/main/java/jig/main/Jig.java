@@ -43,7 +43,7 @@ public class Jig {
       try {
         ImageResponse response = bing.search(request);
         logger.info(response.getResults().size());
-        Collection<BufferedImage> images = downloader.downloadImages(response.getResults());
+        Collection<BufferedImage> images = downloader.downloadImages(response.getImageUrls());
         for (BufferedImage image : images) {
           jig.drawImage(image);
         }
