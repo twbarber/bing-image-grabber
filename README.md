@@ -12,19 +12,25 @@ default configuration values.
 **Using JIG**
 
 ```java
-// Creates new BingService for search and download.
-Config config = new Config(accountKey);
-BingService bingService = new BingService(config);
+// Load JIG Config
+Config config = getConfig();
+BingService bing = new BingService(config);
 
-// Create new Search Request. See below for default values.
-ImageRequestBuilder builder = new ImageRequestBuilder();
-ImageRequest request = builder.setSearchTerm("cats")
-                        .setNumberOfImages(100)
-                        .buildRequest();
+// Build Search Request and Execute
+ImageRequestBuilder builder = new ImageRequestBuilder()
+    .setSearchTerm("cat")
+    .setNumberOfImages(5);
+ImageRequest request = builder.buildRequest();
 
-// ImageResponse holds the collection of results.
-ImageResponse response = bingService.search(request);
-Collection<ImageResult> results = response.getResults();
+// Execute Search and Download Resulting Images
+Collection<BufferedImage> images = new ArrayList<>();
+try {
+  ImageResponse response = bing.search(request);
+  ImageDownloader downloader = new ImageDownloader();
+  images.addAll(downloader.downloadImages(response.getImageUrls()));
+} catch (Exception e) {
+  this.logger.error("Exception executing Search and Download.");
+}
 ```
 
 **Required Configuration Information**

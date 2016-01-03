@@ -3,6 +3,7 @@ package jig.main;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Properties;
 import jig.bing.BingService;
@@ -26,33 +27,41 @@ import org.apache.log4j.Logger;
  */
 public class Jig {
 
-  private static Logger logger = Logger.getLogger(Jig.class);
+  private Logger logger = Logger.getLogger(Jig.class);
   private final String INVALID_ARGUMENTS_ERROR =
       "Usage: java -jar path/to/jar <search-term> <download-directory>";
 
   public static void main(String[] args) {
     if (args.length == 2) {
       Jig jig = new Jig();
-      jig.run();
+      jig.run(args);
     }
   }
 
-  private void run() {
+  private void run(String[] args) {
+    // Load JIG Config
     Config config = getConfig();
+    BingService bing = new BingService(config);
+
+    // Build Search Request and Execute
     ImageRequestBuilder builder = new ImageRequestBuilder()
         .setSearchTerm("cat")
         .setNumberOfImages(5);
     ImageRequest request = builder.buildRequest();
-    BingService bing = new BingService(config);
-    ImageDownloader downloader = new ImageDownloader();
+
+    // Execute Search and Download Resulting Images
+    Collection<BufferedImage> images = new ArrayList<>();
     try {
       ImageResponse response = bing.search(request);
-      Collection<BufferedImage> images = downloader.downloadImages(response.getImageUrls());
-      for (BufferedImage image : images) {
-        drawImage(image);
-      }
+      ImageDownloader downloader = new ImageDownloader();
+      images.addAll(downloader.downloadImages(response.getImageUrls()));
     } catch (Exception e) {
-      e.printStackTrace();
+      this.logger.error("Exception executing Search and Download.");
+    }
+
+    // Draw all Downloaded Images
+    for (BufferedImage image : images) {
+      drawImage(image);
     }
   }
 
