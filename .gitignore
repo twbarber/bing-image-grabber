@@ -6,4 +6,4 @@
 .idea/
 out/
 target
-src/test/resources/config.properties
+src/*/resources/config.properties

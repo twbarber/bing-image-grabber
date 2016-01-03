@@ -37,9 +37,9 @@ public class ImageRequestParameters {
   }
 
   public String toString() {
-    return "ImageRequest Term: " + getSearchTerm() + "\n"
-          + "Number Of Images: " + getNumberOfImages() + "\n"
-          + "Adult Option: " + getAdultOption() + "\n"
-          + "Market: " + getMarket();
+    return "{ ImageRequest Term: " + getSearchTerm() + ", "
+          + "Number Of Images: " + getNumberOfImages() + ", "
+          + "Adult Option: " + getAdultOption() + ", "
+          + "Market: " + getMarket() + " }";
   }
 }

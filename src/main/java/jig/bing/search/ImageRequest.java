@@ -60,4 +60,8 @@ public class ImageRequest {
     return parameters;
   }
 
+  public String toString() {
+    return getParameters().toString();
+  }
+
 }

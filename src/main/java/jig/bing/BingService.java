@@ -36,7 +36,7 @@ public class BingService {
   }
 
   public ImageResponse search(ImageRequest request) throws Exception {
-    this.logger.info("Executing search: " + request.toString());
+    this.logger.info("Executing Search: " + request.toString());
     Request searchRequest = new Request.Builder()
         .url(request.getRequestUrl())
         .build();

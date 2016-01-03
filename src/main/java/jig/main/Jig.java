@@ -32,25 +32,21 @@ public class Jig {
 
   public static void main(String[] args) {
     Jig jig = new Jig();
-    if (args.length == 0) {
-      Config config = jig.getConfig();
-      ImageRequestBuilder builder = new ImageRequestBuilder()
-          .setSearchTerm("cat")
-          .setNumberOfImages(5);
-      ImageRequest request = builder.buildRequest();
-      BingService bing = new BingService(config);
-      ImageDownloader downloader = new ImageDownloader();
-      try {
-        ImageResponse response = bing.search(request);
-        logger.info(response.getResults().size());
-        Collection<BufferedImage> images = downloader.downloadImages(response.getImageUrls());
-        for (BufferedImage image : images) {
-          jig.drawImage(image);
-        }
-        System.out.print("Images: " + images.size());
-      } catch (Exception e) {
-        e.printStackTrace();
+    Config config = jig.getConfig();
+    ImageRequestBuilder builder = new ImageRequestBuilder()
+        .setSearchTerm("cat")
+        .setNumberOfImages(5);
+    ImageRequest request = builder.buildRequest();
+    BingService bing = new BingService(config);
+    ImageDownloader downloader = new ImageDownloader();
+    try {
+      ImageResponse response = bing.search(request);
+      Collection<BufferedImage> images = downloader.downloadImages(response.getImageUrls());
+      for (BufferedImage image : images) {
+        jig.drawImage(image);
       }
+    } catch (Exception e) {
+      e.printStackTrace();
     }
   }
 

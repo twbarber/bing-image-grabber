@@ -73,6 +73,6 @@ public enum Market {
 
   @Override
   public String toString() {
-    return this.market;
+    return this.equals(Market.NONE) ? "NONE" : this.market;
   }
 }
