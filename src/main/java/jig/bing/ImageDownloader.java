@@ -9,7 +9,6 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import jig.bing.image.ImageResult;
-import jig.bing.search.BingImage;
 import org.apache.log4j.Logger;
 
 /**
@@ -21,31 +20,30 @@ public class ImageDownloader {
   private Logger logger = Logger.getLogger(ImageDownloader.class);
 
   public Collection<BufferedImage> downloadImages(Collection<ImageResult> imageSearchResults) {
+    this.logger.info("Downloading " + imageSearchResults.size() + " images.");
     ExecutorService executor = Executors.newCachedThreadPool();
-    List<BingImage> imagesToDownload = convertToBingImages(imageSearchResults);
-    Collection<BingImage> images = Collections.synchronizedList(imagesToDownload);
-    this.logger.info("Sync'd Size: " + images.size());
-    for (BingImage image : images) {
+    List<DownloadTask> imagesToDownload = convertToDownloadTasks(imageSearchResults);
+    Collection<DownloadTask> images = Collections.synchronizedList(imagesToDownload);
+    for (DownloadTask image : images) {
       executor.execute(image);
     }
     shutdownExecutor(executor);
     return extractDownloadedImages(imagesToDownload);
   }
 
-  private List<BingImage> convertToBingImages(Collection<ImageResult> imagesToDownload) {
-    List<BingImage> bingImages = new ArrayList<>();
+  private List<DownloadTask> convertToDownloadTasks(Collection<ImageResult> imagesToDownload) {
+    List<DownloadTask> DownloadTasks = new ArrayList<>();
     for (ImageResult imageResult : imagesToDownload) {
-      bingImages.add(new BingImage(imageResult));
+      DownloadTasks.add(new DownloadTask(imageResult));
     }
-    return bingImages;
+    return DownloadTasks;
   }
 
-  private Collection<BufferedImage> extractDownloadedImages(Collection<BingImage> bingImages) {
+  private Collection<BufferedImage> extractDownloadedImages(Collection<DownloadTask> DownloadTasks) {
     List<BufferedImage> images = new ArrayList<>();
-    for (BingImage imageResult : bingImages) {
+    for (DownloadTask imageResult : DownloadTasks) {
       if (imageResult.getImage() != null) {
         images.add(imageResult.getImage());
-        this.logger.info("Adding Image");
       }
     }
     return images;
@@ -57,6 +55,25 @@ public class ImageDownloader {
       executorService.awaitTermination(Long.MAX_VALUE, TimeUnit.NANOSECONDS);
     } catch (InterruptedException e) {
       this.logger.error("There was problem downloading all requested images.");
+    }
+  }
+
+  private class DownloadTask implements Runnable{
+
+    private ImageResult imageToDownload;
+    private BufferedImage image;
+
+    public DownloadTask(ImageResult imageToDownload) {
+      this.imageToDownload = imageToDownload;
+    }
+
+    @Override
+    public void run() {
+
+    }
+
+    public BufferedImage getImage() {
+      return this.image;
     }
   }
 
