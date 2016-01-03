@@ -31,8 +31,14 @@ public class Jig {
       "Usage: java -jar path/to/jar <search-term> <download-directory>";
 
   public static void main(String[] args) {
-    Jig jig = new Jig();
-    Config config = jig.getConfig();
+    if (args.length == 2) {
+      Jig jig = new Jig();
+      jig.run();
+    }
+  }
+
+  private void run() {
+    Config config = getConfig();
     ImageRequestBuilder builder = new ImageRequestBuilder()
         .setSearchTerm("cat")
         .setNumberOfImages(5);
@@ -43,7 +49,7 @@ public class Jig {
       ImageResponse response = bing.search(request);
       Collection<BufferedImage> images = downloader.downloadImages(response.getImageUrls());
       for (BufferedImage image : images) {
-        jig.drawImage(image);
+        drawImage(image);
       }
     } catch (Exception e) {
       e.printStackTrace();
