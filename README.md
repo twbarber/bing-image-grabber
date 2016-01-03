@@ -3,10 +3,11 @@ JIG - Java Image Grabber
 
 [![Build Status](https://travis-ci.org/twbarber/jig.svg?branch=master)](https://travis-ci.org/twbarber/jig)
 
-**Version:** 0.1
+**Version:** 0.1-ALPHA
 
-The Java Image Grabber library lets the user download images from Microsoft's Bing search engine.
-Users have the option to provide parameters, or use default configuration values.
+The Java Image Grabber library lets the user download images en masse with the help of
+Microsoft's Bing search engine. Users have the option to provide parameters, or use 
+default configuration values.
 
 **Using JIG**
 

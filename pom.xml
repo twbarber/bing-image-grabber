@@ -6,7 +6,7 @@
 
     <groupId>hurdsbrook</groupId>
     <artifactId>bing-image-grabber</artifactId>
-    <version>0.1-SNAPSHOT</version>
+    <version>0.1-ALPHA-SNAPSHOT</version>
 
     <properties>
         <jdk.version>1.7</jdk.version>
@@ -79,7 +79,7 @@
                     <archive>
                         <manifest>
                             <!-- Jar file entry point -->
-                            <mainClass>jig.main.App</mainClass>
+                            <mainClass>jig.main.Jig</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
