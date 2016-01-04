@@ -35,14 +35,28 @@ public class BingService {
     this.client.setAuthenticator(new BingAuthenticator());
   }
 
-  public ImageResponse search(ImageRequest request) throws Exception {
+  /**
+   * Executes the ImageRequest and returns the resulting ImageResponse.
+   * The collection of ImageResults is empty if there was an error executing
+   * the search.
+   *
+   * @param request ImageRequest with pre-populated parameters
+   * @return ImageRespones object, with resulting ImageResults
+   */
+  public ImageResponse search(ImageRequest request) {
     this.logger.info("Executing Search: " + request.toString());
     Request searchRequest = new Request.Builder()
         .url(request.getRequestUrl())
         .build();
-    Response response = client.newCall(searchRequest).execute();
-    String jsonResponse = response.body().string();
-    return getImageResponse(jsonResponse);
+    try {
+      Response response = client.newCall(searchRequest).execute();
+      String jsonResponse = response.body().string();
+      return getImageResponse(jsonResponse);
+    } catch (IOException e) {
+      this.logger.error("There was an unexpected response executing the query: "
+          + request.toString());
+    }
+      return new ImageResponse(new ArrayList<ImageResult>());
   }
 
   private ImageResponse getImageResponse(String response) {

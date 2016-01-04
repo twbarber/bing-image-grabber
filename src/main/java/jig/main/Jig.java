@@ -51,13 +51,10 @@ public class Jig {
 
     // Execute Search and Download Resulting Images
     Collection<BufferedImage> images = new ArrayList<>();
-    try {
-      ImageResponse response = bing.search(request);
-      ImageDownloader downloader = new ImageDownloader();
-      images.addAll(downloader.downloadImages(response.getImageUrls()));
-    } catch (Exception e) {
+    ImageResponse response = bing.search(request);
+    ImageDownloader downloader = new ImageDownloader();
+    images.addAll(downloader.downloadImages(response.getImageUrls()));
       this.logger.error("Exception executing Search and Download.");
-    }
 
     // Draw all Downloaded Images
     for (BufferedImage image : images) {
