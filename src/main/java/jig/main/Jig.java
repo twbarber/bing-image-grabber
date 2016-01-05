@@ -43,10 +43,10 @@ public class Jig {
     BingService bing = new BingService(config);
 
     // Build Search Request
-    ImageRequestBuilder builder = new ImageRequestBuilder()
+    ImageRequest request = new ImageRequestBuilder()
         .setSearchTerm("cat")
-        .setNumberOfImages(5);
-    ImageRequest request = builder.buildRequest();
+        .setNumberOfImages(5)
+        .buildRequest();
 
     // Execute Search and Download Resulting Images
     Collection<String> imageUrls = bing.search(request).getImageUrls();
