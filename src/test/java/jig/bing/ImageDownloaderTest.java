@@ -6,18 +6,14 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collection;
 import jig.bing.image.ImageResult;
 import jig.bing.search.ImageResponse;
 import org.apache.commons.io.IOUtils;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -73,7 +69,7 @@ public class ImageDownloaderTest {
     Collection<String> imagesToDownload = new ArrayList<>();
     imagesToDownload.add(TEST_IMAGE_URL);
     ArrayList<BufferedImage> downloadedImages =
-        new ArrayList<>(this.serviceUnderTest.downloadImages(imagesToDownload));
+        new ArrayList<>(this.serviceUnderTest.download(imagesToDownload));
     assertTrue(!downloadedImages.isEmpty());
     BufferedImage testImage = downloadedImages.get(0);
     assertTrue(testImage.getHeight() == TEST_IMAGE_HEIGHT);
@@ -86,7 +82,7 @@ public class ImageDownloaderTest {
     imagesToDownload.add("");
     imagesToDownload.add(TEST_IMAGE_URL);
     ArrayList<BufferedImage> downloadedImages =
-        new ArrayList<>(this.serviceUnderTest.downloadImages(imagesToDownload));
+        new ArrayList<>(this.serviceUnderTest.download(imagesToDownload));
     assertEquals(1, downloadedImages.size());
   }
 

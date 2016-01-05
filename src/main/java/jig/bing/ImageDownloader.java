@@ -31,7 +31,7 @@ public class ImageDownloader {
    * @param imageUrls URLs of images to download.
    * @return Resulting collection of images downloaded to memory.
    */
-  public Collection<BufferedImage> downloadImages(Collection<String> imageUrls) {
+  public Collection<BufferedImage> download(Collection<String> imageUrls) {
     this.logger.info("Downloading " + imageUrls.size() + " images.");
     ExecutorService executor = Executors.newCachedThreadPool();
     List<DownloadTask> imageDownloadTasks = buildDownloadTasks(imageUrls);

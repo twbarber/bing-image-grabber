@@ -23,10 +23,10 @@ ImageRequestBuilder builder = new ImageRequestBuilder()
 ImageRequest request = builder.buildRequest();
 
 // Execute Search and Download Resulting Images
-Collection<BufferedImage> images = new ArrayList<>();
-ImageResponse response = bing.search(request);
+Collection<String> imageUrls = bing.search(request).getImageUrls();
 ImageDownloader downloader = new ImageDownloader();
-images.addAll(downloader.downloadImages(response.getImageUrls()));
+Collection<BufferedImage> images = new ArrayList<>();
+images.addAll(downloader.download(imageUrls));
 
 // Draw all Downloaded Images
 for (BufferedImage image : images) {
