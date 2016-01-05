@@ -26,11 +26,6 @@ ImageRequest request = new ImageRequestBuilder()
 Collection<String> imageUrls = bing.search(request).getImageUrls();
 ImageDownloader downloader = new ImageDownloader();
 Collection<BufferedImage> images = downloader.download(imageUrls);
-
-// Draw all Downloaded Images
-for (BufferedImage image : images) {
-  drawImage(image);
-}
 ```
 
 **Required Configuration Information**
