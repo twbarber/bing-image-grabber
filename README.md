@@ -13,8 +13,8 @@ default configuration values.
 
 ```java
 // Load JIG Config and Bing Service
-    Config config = getConfig();
-    BingService bing = new BingService(config);
+Config config = getConfig();
+BingService bing = new BingService(config);
 
 // Build Search Request
 ImageRequestBuilder builder = new ImageRequestBuilder()
