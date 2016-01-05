@@ -6,7 +6,6 @@ import com.squareup.okhttp.Response;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -15,31 +14,36 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import javax.imageio.ImageIO;
-import jig.bing.image.ImageResult;
-import org.apache.commons.codec.binary.StringUtils;
+
 import org.apache.log4j.Logger;
 
 /**
- * Used to download Images gathered by the BingService.
+ * Multi-threaded download service used to get Images gathered by
+ * the BingService.
  *
  */
 public class ImageDownloader {
 
   private Logger logger = Logger.getLogger(ImageDownloader.class);
 
-  public Collection<BufferedImage> downloadImages(Collection<String> imageSearchResults) {
-    this.logger.info("Downloading " + imageSearchResults.size() + " images.");
+  /**
+   * Downloads images from a list of URLs
+   * @param imageUrls URLs of images to download.
+   * @return Resulting collection of images downloaded to memory.
+   */
+  public Collection<BufferedImage> downloadImages(Collection<String> imageUrls) {
+    this.logger.info("Downloading " + imageUrls.size() + " images.");
     ExecutorService executor = Executors.newCachedThreadPool();
-    List<DownloadTask> imagesToDownload = convertToDownloadTasks(imageSearchResults);
-    Collection<DownloadTask> images = Collections.synchronizedList(imagesToDownload);
+    List<DownloadTask> imageDownloadTasks = buildDownloadTasks(imageUrls);
+    Collection<DownloadTask> images = Collections.synchronizedList(imageDownloadTasks);
     for (DownloadTask image : images) {
       executor.execute(image);
     }
     shutdownExecutor(executor);
-    return extractDownloadedImages(imagesToDownload);
+    return extractDownloadedImages(imageDownloadTasks);
   }
 
-  private List<DownloadTask> convertToDownloadTasks(Collection<String> imagesToDownload) {
+  private List<DownloadTask> buildDownloadTasks(Collection<String> imagesToDownload) {
     List<DownloadTask> DownloadTasks = new ArrayList<>();
     for (String imageUrl : imagesToDownload) {
       DownloadTasks.add(new DownloadTask(imageUrl));

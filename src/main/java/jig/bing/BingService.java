@@ -21,7 +21,7 @@ import jig.config.Config;
 import org.apache.log4j.Logger;
 
 /**
- * BingService acts as the messenger for the Bing ImageRequest API. Returns ImageResult
+ * BingService acts as the messenger for the Bing Image Request API. Returns ImageResponse
  * Objects to the caller for future use.
  */
 public class BingService {
@@ -40,8 +40,8 @@ public class BingService {
    * The collection of ImageResults is empty if there was an error executing
    * the search.
    *
-   * @param request ImageRequest with pre-populated parameters
-   * @return ImageRespones object, with resulting ImageResults
+   * @param request @ImageRequest with pre-populated parameters
+   * @return ImageResponse object containging ImageResults
    */
   public ImageResponse search(ImageRequest request) {
     this.logger.info("Executing Search: " + request.toString());
@@ -80,6 +80,13 @@ public class BingService {
     return imageResults;
   }
 
+  /**
+   * Takes an an ImageResponse Object and downloads all present Images
+   * to Memory.
+   *
+   * @param response ImageResponse object where ImageResults for download
+   *                 are stored.
+   */
   public void downloadImages(ImageResponse response) {
     ImageDownloader imageDownloader = new ImageDownloader();
     imageDownloader.downloadImages(response.getImageUrls());
