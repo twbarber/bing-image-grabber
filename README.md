@@ -12,11 +12,11 @@ default configuration values.
 **Using JIG**
 
 ```java
-// Load JIG Config
-Config config = getConfig();
-BingService bing = new BingService(config);
+// Load JIG Config and Bing Service
+    Config config = getConfig();
+    BingService bing = new BingService(config);
 
-// Build Search Request and Execute
+// Build Search Request
 ImageRequestBuilder builder = new ImageRequestBuilder()
     .setSearchTerm("cat")
     .setNumberOfImages(5);
@@ -25,8 +25,7 @@ ImageRequest request = builder.buildRequest();
 // Execute Search and Download Resulting Images
 Collection<String> imageUrls = bing.search(request).getImageUrls();
 ImageDownloader downloader = new ImageDownloader();
-Collection<BufferedImage> images = new ArrayList<>();
-images.addAll(downloader.download(imageUrls));
+Collection<BufferedImage> images = downloader.download(imageUrls);
 
 // Draw all Downloaded Images
 for (BufferedImage image : images) {

@@ -38,11 +38,11 @@ public class Jig {
   }
 
   private void run(String[] args) {
-    // Load JIG Config
+    // Load JIG Config and Bing Service
     Config config = getConfig();
     BingService bing = new BingService(config);
 
-    // Build Search Request and Execute
+    // Build Search Request
     ImageRequestBuilder builder = new ImageRequestBuilder()
         .setSearchTerm("cat")
         .setNumberOfImages(5);
@@ -51,8 +51,7 @@ public class Jig {
     // Execute Search and Download Resulting Images
     Collection<String> imageUrls = bing.search(request).getImageUrls();
     ImageDownloader downloader = new ImageDownloader();
-    Collection<BufferedImage> images = new ArrayList<>();
-    images.addAll(downloader.download(imageUrls));
+    Collection<BufferedImage> images = downloader.download(imageUrls);
 
     // Draw all Downloaded Images
     for (BufferedImage image : images) {
