@@ -17,7 +17,6 @@ import static org.junit.Assert.assertTrue;
 /**
  * Test class for the BingService Class.
  */
-@Ignore
 public class BingServiceTest {
 
   private Config config;
@@ -26,9 +25,18 @@ public class BingServiceTest {
   @Before
   public void setup() {
     Properties configProperties = loadConfigProperties();
-    AccountKey accountKey = new AccountKey(configProperties.getProperty("account.key"));
+    String key = loadAccountKey(configProperties);
+    AccountKey accountKey = new AccountKey(key);
     this.config = new Config(accountKey);
     this.serviceUnderTest = new BingService(config);
+  }
+
+  private String loadAccountKey(Properties configProperties) {
+    if (configProperties.containsKey("account.key")) {
+      return configProperties.getProperty("account.key");
+    } else {
+      return System.getProperty("account.key");
+    }
   }
 
   private Properties loadConfigProperties() {
