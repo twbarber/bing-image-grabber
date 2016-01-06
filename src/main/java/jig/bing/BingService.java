@@ -31,18 +31,8 @@ public class BingService {
   private Config config;
 
   public BingService(final Config config) {
-    if (isValidConfiguration(config)) {
-      this.config = config;
-      this.client.setAuthenticator(new BingAuthenticator());
-    }
-  }
-
-  private boolean isValidConfiguration(Config config) {
-    if (this.config.getAccountKey() != null && !this.config.getAccountKey().isEmpty()) {
-      return true;
-    } else {
-      throw new IllegalArgumentException("Invalid Configuration File.");
-    }
+    this.config = config;
+    this.client.setAuthenticator(new BingAuthenticator());
   }
 
   /**

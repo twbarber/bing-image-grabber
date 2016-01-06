@@ -17,6 +17,7 @@ public class Config {
   public Config(String accountKey) {
     this.accountKey = accountKey;
     loadDefaults();
+    validate();
   }
 
   private String loadAccountKey(File file) {
@@ -29,6 +30,12 @@ public class Config {
 
   public String getAccountKey() {
     return this.accountKey;
+  }
+
+  private void validate() {
+    if (this.getAccountKey() == null || this.getAccountKey().isEmpty()) {
+      throw new IllegalArgumentException("Invalid Bing Account Key.");
+    }
   }
 
 }
