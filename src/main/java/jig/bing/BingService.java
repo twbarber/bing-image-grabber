@@ -10,6 +10,8 @@ import com.squareup.okhttp.Credentials;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
+
+import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.Proxy;
 import java.util.ArrayList;
@@ -84,12 +86,16 @@ public class BingService {
    * Takes an an ImageResponse Object and downloads all present Images
    * to Memory.
    *
-   * @param response ImageResponse object where ImageResults for download
+   * @param imageUrls ImageResponse object where ImageResults for download
    *                 are stored.
    */
-  public void downloadImages(ImageResponse response) {
+  public Collection<BufferedImage> download(Collection<String> imageUrls) {
     ImageDownloader imageDownloader = new ImageDownloader();
-    imageDownloader.download(response.getImageUrls());
+    return imageDownloader.download(imageUrls);
+  }
+
+  public void save(Collection<BufferedImage> images) {
+
   }
 
   private class BingAuthenticator implements Authenticator {

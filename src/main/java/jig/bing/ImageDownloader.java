@@ -3,6 +3,8 @@ package jig.bing;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
+
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
@@ -26,12 +28,14 @@ public class ImageDownloader {
 
   private Logger logger = Logger.getLogger(ImageDownloader.class);
 
+  ImageDownloader() { }
+
   /**
    * Downloads images from a list of URLs
    * @param imageUrls URLs of images to download.
    * @return Resulting collection of images downloaded to memory.
    */
-  public Collection<BufferedImage> download(Collection<String> imageUrls) {
+  Collection<BufferedImage> download(Collection<String> imageUrls) {
     this.logger.info("Downloading " + imageUrls.size() + " images.");
     ExecutorService executor = Executors.newCachedThreadPool();
     List<DownloadTask> imageDownloadTasks = buildDownloadTasks(imageUrls);

@@ -1,11 +1,17 @@
 package jig.bing;
 
+import org.apache.log4j.Logger;
+
 import java.io.File;
 
 /**
  * Used to store save images to disk
  */
 public class ImageWriter {
+
+  private Logger logger = Logger.getLogger(ImageWriter.class);
+
+  ImageWriter() { }
 
   /**
    * Creates directories in <user_home>/jig/images/<query_term> where images will be

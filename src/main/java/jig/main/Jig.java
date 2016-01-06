@@ -48,7 +48,7 @@ public class Jig {
 
     // Execute Search and Download Resulting Images
     Collection<String> imageUrls = bing.search(request).getImageUrls();
-    Collection<BufferedImage> images = new ImageDownloader().download(imageUrls);
+    Collection<BufferedImage> images = bing.download(imageUrls);
 
     // Draw all Downloaded Images
     for (BufferedImage image : images) {
