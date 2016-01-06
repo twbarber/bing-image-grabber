@@ -9,7 +9,6 @@ import jig.bing.search.ImageResponse;
 import jig.config.AccountKey;
 import jig.config.Config;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.junit.Assert.assertTrue;
