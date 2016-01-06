@@ -34,7 +34,7 @@ public class Config {
 
   private void validate() {
     if (this.getAccountKey() == null || this.getAccountKey().isEmpty()) {
-      throw new IllegalArgumentException("Invalid Bing Account Key.");
+      throw new IllegalArgumentException("Bing Account Key cannot be empty.");
     }
   }
 
