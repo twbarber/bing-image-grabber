@@ -2,6 +2,7 @@ package jig.bing;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Collection;
 import java.util.Properties;
 import jig.bing.search.ImageRequest;
 import jig.bing.search.ImageRequestBuilder;
@@ -52,8 +53,8 @@ public class BingServiceTest {
   public void testSearch() throws Exception {
     ImageRequestBuilder builder = new ImageRequestBuilder();
     ImageRequest request = builder.buildRequest();
-    ImageResponse response = this.serviceUnderTest.search(request);
-    assertTrue(response.getResults().size() != 0);
+    Collection<String> response = this.serviceUnderTest.search(request);
+    assertTrue(response.size() != 0);
   }
 
   @Test
