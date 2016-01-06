@@ -6,7 +6,6 @@ import java.util.Properties;
 import jig.bing.search.ImageRequest;
 import jig.bing.search.ImageRequestBuilder;
 import jig.bing.search.ImageResponse;
-import jig.config.AccountKey;
 import jig.config.Config;
 import org.junit.Before;
 import org.junit.Test;
@@ -24,8 +23,7 @@ public class BingServiceTest {
   @Before
   public void setup() {
     Properties configProperties = loadConfigProperties();
-    String key = loadAccountKey(configProperties);
-    AccountKey accountKey = new AccountKey(key);
+    String accountKey = loadAccountKey(configProperties);
     this.config = new Config(accountKey);
     this.serviceUnderTest = new BingService(config);
   }

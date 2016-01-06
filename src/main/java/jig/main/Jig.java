@@ -3,14 +3,12 @@ package jig.main;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Properties;
 import jig.bing.BingService;
 import jig.bing.ImageDownloader;
 import jig.bing.search.ImageRequest;
 import jig.bing.search.ImageRequestBuilder;
-import jig.config.AccountKey;
 import jig.config.Config;
 import org.apache.log4j.Logger;
 
@@ -60,7 +58,7 @@ public class Jig {
 
   private Config getConfig() {
     Properties configProperties = loadConfigProperties();
-    AccountKey accountKey = new AccountKey(configProperties.getProperty("account.key"));
+    String accountKey = configProperties.getProperty("account.key");
     return new Config(accountKey);
   }
 

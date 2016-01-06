@@ -31,8 +31,18 @@ public class BingService {
   private Config config;
 
   public BingService(final Config config) {
-    this.config = config;
-    this.client.setAuthenticator(new BingAuthenticator());
+    if (isValidConfiguration(config)) {
+      this.config = config;
+      this.client.setAuthenticator(new BingAuthenticator());
+    }
+  }
+
+  private boolean isValidConfiguration(Config config) {
+    if (this.config.getAccountKey() != null && !this.config.getAccountKey().isEmpty()) {
+      return true;
+    } else {
+      throw new IllegalArgumentException("Invalid Configuration File.");
+    }
   }
 
   /**
@@ -96,7 +106,7 @@ public class BingService {
 
     @Override
     public Request authenticate(Proxy proxy, Response response) throws IOException {
-      String credential = Credentials.basic("", config.getAccountKey().getAccountKey());
+      String credential = Credentials.basic("", config.getAccountKey());
       return response.request().newBuilder()
           .header("Authorization", credential)
           .build();
@@ -104,7 +114,7 @@ public class BingService {
 
     @Override
     public Request authenticateProxy(Proxy proxy, Response response) throws IOException {
-      String credential = Credentials.basic("", config.getAccountKey().getAccountKey());
+      String credential = Credentials.basic("", config.getAccountKey());
       return response.request().newBuilder()
           .header("Proxy-Authorization", credential)
           .build();

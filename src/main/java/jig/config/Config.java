@@ -12,9 +12,9 @@ import org.apache.log4j.Logger;
 public class Config {
 
   private Logger logger = Logger.getLogger(Config.class);
-  private final AccountKey accountKey;
+  private final String accountKey;
 
-  public Config(AccountKey accountKey) {
+  public Config(String accountKey) {
     this.accountKey = accountKey;
     loadDefaults();
   }
@@ -27,7 +27,7 @@ public class Config {
 
   }
 
-  public AccountKey getAccountKey() {
+  public String getAccountKey() {
     return this.accountKey;
   }
 
