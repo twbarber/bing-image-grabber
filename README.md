@@ -29,20 +29,13 @@ Collection<BufferedImage> images = bing.download(imageUrls);
 
 **Required Configuration Information**
 
-    - User's API Key
+    - Bing Account Key
 
     See the example_config.properties for more information.
 
-**Optional Query Parameters**
+**Optional Query Parameters and Defaults**
 
-    - Search Term
-    - Size of Return Set
-    - Adult Option
-    - Market
-
-**Default Values if not Specified**
-
-    - Search Term: Randomly generated 7 Digit Number
-    - Size of Return Set: 50
-    - Adult Option: Strict
-    - Market: None, determined by Bing using requesting IP
+    - Search Term : Randomly generated 7 Digit Number
+    - Size of Return Set : 50
+    - Adult Option : Strict
+    - Market : None, determined by Bing using requesting IP
