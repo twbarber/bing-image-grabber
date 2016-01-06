@@ -24,7 +24,7 @@ ImageRequest request = new ImageRequestBuilder()
 
 // Execute Search and Download Resulting Images
 Collection<String> imageUrls = bing.search(request).getImageUrls();
-Collection<BufferedImage> images = new ImageDownloader().download(imageUrls);
+Collection<BufferedImage> images = bing.download(imageUrls);
 ```
 
 **Required Configuration Information**
